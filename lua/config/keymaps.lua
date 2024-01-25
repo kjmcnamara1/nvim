@@ -13,3 +13,6 @@ map("i", "<c-h>", "<left>", opts)
 map("i", "<c-j>", "<down>", opts)
 map("i", "<c-k>", "<up>", opts)
 map("i", "<c-l>", "<right>", opts)
+
+map("n", "<c-d>", "<c-d>zz", opts)
+map("n", "<c-u>", "<c-u>zz", opts)
