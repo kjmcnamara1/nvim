@@ -7,11 +7,10 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls" },
-      })
-    end,
+    opts = {
+      ensure_installed = { "lua_ls" },
+      automatic_installation = true,
+    },
   },
   {
     "neovim/nvim-lspconfig",
@@ -21,11 +20,13 @@ return {
       lspconfig.pyright.setup({})
       lspconfig.ruff_lsp.setup({})
       lspconfig.eslint.setup({})
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, {})
-      vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, {})
     end,
+    keys = {
+      { "K", vim.lsp.buf.hover, desc = "LSP Hover" },
+      { "gd", vim.lsp.buf.definition, desc = "LSP [g]o To [d]efinition" },
+      { "<leader>rn", vim.lsp.buf.rename, desc = "LSP [r]e[n]ame" },
+      { "<leader>ca", vim.lsp.buf.code_action, desc = "LSP [c]ode [a]ction", mode = { "n", "v" } },
+    },
   },
   {
     "nvimtools/none-ls.nvim",
@@ -41,13 +42,14 @@ return {
         },
       })
 
-      vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+      --vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format, {})
     end,
+    keys={{ "<leader>fm", vim.lsp.buf.format,desc='LSP [f]or[m]at'}},
   },
---  {
---    "LhKipp/nvim-nu",
---    config = function()
---      require("nu").setup()
---    end,
---  },
+  --  {
+  --    "LhKipp/nvim-nu",
+  --    config = function()
+  --      require("nu").setup()
+  --    end,
+  --  },
 }

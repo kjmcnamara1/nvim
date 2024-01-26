@@ -1,27 +1,40 @@
 return {
   {
+    'rmehri01/onenord.nvim',
+    name = 'onenord',
+    lazy = false,
+    priority = 1000,
+  },
+  {
     "shaunsingh/nord.nvim",
     name = "nord",
     lazy = true,
-    priority = 1000,
+    --priority = 1000,
   },
   {
     "olimorris/onedarkpro.nvim",
     name = "onedarkpro",
     lazy = true,
-    priority = 1000, -- Ensure it loads first
+    --priority = 1000, -- Ensure it loads first
   },
   {
     "navarasu/onedark.nvim",
     name = "onedark",
     lazy = true,
-    priority = 1000,
+    --priority = 1000,
   },
+    {
+      "neanias/everforest-nvim",
+      name = "everforest",
+      lazy = true,
+      version = false,
+      --priority = 1000, -- make sure to load this before all the other start plugins
+    },
   {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = true,
-    priority = 1000,
+    --priority = 1000,
     opts = {
       transparent_background = true,
       integrations = {
@@ -59,19 +72,6 @@ return {
         treesitter_context = true,
         which_key = true,
       },
-    },
-    {
-      "neanias/everforest-nvim",
-      name = "everforest",
-      lazy = true,
-      version = false,
-      priority = 1000, -- make sure to load this before all the other start plugins
-      -- Optional; default configuration will be used if setup isn't called.
-      -- config = function()
-      --   require("everforest").setup({
-      --     -- Your config here
-      --   })
-      -- end,
     },
   },
 }

@@ -1,9 +1,8 @@
 return {
   "nvim-lualine/lualine.nvim",
-  --opts = { theme = "dracula" },
   opts = {
     options = {
-      theme = "nord",
+      theme = "onenord",
     },
   },
   --config = function()

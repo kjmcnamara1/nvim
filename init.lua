@@ -15,8 +15,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("config")
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  --defaults = { lazy = true },
+  install = { colorscheme = { "onenord" } },
+})
 
 --vim.cmd.colorscheme 'catppuccin'
-vim.cmd.colorscheme("nord")
-
+vim.cmd.colorscheme("onenord")
