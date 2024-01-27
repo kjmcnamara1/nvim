@@ -15,17 +15,26 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
       local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({})
-      lspconfig.pyright.setup({})
-      lspconfig.ruff_lsp.setup({})
-      lspconfig.eslint.setup({})
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities
+      })
+      lspconfig.pyright.setup({
+        capabilities = capabilities
+      })
+      lspconfig.ruff_lsp.setup({
+        capabilities = capabilities
+      })
+      lspconfig.eslint.setup({
+        capabilities = capabilities
+      })
     end,
     keys = {
-      { "K", vim.lsp.buf.hover, desc = "LSP Hover" },
-      { "gd", vim.lsp.buf.definition, desc = "LSP [g]o To [d]efinition" },
-      { "<leader>rn", vim.lsp.buf.rename, desc = "LSP [r]e[n]ame" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "LSP [c]ode [a]ction", mode = { "n", "v" } },
+      { "K",          vim.lsp.buf.hover,       desc = "LSP Hover" },
+      { "gd",         vim.lsp.buf.definition,  desc = "LSP [g]o To [d]efinition" },
+      { "<leader>rn", vim.lsp.buf.rename,      desc = "LSP [r]e[n]ame" },
+      { "<leader>ca", vim.lsp.buf.code_action, desc = "LSP [c]ode [a]ction",     mode = { "n", "v" } },
     },
   },
   {
@@ -44,7 +53,7 @@ return {
 
       --vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format, {})
     end,
-    keys={{ "<leader>fm", vim.lsp.buf.format,desc='LSP [f]or[m]at'}},
+    keys = { { "<leader>fm", vim.lsp.buf.format, desc = 'LSP [f]or[m]at' } },
   },
   --  {
   --    "LhKipp/nvim-nu",
