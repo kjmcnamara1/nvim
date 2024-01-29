@@ -14,11 +14,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("config")
+require("core")
 require("lazy").setup("plugins", {
   --defaults = { lazy = true },
   install = { colorscheme = { "onenord" } },
+  change_detection = { notify = false },
 })
 
---vim.cmd.colorscheme 'catppuccin'
-vim.cmd.colorscheme("onenord")
+-- vim.cmd.colorscheme("onenord")

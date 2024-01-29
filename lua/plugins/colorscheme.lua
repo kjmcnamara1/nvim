@@ -1,9 +1,16 @@
 return {
   {
-    'rmehri01/onenord.nvim',
-    name = 'onenord',
+    "rmehri01/onenord.nvim",
+    name = "onenord",
     lazy = false,
     priority = 1000,
+    opts = {
+      fade_nc = true,
+      styles = {
+        comments = "italic",
+        keywords = "bold",
+      },
+    },
   },
   {
     "shaunsingh/nord.nvim",
@@ -23,13 +30,13 @@ return {
     lazy = true,
     --priority = 1000,
   },
-    {
-      "neanias/everforest-nvim",
-      name = "everforest",
-      lazy = true,
-      version = false,
-      --priority = 1000, -- make sure to load this before all the other start plugins
-    },
+  {
+    "neanias/everforest-nvim",
+    name = "everforest",
+    lazy = true,
+    version = false,
+    --priority = 1000, -- make sure to load this before all the other start plugins
+  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
