@@ -1,7 +1,6 @@
 return {
   {
     "lukas-reineke/indent-blankline.nvim",
-    -- event = "LazyFile",
     opts = {
       indent = {
         -- char = "│",
@@ -32,17 +31,17 @@ return {
       },
     },
     main = "ibl",
-    dependencies = {
-      -- {
-      --   "luochen1990/rainbow",
-      --   config = function()
-      --     vim.g.rainbow_active = 1
-      --   end,
-      -- },
-      -- {
-      --   "HiPhish/rainbow-delimiters.nvim",
-      --   -- opts={},
-      -- },
-    },
+    -- dependencies = {
+    --   {
+    --     "luochen1990/rainbow",
+    --     config = function()
+    --       vim.g.rainbow_active = 1
+    --     end,
+    --   },
+    --   {
+    --     "HiPhish/rainbow-delimiters.nvim",
+    --     -- opts={},
+    --   },
+    -- },
   },
 }

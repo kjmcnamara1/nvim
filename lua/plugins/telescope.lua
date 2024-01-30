@@ -7,6 +7,9 @@ return {
     },
     cmd = "Telescope",
     version = false,
+    opts = {
+      prompt_prefix = "   ",
+    },
     keys = {
       -- common
       { "<leader><space>", "<cmd>Telescope find_files<cr>",                                              desc = "Find Files" },
