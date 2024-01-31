@@ -5,11 +5,11 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      fade_nc = true,
+      -- fade_nc = true,
       styles = {
         comments = "italic",
         keywords = "bold",
-      },
+      }
     },
   },
   {
