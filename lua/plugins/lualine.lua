@@ -1,8 +1,10 @@
 return {
   "nvim-lualine/lualine.nvim",
+  event = 'VimEnter',
   opts = {
     options = {
-      theme = "onenord",
+      -- theme = "auto",
+      globalstatus = true,
     },
   },
   --config = function()

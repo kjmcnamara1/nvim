@@ -98,8 +98,8 @@ vim.opt.sidescrolloff = 5
 -- Minimum window width
 vim.opt.winminwidth = 5
 
--- Global statusline for all windows
-vim.opt.laststatus = 3
+-- Global statusline for all windows -- Handled by lualine opt
+-- vim.opt.laststatus = 3
 
 -- Better completion experience
 -- vim.opt.completeopt = "menu,menuone,noselect"

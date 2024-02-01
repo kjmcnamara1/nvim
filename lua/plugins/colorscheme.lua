@@ -2,7 +2,8 @@ return {
   {
     "rmehri01/onenord.nvim",
     name = "onenord",
-    lazy = false,
+    event = 'VimEnter',
+    -- lazy = false,
     priority = 1000,
     opts = {
       -- fade_nc = true,

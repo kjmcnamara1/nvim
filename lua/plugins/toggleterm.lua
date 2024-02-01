@@ -1,4 +1,5 @@
 return {
+  -- TODO: Need to clean up new terminal command keymaps
   {
     "akinsho/toggleterm.nvim",
     opts = {
@@ -23,10 +24,6 @@ return {
         end
       end,
     },
-    -- config = function (_,opts)
-    --   require('toggleterm').setup(opts)
-    --
-    -- end
     cmd = "ToggleTerm",
     keys = {
       {
@@ -62,17 +59,4 @@ return {
       { "<c-x>", [[<c-\><c-n>]], mode = "t", buffer = 0 },
     },
   },
-  -- {
-  --   "NvChad/nvterm",
-  --   config = function()
-  --     require("nvterm").setup()
-  --     local terminal = require("nvterm.terminal")
-  --     vim.keymap.set({ "n", "t" }, "<c-i>", function()
-  --       terminal.toggle("float")
-  --     end, { noremap = true, silent = true, desc = "Toggle floating terminal" })
-  --   end,
-  --   -- keys = {
-  --   --   { '<c-i>', function() require('nvterm.terminal').toggle('float') end, mode = { 'n', 't' }, desc = 'Toggle Terminal' }
-  --   -- },
-  -- },
 }
