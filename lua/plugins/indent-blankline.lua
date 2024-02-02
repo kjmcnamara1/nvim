@@ -1,6 +1,8 @@
 return {
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    event = 'BufEnter',
     opts = {
       indent = {
         -- char = "│",
@@ -30,7 +32,6 @@ return {
         },
       },
     },
-    main = "ibl",
     -- dependencies = {
     --   {
     --     "luochen1990/rainbow",
