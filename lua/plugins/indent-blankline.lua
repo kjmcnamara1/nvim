@@ -3,35 +3,35 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = 'BufEnter',
-    opts = {
-      indent = {
-        -- char = "│",
-        char = "",
-        tab_char = "│",
-      },
-      whitespace = {
-        highlight = {
-          "CursorColumn",
-          "Whitespace",
-        },
-      },
-      scope = { enabled = false },
-      exclude = {
-        filetypes = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
-        },
-      },
-    },
+    -- opts = {
+    --   indent = {
+    --     -- char = "│",
+    --     char = "",
+    --     tab_char = "│",
+    --   },
+    --   whitespace = {
+    --     highlight = {
+    --       "CursorColumn",
+    --       "Whitespace",
+    --     },
+    --   },
+    --   scope = { enabled = false },
+    --   exclude = {
+    --     filetypes = {
+    --       "help",
+    --       "alpha",
+    --       "dashboard",
+    --       "neo-tree",
+    --       "Trouble",
+    --       "trouble",
+    --       "lazy",
+    --       "mason",
+    --       "notify",
+    --       "toggleterm",
+    --       "lazyterm",
+    --     },
+    --   },
+    -- },
     -- dependencies = {
     --   {
     --     "luochen1990/rainbow",
