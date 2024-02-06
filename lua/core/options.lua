@@ -10,7 +10,6 @@ vim.g.maplocalleader = "\\"
 -- ======================== EDITOR ========================
 
 -- Enable relative line numbers with current line as absolute number
-vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Set tab to 2 spaces and round indent
@@ -20,38 +19,19 @@ vim.opt.expandtab = true
 vim.opt.shiftround = true
 
 -- Enable auto indenting and set to spaces
-vim.opt.smartindent = true
 vim.opt.shiftwidth = 2
 
--- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
-vim.opt.breakindent = true
-
--- Disable text wrap
+-- Turn off text wrap by default
 vim.opt.wrap = false
-
--- Enable incremental searching
-vim.opt.incsearch = true
-vim.opt.hlsearch = true
-
--- Enable ignorecase + smartcase for better searching with '/'
-vim.opt.ignorecase = true
-vim.opt.smartcase = true -- Don't ignore case with capitals
 
 -- Preview incremental substitute
 -- vim.opt.inccommand = "split"
 
 -- Show invisible characters
-vim.opt.list = true
-vim.opt.listchars = "trail:∙,extends:󰇘,precedes:󰇘,conceal:"
-
--- Enable highlighting of the current line
-vim.opt.cursorline = true
+vim.opt.listchars="trail:∙,extends:󰇘,precedes:󰇘,conceal:,nbsp:␣"
 
 -- Place a column line
 -- vim.opt.colorcolumn = '80'
-
--- Allow cursor to move past end of line in visual block mode
--- vim.opt.virtualedit = "block"
 
 -- Vim Autoformatting Options
 -- vim.g.autoformat = true
@@ -69,44 +49,15 @@ vim.opt.cursorline = true
 
 -- ======================== WINDOW ========================
 
--- Enable mouse mode
-vim.opt.mouse = "a"
-
--- Split new windows below and to right of current
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.splitkeep = "screen"
-
--- Enable 24 bit color
-vim.opt.termguicolors = true
-
--- Enable the sign column to prevent the screen from jumping
-vim.opt.signcolumn = "yes"
-
--- Set fold settings
--- These options were reccommended by nvim-ufo
--- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
-vim.opt.foldcolumn = "0"
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
-vim.opt.foldenable = true
-
 -- Always keep n lines above/below cursor unless at start/end of file
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5
 
 -- Minimum window width
-vim.opt.winminwidth = 5
+-- vim.opt.winminwidth = 5
 
 -- Global statusline for all windows -- Handled by lualine opt
 -- vim.opt.laststatus = 3
-
--- Better completion experience
--- vim.opt.completeopt = "menu,menuone,noselect"
-
--- Pop Up Menu options
--- vim.opt.pumblend = 10
--- vim.opt.pumheight = 10
 
 -- vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
 
@@ -123,7 +74,7 @@ vim.opt.winminwidth = 5
 -- ======================== SESSION ========================
 
 -- Confirm to save changes before exiting modified buffer
-vim.opt.confirm = true
+-- vim.opt.confirm = true
 
 -- Sync with system clipboard
 vim.opt.clipboard = "unnamedplus"
@@ -135,8 +86,66 @@ vim.opt.autowrite = true
 vim.opt.updatetime = 200
 
 -- Enable persistent undo history
-vim.opt.undofile = true
 vim.opt.undolevels = 10000
 
--- Options to save between sessions
--- vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
+-- ===================== set by MINI.BASICS =============================
+-- --------------------- options.basic ---------------------------
+-- vim.g.mapleader = ' ' -- Use space as the one and only true Leader key
+-- General
+-- vim.o.undofile    = true  -- Enable persistent undo (see also `:h undodir`)
+
+-- vim.o.backup      = false -- Don't store backup while overwriting the file
+-- vim.o.writebackup = false -- Don't store backup while overwriting the file
+
+-- vim.o.mouse       = 'a'   -- Enable mouse for all available modes
+
+-- vim.cmd('filetype plugin indent on') -- Enable all filetype plugins
+
+-- Appearance
+-- vim.o.breakindent   = true    -- Indent wrapped lines to match line start
+-- vim.o.cursorline    = true    -- Highlight current line
+-- vim.o.linebreak     = true    -- Wrap long lines at 'breakat' (if 'wrap' is set)
+-- vim.o.number        = true    -- Show line numbers
+-- vim.o.splitbelow    = true    -- Horizontal splits will be below
+-- vim.o.splitright    = true    -- Vertical splits will be to the right
+
+-- vim.o.ruler         = false   -- Don't show cursor position in command line
+-- vim.o.showmode      = false   -- Don't show mode in command line
+-- vim.o.wrap          = false   -- Display long lines as just one line
+
+-- vim.o.signcolumn    = 'yes'   -- Always show sign column (otherwise it will shift text)
+-- vim.o.fillchars     = 'eob: ' -- Don't show `~` outside of buffer
+
+-- Editing
+-- vim.o.ignorecase  = true -- Ignore case when searching (use `\C` to force not doing that)
+-- vim.o.incsearch   = true -- Show search results while typing
+-- vim.o.infercase   = true -- Infer letter cases for a richer built-in keyword completion
+-- vim.o.smartcase   = true -- Don't ignore case when searching if pattern has upper case
+-- vim.o.smartindent = true -- Make indenting smart
+
+-- vim.o.completeopt   = 'menuone,noinsert,noselect' -- Customize completions
+-- vim.o.virtualedit   = 'block'                     -- Allow going past the end of line in visual block mode
+-- vim.o.formatoptions = 'qjl1'                      -- Don't autoformat comments
+
+-- Neovim version dependent
+-- if vim.fn.has('nvim-0.9') == 1 then
+-- 	vim.opt.shortmess:append('WcC') -- Reduce command line messages
+-- 	vim.o.splitkeep = 'screen'      -- Reduce scroll during window split
+-- else
+-- 	vim.opt.shortmess:append('Wc')  -- Reduce command line messages
+-- end
+
+-- if vim.fn.has('nvim-0.10') == 0 then
+-- 	vim.o.termguicolors = true -- Enable gui colors
+-- end
+
+-- --------------------- options.extra_ui ---------------------------
+-- vim.o.pumblend  = 10 -- Make builtin completion menus slightly transparent
+-- vim.o.pumheight = 10 -- Make popup menu smaller
+-- vim.o.winblend  = 10 -- Make floating windows slightly transparent
+
+-- vim.o.listchars = 'tab:> ,extends:…,precedes:…,nbsp:␣' -- Define which helper symbols to show
+-- vim.o.list      = true                                 -- Show some helper symbols
+
+-- if vim.fn.exists("syntax_on") ~= 1 then vim.cmd([[syntax enable]]) end
+

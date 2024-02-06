@@ -1,6 +1,12 @@
 -- Vim options
 require("core.options")
 
+-- Custom keymaps
+require("core.keymaps")
+
+-- Custom autocmds
+require("core.autocmds")
+
 -- ===================== Lazy.nvim Plugin Manager =============================
 -- Set lazy data folder location where plugins will download
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -27,9 +33,3 @@ local opts = {
 
 -- Load Lazy.nvim
 require("lazy").setup("plugins", opts)
-
--- Custom keymaps
-require("core.keymaps")
-
--- Custom autocmds
-require("core.autocmds")
