@@ -210,7 +210,7 @@ return {
         show_unloaded = true,
       },
       document_symbols = {
-            window = {
+        window = {
           position = "right",
         },
       },
@@ -305,6 +305,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = "BufEnter",
+    cond = (vim.env.NAME or vim.env.COMPUTERNAME) ~= 'ANGEL',
     opts = {
       indent = {
         char = "",
@@ -581,6 +582,10 @@ return {
     build = ":TSUpdate",
     event={'BufReadPost','BufNewFile','VeryLazy'},
     cmd = { "TSInstall",'TSBufEnable','TSBufDisable','TSModuleInfo',"TSUpdateSync", "TSUpdate",  },
+    keys = {
+      {';',function() return require('nvim-treesitter.textobjects.repeatable_move').repeat_last_move_next() end, mode={'n','x','o'}, desc='Repeat next move'},
+      {',',function() return require('nvim-treesitter.textobjects.repeatable_move').repeat_last_move_previous() end, mode={'n','x','o'}, desc='Repeat previous move'},
+    },
     opts = {
       ensure_installed = {
         "bash",
@@ -640,6 +645,7 @@ return {
         },
         move = {
           enable = true,
+          set_jumps=true,
           goto_next_start = {
             [']c'] = '@comment.outer',
             [']a'] = '@parameter.outer',
