@@ -6,7 +6,7 @@ return {
     event = "VimEnter",
     priority = 1000,
     opts = {
-      -- fade_nc = true,
+      fade_nc = true,
       styles = {
         comments = "italic",
         keywords = "bold",
@@ -214,14 +214,6 @@ return {
           position = "right",
         },
       },
-      -- default_component_configs = {
-      --   indent = {
-      --     with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-      --     expander_collapsed = "",
-      --     expander_expanded = "",
-      --     expander_highlight = "NeoTreeExpander",
-      --   },
-      -- },
     },
     keys = {
       { "<leader>e", ":Neotree toggle reveal<cr>", desc = "NeoTree Explorer", silent = true, },
@@ -229,65 +221,72 @@ return {
       { "<leader>oe", ":Neotree toggle reveal source=document_symbols<cr>", desc = "NeoTree Symbols Outline", silent = true, },
       { "<leader>be", ":Neotree toggle reveal source=buffers<cr>", desc = "NeoTree Buffers", silent = true, },
     },
-    -- init = function()
-    --   if vim.fn.argc(-1) == 1 then
-    --     local stat = vim.loop.fs_stat(vim.fn.argv(0))
-    --     if stat and stat.type == "directory" then
-    --       require("neo-tree")
-    --     end
-    --   end
-    -- end,
-    -- deactivate = function()
-    --   vim.cmd([[Neotree close]])
-    -- end,
   },
   -- TODO: Need to clean up new terminal command keymaps
-  -- {
-  --   "akinsho/toggleterm.nvim",
-  --   cmd = "ToggleTerm",
-  --   opts = {
-  --     shade_terminals = false,
-  --     open_mapping = [[<c-\>]],
-  --     direction = "horizontal",
-  --     winbar = {
-  --       enabled = true,
-  --     },
-  --     float_opts = {
-  --       border = "curved",
-  --       width = 120,
-  --       height = 30,
-  --     },
-  --     size = function(term)
-  --       if term.direction == "horizontal" then
-  --         return 15
-  --       elseif term.direction == "vertical" then
-  --         return vim.o.columns * 0.4
-  --       else
-  --         return 20
-  --       end
-  --     end,
-  --   },
-  --   keys = {
-  --     {
-  --       "<c-bslash>", -- "<cmd>ToggleTerm<cr>", mode = { "i", "n", "t" }, desc = "Toggle Terminal", },
-  --       { "<c-t>f", "<cmd>ToggleTerm direction=float<cr>", mode = { "i", "n", "t" }, desc = "Toggle Float Terminal" },
-  --       {
-  --         "<c-t>h",
-  --         "<cmd>ToggleTerm direction=horizontal<cr>",
-  --         mode = { "i", "n", "t" },
-  --         desc = "Toggle Horizontal Terminal",
-  --       },
-  --       {
-  --         "<c-t>v",
-  --         "<cmd>ToggleTerm direction=vertical<cr>",
-  --         mode = { "i", "n", "t" },
-  --         desc = "Toggle Vertical Terminal",
-  --       },
-  --       { "<c-t>t", "<cmd>ToggleTerm direction=tab<cr>", mode = { "i", "n", "t" }, desc = "Toggle Tab Terminal" },
-  --       { "<c-x>", [[<c-\><c-n>]], mode = "t", buffer = 0 },
-  --     },
-  --   },
+  {
+    "akinsho/toggleterm.nvim",
+    cmd = "ToggleTerm",
+    opts = {
+      shade_terminals = false,
+      open_mapping = [[<c-\>]],
+      direction = "float",
+      winbar = {
+        enabled = true,
+      },
+      float_opts = {
+        border = "curved",
+        width = 120,
+        height = 30,
+      },
+      size = function(term)
+        if term.direction == "horizontal" then
+          return 15
+        elseif term.direction == "vertical" then
+          return vim.o.columns * 0.4
+        else
+          return 20
+        end
+      end,
+    },
+    keys = {
+      {
+        "<c-bslash>",
+        -- "<cmd>ToggleTerm<cr>",
+        mode = { "i", "n", "t" },
+        desc = "Toggle Terminal",
+        },
+        { "<c-t>f", "<cmd>ToggleTerm direction=float<cr>", mode = { "i", "n", "t" }, desc = "Toggle Float Terminal" },
+        { "<c-t>h", "<cmd>ToggleTerm direction=horizontal<cr>", mode = { "i", "n", "t" }, desc = "Toggle Horizontal Terminal", },
+        { "<c-t>v", "<cmd>ToggleTerm direction=vertical<cr>", mode = { "i", "n", "t" }, desc = "Toggle Vertical Terminal", },
+        { "<c-t>t", "<cmd>ToggleTerm direction=tab<cr>", mode = { "i", "n", "t" }, desc = "Toggle Tab Terminal" },
+        { "<c-x>", [[<c-\><c-n>]], mode = "t", buffer = 0 },
+      },
+    },
   
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "sindrets/diffview.nvim",        -- optional - Diff integration
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    cmd = 'Neogit',
+    keys = {
+      {'<leader>gg','<cmd>Neogit<cr>',desc = 'Open NeoGit'}
+    },
+    opts = {
+      graph_style  ='unicode',
+      telescope_sorter = function()
+        return require("telescope").extensions.fzf.native_fzf_sorter()
+      end,
+      signs = {
+        -- { CLOSED, OPENED }
+        section = { "󰧚", "󰧗" },
+        item = { "󰬪", "󰬧" },
+        hunk = { "󰅂", "󰅀" },
+      },
+    },
+  },
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPost", "BufWritePost", "BufNewFile" },
@@ -297,8 +296,21 @@ return {
       },
     },
     keys = {
-      { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Git Preview Hunk" },
-      { "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle Git Blame" },
+      { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Git Preview Hunk" ,buffer=0},
+      { "<leader>gi", "<cmd>Gitsigns preview_hunk_inline<cr>", desc = "Git Preview Hunk Inline" ,buffer=0},
+      { "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle Git Blame",buffer=0 },
+      { "<leader>gS", "<cmd>Gitsigns stage_buffer<cr>", desc = "Git Stage Buffer",buffer=0 },
+      { "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", desc = "Git Reset Buffer",buffer=0 },
+      -- Git Hunks
+      { "<leader>ghs", "<cmd>Gitsigns stage_hunk<cr>", desc = "Stage Git Hunk",buffer=0 },
+      { "<leader>ghr", "<cmd>Gitsigns reset_hunk<cr>", desc = "Reset Git Hunk",buffer=0 },
+      { "<leader>ghu", "<cmd>Gitsigns undo_stage_hunk<cr>", desc = "Undo Stage Git Hunk",buffer=0 },
+      -- Movements
+      { "]h", "<cmd>Gitsigns next_hunk<cr>", desc = "Next Git Hunk",buffer=0 },
+      { "[h", "<cmd>Gitsigns prev_hunk<cr>", desc = "Previous Git Hunk",buffer=0 },
+      -- Text Object
+      { "ih", ":<c-u>Gitsigns select_hunk<cr>", mode={'o','x'},desc = "Previous Git Hunk",buffer=0 },
+      { "ah", ":<c-u>Gitsigns select_hunk<cr>", mode={'o','x'},desc = "Previous Git Hunk",buffer=0 },
     },
   },
   {
@@ -585,6 +597,10 @@ return {
     keys = {
       {';',function() return require('nvim-treesitter.textobjects.repeatable_move').repeat_last_move_next() end, mode={'n','x','o'}, desc='Repeat next move'},
       {',',function() return require('nvim-treesitter.textobjects.repeatable_move').repeat_last_move_previous() end, mode={'n','x','o'}, desc='Repeat previous move'},
+      {'f',function() return require('nvim-treesitter.textobjects.repeatable_move').builtin_f() end, mode={'n','x','o'},desc='Find character forwards'},
+      {'F',function() return require('nvim-treesitter.textobjects.repeatable_move').builtin_F() end, mode={'n','x','o'},desc='Find character backwards'},
+      {'t',function() return require('nvim-treesitter.textobjects.repeatable_move').builtin_t() end, mode={'n','x','o'},desc='Until character forwards'},
+      {'T',function() return require('nvim-treesitter.textobjects.repeatable_move').builtin_T() end, mode={'n','x','o'},desc='Until character backwards'},
     },
     opts = {
       ensure_installed = {
@@ -628,14 +644,14 @@ return {
           enable=true,
           lookahead=true,
           keymaps={
-            ['aa'] = '@parameter.outer',
-            ['ia'] = '@parameter.inner',
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
+            -- ['aa'] = '@parameter.outer',
+            -- ['ia'] = '@parameter.inner',
+            -- ['af'] = '@function.outer',
+            -- ['if'] = '@function.inner',
             -- ['ac'] = '@class.outer',
             -- ['ic'] = '@class.inner',
-            ['ac'] = '@comment.outer',
-            ['ic'] = '@comment.inner',
+            -- ['ac'] = '@comment.outer',
+            -- ['ic'] = '@comment.inner',
           },
           selection_modes={
             ['@function.outer'] = 'V',
@@ -650,26 +666,32 @@ return {
             [']c'] = '@comment.outer',
             [']a'] = '@parameter.outer',
             ["]f"] = "@function.outer", 
-            ["]]"] = "@class.outer"
+            ["]F"] = "@call.outer", 
+            ["]C"] = "@class.outer",
+            ["]A"] = "@assignment.outer",
+            ["<tab>"] = {query={'@variable*','@attribute.inner*','@parameter.inner','@assignment.inner','@conditional.inner','@call.inner'}},
           },
-          goto_next_end = {
-            [']C'] = '@comment.outer',
-            [']A'] = '@parameter.outer',
-            ["]F"] = "@function.outer",
-            ["]["] = "@class.outer"
-          },
+          -- goto_next_end = {
+          --   [']C'] = '@comment.outer',
+          --   [']A'] = '@parameter.outer',
+          --   ["]F"] = "@function.outer",
+          --   ["]["] = "@class.outer"
+          -- },
           goto_previous_start = {
             ['[c'] = '@comment.outer',
             ['[a'] = '@parameter.outer',
             ["[f"] = "@function.outer",
-            ["[["] = "@class.outer" 
+            ["[F"] = "@call.outer", 
+            ["[C"] = "@class.outer" ,
+            ["[A"] = "@assignment.outer",
+            ["<s-tab>"] = {query={'@variable*','@attribute.inner*','@parameter.inner','@assignment.inner','@conditional.inner','@call.inner'}},
           },
-          goto_previous_end = {
-            ['[C'] = '@comment.outer',
-            ['[A'] = '@parameter.outer',
-            ["[F"] = "@function.outer",
-            ["[]"] = "@class.outer"
-          },
+          -- goto_previous_end = {
+          --   ['[C'] = '@comment.outer',
+          --   ['[A'] = '@parameter.outer',
+          --   ["[F"] = "@function.outer",
+          --   ["[]"] = "@class.outer"
+          -- },
           -- goto_next = {[']c'] = '@comment.outer'},
           -- goto_previous = {['[c'] = '@comment.outer'},
         },
@@ -684,6 +706,9 @@ return {
         },
       },
     },
+    init=function(plugin)
+      require("nvim-treesitter.query_predicates")
+    end,
     config = function(_,opts)
       require('nvim-treesitter.configs').setup(opts)
       -- vim.opt.foldmethod=exp
@@ -761,34 +786,39 @@ return {
     config = true,
   },
 
-  -- {
-  --   "echasnovski/mini.ai",
-  --   event = "VeryLazy",
-  --   opts = function--[[ --[[ () ]] ]]
-  --     local ai = require("mini.ai")
-  --     return {
-  --       n_lines = 500,
-  --       -- TODO: Add 'gc' text object for comments
-  --       custom_textobjects = {
-  --         o = ai.gen_spec.treesitter({
-  --           a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-  --           i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-  --         }, {}),
-  --         f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
-  --         c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
-  --         t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
-  --         e = function()
-  --           local from = { line = 1, col = 1 }
-  --           local to = {
-  --             line = vim.fn.line("$"),
-  --             col = math.max(vim.fn.getline("$"):len(), 1),
-  --           }
-  --           return { from = from, to = to }
-  --         end,
-  --       },
-  --     }
-  --   end,
-  -- },
+  {
+    "echasnovski/mini.ai",
+    event = "VeryLazy",
+    opts = function()
+      local ai = require("mini.ai")
+      return {
+        n_lines = 500,
+        -- TODO: Add 'gc' text object for comments
+        custom_textobjects = {
+          o = ai.gen_spec.treesitter({
+            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          }),
+          a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
+          A = ai.gen_spec.treesitter({ a = "@assignment.outer", i = "@assignment.inner" }),
+          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+          F = ai.gen_spec.treesitter({ a = "@call.outer", i = "@call.inner" }),
+          c = ai.gen_spec.treesitter({ a = "@comment.outer", i = "@comment.inner" }),
+          C = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+          r = ai.gen_spec.treesitter({ a = "@regex.outer", i = "@regex.inner" }),
+          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
+          e = function()
+            local from = { line = 1, col = 1 }
+            local to = {
+              line = vim.fn.line("$"),
+              col = math.max(vim.fn.getline("$"):len(), 1),
+            }
+            return { from = from, to = to }
+          end,
+        },
+      }
+    end,
+  },
 
   -- Better than mini.comment
   -- mini.comment does not have block comments (gb, gbc)
