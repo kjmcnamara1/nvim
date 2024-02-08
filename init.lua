@@ -28,6 +28,11 @@ vim.opt.rtp:prepend(lazypath)
 local opts = {
   --defaults = { lazy = true },
   install = { colorscheme = { "onenord" } },
+  ui = {
+    border='rounded',
+    title='Lazy Plugin Manager',
+  },
+  checker = {enabled = true},
   change_detection = { notify = false },
 }
 

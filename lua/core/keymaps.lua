@@ -83,18 +83,7 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
 -- Unmap 's' for mini.surround
-map("n", "s", "<nop>")
-
--- Unmap 'f' and 'F' for flash.nvim
-map("n", "f", "<nop>")
-map("n", "F", "<nop>")
-
-
-
-
-
-
-
+-- map("n", "s", "<nop>")
 
 -- ===================== set by MINI.BASICS =============================
 -- --------------------- mappings.basic ---------------------------
