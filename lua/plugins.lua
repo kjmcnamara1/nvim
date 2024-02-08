@@ -484,6 +484,11 @@ return {
 
   -- ============================================ EDITOR ============================================
   {
+    -- Adds labels for marks to sign column and several keymaps
+    'kshenoy/vim-signature',
+    event={'BufReadPost','BufNewFile'},
+  },
+  {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
     dependencies = {
@@ -640,36 +645,20 @@ return {
         },
       },
       textobjects = {
-        select={
-          enable=true,
-          lookahead=true,
-          keymaps={
-            -- ['aa'] = '@parameter.outer',
-            -- ['ia'] = '@parameter.inner',
-            -- ['af'] = '@function.outer',
-            -- ['if'] = '@function.inner',
-            -- ['ac'] = '@class.outer',
-            -- ['ic'] = '@class.inner',
-            -- ['ac'] = '@comment.outer',
-            -- ['ic'] = '@comment.inner',
-          },
-          selection_modes={
-            ['@function.outer'] = 'V',
-            ['@class.outer'] = 'V',
-          },
-          include_surrounding_whitespace = true,
-        },
         move = {
           enable = true,
           set_jumps=true,
           goto_next_start = {
             [']c'] = '@comment.outer',
-            [']a'] = '@parameter.outer',
-            ["]f"] = "@function.outer", 
-            ["]F"] = "@call.outer", 
+            [']a'] = '@parameter.inner',
+            ["]m"] = "@function.outer", 
+            ["]f"] = "@call.outer", 
             ["]C"] = "@class.outer",
-            ["]A"] = "@assignment.outer",
-            ["<tab>"] = {query={'@variable*','@attribute.inner*','@parameter.inner','@assignment.inner','@conditional.inner','@call.inner'}},
+            ["]="] = "@assignment.inner",
+            ["]l"] = "@loop.outer",
+            ["]s"] = {query='@scope',query_group='locals', desc='Next scope'},
+            ["]z"] = {query='@fold',query_group='folds', desc='Next fold'},
+            -- ["<tab>"] = {query={'@variable*','@attribute.inner*','@parameter.inner','@assignment.inner','@conditional.inner','@call.inner'}},
           },
           -- goto_next_end = {
           --   [']C'] = '@comment.outer',
@@ -679,12 +668,15 @@ return {
           -- },
           goto_previous_start = {
             ['[c'] = '@comment.outer',
-            ['[a'] = '@parameter.outer',
-            ["[f"] = "@function.outer",
-            ["[F"] = "@call.outer", 
+            ['[a'] = '@parameter.inner',
+            ["[m"] = "@function.outer",
+            ["[f"] = "@call.outer", 
             ["[C"] = "@class.outer" ,
-            ["[A"] = "@assignment.outer",
-            ["<s-tab>"] = {query={'@variable*','@attribute.inner*','@parameter.inner','@assignment.inner','@conditional.inner','@call.inner'}},
+            ["[="] = "@assignment.inner",
+            ["[l"] = "@loop.outer",
+            ["[s"] = {query='@scope',query_group='locals', desc='Previous scope'},
+            ["[z"] = {query='@fold',query_group='folds', desc='Previous fold'},
+            -- ["<s-tab>"] = {query={'@variable*','@attribute.inner*','@parameter.inner','@assignment.inner','@conditional.inner','@call.inner'}},
           },
           -- goto_previous_end = {
           --   ['[C'] = '@comment.outer',
@@ -698,25 +690,36 @@ return {
         swap = {
           enable=true,
           swap_next={
-            ['<leader>a'] = '@parameter.inner',
+            ['<leader>na'] = '@parameter.inner',
+            ['<leader>nm'] = '@function.outer',
           },
           swap_previous = {
-            ['<leader>A'] = '@parameter.inner',
+            ['<leader>pa'] = '@parameter.inner',
+            ['<leader>pm'] = '@function.outer',
           },
         },
       },
     },
-    init=function(plugin)
-      require("nvim-treesitter.query_predicates")
-    end,
+    -- init=function(plugin)
+    --   require("nvim-treesitter.query_predicates")
+    -- end,
     config = function(_,opts)
       require('nvim-treesitter.configs').setup(opts)
       -- vim.opt.foldmethod=exp
       -- vim.opt.foldexpr=nvim_treesitter#foldexpr()
+
+      -- local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
+      -- vim.keymap.set({'n','x','o'}, ';',ts_repeat_move.repeat_last_move_next)
+      -- vim.keymap.set({'n','x','o'}, ';',ts_repeat_move.repeat_last_move_previous)
+
+      -- vim.keymap.set({'n','x','o'}, 'f',ts_repeat_move.builtin_f)
+      -- vim.keymap.set({'n','x','o'}, 'F',ts_repeat_move.builtin_F)
+      -- vim.keymap.set({'n','x','o'}, 't',ts_repeat_move.builtin_t)
+      -- vim.keymap.set({'n','x','o'}, 'T',ts_repeat_move.builtin_T)
     end,
   }, 
   {    "nvim-treesitter/nvim-treesitter-context",
-    -- TODO: Need to add lazy loading
+    event={'BufReadPost','BufNewFile'},
     opts = {
       max_lines=3,
     },
@@ -738,26 +741,28 @@ return {
       { "<F3>", mode = { "i", "n", "v" }, desc = "Toggle maximize window" },
     },
   },
-  -- {
-  --   "folke/flash.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     modes = {
-  --       -- search = { highlight = { backdrop = true } },
-  --       char = {
-  --         -- autohide = true,
-  --         jump_labels = true,
-  --       },
-  --     },
-  --   },
-  --   keys = {
-  --     -- { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-  --     { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Trweesitter", },
-  --     { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash", },
-  --     { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search", },
-  --     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search", },
-  --   },
-  -- },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {
+      jump = {
+        autojump=true,
+      },
+      label={
+        current=false,
+      },
+      modes = {
+        char = { enabled=false },
+      },
+    },
+    keys = {
+      { "f",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "F", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Trweesitter", },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash", },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search", },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search", },
+    },
+  },
   {
     "echasnovski/mini.basics",  
     event = "VeryLazy",
@@ -782,7 +787,7 @@ return {
   },
   {
     "echasnovski/mini.surround",
-    event = "VeryLazy",
+    keys = { 'sa', 'sd', 'sn', 'sr', 'sh', 'sf', 'sF' }, 
     config = true,
   },
 
@@ -795,17 +800,14 @@ return {
         n_lines = 500,
         -- TODO: Add 'gc' text object for comments
         custom_textobjects = {
-          o = ai.gen_spec.treesitter({
-            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-          }),
-          a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
-          A = ai.gen_spec.treesitter({ a = "@assignment.outer", i = "@assignment.inner" }),
-          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
-          F = ai.gen_spec.treesitter({ a = "@call.outer", i = "@call.inner" }),
+          -- o = ai.gen_spec.treesitter({
+          --   a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+          --   i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          -- }),
+          ['='] = ai.gen_spec.treesitter({ a = "@assignment.outer", i = "@assignment.inner" }),
+          m = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
           c = ai.gen_spec.treesitter({ a = "@comment.outer", i = "@comment.inner" }),
-          C = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
-          r = ai.gen_spec.treesitter({ a = "@regex.outer", i = "@regex.inner" }),
+          C = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
           t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
           e = function()
             local from = { line = 1, col = 1 }
