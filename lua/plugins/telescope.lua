@@ -27,6 +27,11 @@ return {
         layout_config = {
           prompt_position='top',
         },
+        mappings = {
+          i = {
+            ['<c-h>'] = 'select_horizontal'
+          },
+        },
       },
       pickers = {
         buffers = {
@@ -38,6 +43,14 @@ return {
           sort_lastused = true,
           layout_config={
             anchor = 'N',
+          },
+          mappings = {
+            i = {
+              ['<c-x>'] = 'delete_buffer',
+            },
+            n = {
+              x = 'delete_buffer',
+            },
           },
         },
         colorscheme = {
