@@ -24,12 +24,14 @@ map("x", "<leader>p", '"_dP', { desc = "Paste without overwriting register" })
 map("n", "U", "<c-r>", { desc = "Redo" })
 
 -- Buffers
-map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New File" })
-map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New file" })
+map("n", "<leader>'", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
+-- map("n", "<leader>`", "<cmd>exe 'tabn '.g:lasttab<cr>", { desc = "Switch to other tab" }) -- need to create an autocmd to record last tab number
 
 -- Better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
+map("v", "=", "=gv")
 
 -- Better beginning / end of lines ( modes Norm, Vis, Sel, Opr)
 map("", "H", "^", { desc = "Beginning of Line" })
