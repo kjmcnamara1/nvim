@@ -61,6 +61,9 @@ vim.opt.sidescrolloff = 5
 
 -- vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
 
+vim.opt.foldcolumn = 'auto'
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 -- vim.opt.fillchars = {
 --   foldopen = "",
 --   foldclose = "",
@@ -87,6 +90,9 @@ vim.opt.updatetime = 200
 
 -- Enable persistent undo history
 vim.opt.undolevels = 10000
+
+-- Items to remember for saving/loading sessions
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- ===================== set by MINI.BASICS =============================
 -- --------------------- options.basic ---------------------------

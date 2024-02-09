@@ -1,19 +1,20 @@
 return {
   {
+    -- Change background highlight to match color of string, e.g. '#abf4c2'
     'NvChad/nvim-colorizer.lua',
     event={'BufReadPre','BufNewFile'},
     config=true,
   },
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    opts = {
-      options = {'buffers','curdir','tabpages','winsize','terminal','folds'}
-    },
-    keys = {
-      {'<leader>wl',[[<cmd>lua require('persistence').load()<cr>]],desc='Restore session'}
-    }
-  },
+  -- {
+  --   "folke/persistence.nvim",
+  --   event = "BufReadPre", -- this will only start session saving when an actual file was opened
+  --   opts = {
+  --     options = {'buffers','curdir','tabpages','winsize','terminal','folds'}
+  --   },
+  --   keys = {
+  --     {'<leader>wl',[[<cmd>lua require('persistence').load()<cr>]],desc='Restore session'}
+  --   }
+  -- },
   {
     "szw/vim-maximizer",
     cmd = "MaximizerToggle",
