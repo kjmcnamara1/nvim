@@ -88,3 +88,11 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.cmd.wincmd("=")
   end,
 })
+
+-- Format file on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup("lsp_format"),
+  callback = function()
+    vim.lsp.buf.format({ bufnr = 0 })
+  end
+})

@@ -1,20 +1,10 @@
 return {
   {
     -- Change background highlight to match color of string, e.g. '#abf4c2'
-    'NvChad/nvim-colorizer.lua',
-    event={'BufReadPre','BufNewFile'},
-    config=true,
+    "brenoprata10/nvim-highlight-colors",
+    event = { "BufReadPre", "BufNewFile" },
+    config = true,
   },
-  -- {
-  --   "folke/persistence.nvim",
-  --   event = "BufReadPre", -- this will only start session saving when an actual file was opened
-  --   opts = {
-  --     options = {'buffers','curdir','tabpages','winsize','terminal','folds'}
-  --   },
-  --   keys = {
-  --     {'<leader>wl',[[<cmd>lua require('persistence').load()<cr>]],desc='Restore session'}
-  --   }
-  -- },
   {
     "szw/vim-maximizer",
     cmd = "MaximizerToggle",
@@ -66,16 +56,16 @@ return {
       },
     },
     keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",                            desc = "Toggle pin" },
+      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>",                 desc = "Delete non-pinned buffers" },
+      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>",                          desc = "Delete other buffers" },
       -- { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
       -- { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
-      { "<a-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-      { "<a-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-      { "<leader>x", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer", },
+      { "<a-h>",      "<cmd>BufferLineCyclePrev<cr>",                            desc = "Prev buffer" },
+      { "<a-l>",      "<cmd>BufferLineCycleNext<cr>",                            desc = "Next buffer" },
+      { "[b",         "<cmd>BufferLineCyclePrev<cr>",                            desc = "Prev buffer" },
+      { "]b",         "<cmd>BufferLineCycleNext<cr>",                            desc = "Next buffer" },
+      { "<leader>x",  function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
     },
     config = function(_, opts)
       require("bufferline").setup(opts)
@@ -111,9 +101,9 @@ return {
       filesystem = {
         group_empty_dirs = true,
         hijack_netrw_behavior = "open_default",
-        follow_current_file = { 
+        follow_current_file = {
           enabled = true,
-          leave_dirs_open=true,
+          leave_dirs_open = true,
         },
         use_libuv_file_watcher = true,
         window = {
@@ -134,10 +124,10 @@ return {
       },
     },
     keys = {
-      { "<leader>e", ":Neotree toggle reveal<cr>", desc = "NeoTree Explorer", silent = true, },
-      { "<leader>ge", ":Neotree toggle reveal source=git_status<cr>", desc = "NeoTree Git Explorer", silent = true, },
-      { "<leader>oe", ":Neotree toggle reveal source=document_symbols<cr>", desc = "NeoTree Symbols Outline", silent = true, },
-      { "<leader>be", ":Neotree toggle reveal source=buffers<cr>", desc = "NeoTree Buffers", silent = true, },
+      { "<leader>e",  ":Neotree toggle reveal<cr>",                         desc = "NeoTree Explorer",        silent = true },
+      { "<leader>ge", ":Neotree toggle reveal source=git_status<cr>",       desc = "NeoTree Git Explorer",    silent = true },
+      { "<leader>oe", ":Neotree toggle reveal source=document_symbols<cr>", desc = "NeoTree Symbols Outline", silent = true },
+      { "<leader>be", ":Neotree toggle reveal source=buffers<cr>",          desc = "NeoTree Buffers",         silent = true },
     },
   },
 }
