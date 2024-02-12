@@ -8,7 +8,7 @@ return {
     opts = {
       fade_nc = true,
       styles = {
-        comments = "italic",
+        -- comments = "italic",
         keywords = "bold",
       },
       -- TODO: Need to add override for Neo-tree focused file 'NeoTreeCursorLine'
