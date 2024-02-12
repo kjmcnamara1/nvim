@@ -124,10 +124,61 @@ return {
       },
     },
     keys = {
-      { "<leader>e",  ":Neotree toggle reveal<cr>",                         desc = "NeoTree Explorer",        silent = true },
-      { "<leader>ge", ":Neotree toggle reveal source=git_status<cr>",       desc = "NeoTree Git Explorer",    silent = true },
-      { "<leader>oe", ":Neotree toggle reveal source=document_symbols<cr>", desc = "NeoTree Symbols Outline", silent = true },
-      { "<leader>be", ":Neotree toggle reveal source=buffers<cr>",          desc = "NeoTree Buffers",         silent = true },
+      { "<leader>e",  ":Neotree toggle reveal<cr>",                   desc = "NeoTree Explorer",     silent = true },
+      { "<leader>ge", ":Neotree toggle reveal source=git_status<cr>", desc = "NeoTree Git Explorer", silent = true },
+      -- { "<leader>oe", ":Neotree toggle reveal source=document_symbols<cr>", desc = "NeoTree Symbols Outline", silent = true },
+      { "<leader>be", ":Neotree toggle reveal source=buffers<cr>",    desc = "NeoTree Buffers",      silent = true },
     },
+  },
+  {
+    "simrat39/symbols-outline.nvim",
+    cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
+    keys = { { "<leader>oe", "<cmd>SymbolsOutline<cr>", desc = "Toggle Symbols Outline" } },
+    opts = {
+      relative_width = false,
+      width = 50,
+      symbols = {
+        File = { icon = " ", hl = "@text.uri" },
+        Module = { icon = " ", hl = "@namespace" },
+        Namespace = { icon = "󰦮 ", hl = "@namespace" },
+        Package = { icon = " ", hl = "@namespace" },
+        Class = { icon = " ", hl = "@type" },
+        Method = { icon = "󰊕 ", hl = "@method" },
+        Property = { icon = " ", hl = "@method" },
+        Field = { icon = " ", hl = "@field" },
+        Constructor = { icon = " ", hl = "@constructor" },
+        Enum = { icon = " ", hl = "@type" },
+        Interface = { icon = " ", hl = "@type" },
+        Function = { icon = "󰊕 ", hl = "@function" },
+        Variable = { icon = "󰀫 ", hl = "@constant" },
+        Constant = { icon = "󰏿 ", hl = "@constant" },
+        String = { icon = " ", hl = "@string" },
+        Number = { icon = "󰎠 ", hl = "@number" },
+        Boolean = { icon = "󰨙 ", hl = "@boolean" },
+        Array = { icon = " ", hl = "@constant" },
+        Object = { icon = " ", hl = "@type" },
+        Key = { icon = " ", hl = "@type" },
+        Null = { icon = " ", hl = "@type" },
+        EnumMember = { icon = " ", hl = "@field" },
+        Struct = { icon = "󰆼 ", hl = "@type" },
+        Event = { icon = " ", hl = "@type" },
+        Operator = { icon = " ", hl = "@operator" },
+        TypeParameter = { icon = " ", hl = "@parameter" },
+        Component = { icon = " ", hl = "@function" },
+        Fragment = { icon = " ", hl = "@constant" },
+      },
+    },
+    config = function(_, opts)
+      require("symbols-outline").setup(opts)
+
+      -- Create autocmd to remove foldcolumn from symbols outline
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("symbols_nofold", {}),
+        pattern = "Outline",
+        callback = function()
+          vim.opt.foldcolumn = "0"
+        end
+      })
+    end
   },
 }

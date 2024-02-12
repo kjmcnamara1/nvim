@@ -80,7 +80,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 
 -- Open help in vertical split window instead of horizontal
 vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("vertical_help", { clear = true }),
+  group = augroup("vertical_help"),
   pattern = "help",
   callback = function()
     vim.bo.bufhidden = "unload"
