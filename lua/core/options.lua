@@ -62,7 +62,7 @@ vim.opt.sidescrolloff = 5
 -- vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
 
 -- Folding options for ufo plugin
-vim.opt.foldcolumn = "1"
+vim.opt.foldcolumn = "auto:9"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
@@ -73,7 +73,7 @@ vim.opt.fillchars = {
   foldclose = "",
   -- fold = "⸱",
   fold = " ",
-  foldsep = " ",
+  -- foldsep = " ",
   eob = " ",
 }
 
