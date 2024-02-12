@@ -28,7 +28,7 @@ vim.opt.wrap = false
 -- vim.opt.inccommand = "split"
 
 -- Show invisible characters
-vim.opt.listchars="trail:∙,extends:󰇘,precedes:󰇘,conceal:,nbsp:␣"
+vim.opt.listchars = "trail:∙,extends:󰇘,precedes:󰇘,conceal:,nbsp:␣"
 
 -- Place a column line
 -- vim.opt.colorcolumn = '80'
@@ -61,18 +61,21 @@ vim.opt.sidescrolloff = 5
 
 -- vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
 
-vim.opt.foldcolumn = 'auto'
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
--- vim.opt.fillchars = {
---   foldopen = "",
---   foldclose = "",
---   -- fold = "⸱",
---   fold = " ",
---   foldsep = " ",
---   diff = "╱",
---   eob = " ",
--- }
+-- Folding options for ufo plugin
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.fillchars = {
+  foldopen = "",
+  foldclose = "",
+  -- fold = "⸱",
+  fold = " ",
+  foldsep = " ",
+  eob = " ",
+}
 
 -- ======================== SESSION ========================
 
@@ -92,7 +95,7 @@ vim.opt.updatetime = 200
 vim.opt.undolevels = 10000
 
 -- Items to remember for saving/loading sessions
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- ===================== set by MINI.BASICS =============================
 -- --------------------- options.basic ---------------------------
@@ -154,4 +157,3 @@ vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,te
 -- vim.o.list      = true                                 -- Show some helper symbols
 
 -- if vim.fn.exists("syntax_on") ~= 1 then vim.cmd([[syntax enable]]) end
-

@@ -8,29 +8,14 @@ return {
       "williamboman/mason-lspconfig.nvim", -- automatically install LSPs
       "hrsh7th/cmp-nvim-lsp",              -- LSP completions
       "nvimtools/none-ls.nvim",            -- new community fork of null-ls (wrap DAP, linters, and formatters as LSPs)
-      "kevinhwang91/nvim-ufo",             -- code folding
-      "kevinhwang91/promise-async",
     },
     config = function()
-      -- local null_ls = require("null-ls")
-      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      -- local lspconfig = require("lspconfig")
-
-      -- require("neodev").setup()
-
-      -- require("mason").setup()
-
-      -- require("mason-lspconfig").setup({
-      --   ensure_installed = { "lua_ls" },
-      --   automatic_installation = true,
-      -- })
-
-
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-      -- capabilities.textDocument.foldingRange = {
-      --   dynamicRegistration = false,
-      --   lineFoldingOnly = true,
-      -- }
+      -- Add folding capabilities for ufo plugin
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
 
       -- Add rounded borders to hover and signature popups
       local handlers = {
@@ -90,14 +75,6 @@ return {
       --   for _, ls in ipairs(language_servers) do
       --   require("lspconfig")[ls].setup({ capabilities = capabilities })
       -- end
-
-      --   -- fold options for ufo
-      --   vim.opt.foldcolumn = "1"
-      --   vim.opt.foldlevel = 99
-      --     vim.opt.foldlevelstart = 99
-      --     vim.opt.foldenable = true
-
-      --     require("ufo").setup()
 
       --   null_ls.setup({
       --     sources = {

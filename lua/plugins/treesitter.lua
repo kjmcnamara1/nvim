@@ -5,20 +5,20 @@ return {
     dependencies = {
       -- "nushell/tree-sitter-nu" ,
       "nvim-treesitter/nvim-treesitter-textobjects",
-      'windwp/nvim-ts-autotag',
+      "windwp/nvim-ts-autotag",
     },
     build = ":TSUpdate",
-    event = { 'BufReadPost', 'BufNewFile', 'VeryLazy' },
-    cmd = { "TSInstall", 'TSBufEnable', 'TSBufDisable', 'TSModuleInfo', "TSUpdateSync", "TSUpdate", },
+    event = { "BufReadPost", "BufNewFile", "VeryLazy" },
+    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo", "TSUpdateSync", "TSUpdate", },
     keys = {
-      { ';', function() return require('nvim-treesitter.textobjects.repeatable_move').repeat_last_move_next() end,     mode = { 'n', 'x', 'o' }, desc = 'Repeat next move' },
-      { ',', function() return require('nvim-treesitter.textobjects.repeatable_move').repeat_last_move_previous() end, mode = { 'n', 'x', 'o' }, desc = 'Repeat previous move' },
+      { ";", function() return require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_next() end,     mode = { "n", "x", "o" }, desc = "Repeat next move" },
+      { ",", function() return require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_previous() end, mode = { "n", "x", "o" }, desc = "Repeat previous move" },
       -- {'f',function() return require('nvim-treesitter.textobjects.repeatable_move').builtin_f() end, mode={'n','x','o'},desc='Find character forwards'},
       -- {'F',function() return require('nvim-treesitter.textobjects.repeatable_move').builtin_F() end, mode={'n','x','o'},desc='Find character backwards'},
-      { 't', function() return require('nvim-treesitter.textobjects.repeatable_move').builtin_t() end,                 mode = { 'n', 'x', 'o' }, desc = 'Until character forwards' },
-      { 'T', function() return require('nvim-treesitter.textobjects.repeatable_move').builtin_T() end,                 mode = { 'n', 'x', 'o' }, desc = 'Until character backwards' },
+      { "t", function() return require("nvim-treesitter.textobjects.repeatable_move").builtin_t() end,                 mode = { "n", "x", "o" }, desc = "Until character forwards" },
+      { "T", function() return require("nvim-treesitter.textobjects.repeatable_move").builtin_T() end,                 mode = { "n", "x", "o" }, desc = "Until character backwards" },
     },
-    main = 'nvim-treesitter.configs',
+    main = "nvim-treesitter.configs",
     opts = {
       ensure_installed = {
         "bash",
@@ -63,15 +63,15 @@ return {
           enable = true,
           set_jumps = true,
           goto_next_start = {
-            [']c'] = '@comment.outer',
-            [']a'] = '@parameter.inner',
+            ["]c"] = "@comment.outer",
+            ["]a"] = "@parameter.inner",
             ["]m"] = "@function.outer",
             ["]f"] = "@call.outer",
             ["]C"] = "@class.outer",
             ["]="] = "@assignment.inner",
             ["]l"] = "@loop.outer",
-            ["]s"] = { query = '@scope', query_group = 'locals', desc = 'Next scope' },
-            ["]z"] = { query = '@fold', query_group = 'folds', desc = 'Next fold' },
+            ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+            -- ["]z"] = { query = '@fold', query_group = 'folds', desc = 'Next fold' },
             -- ["<tab>"] = {query={'@variable*','@attribute.inner*','@parameter.inner','@assignment.inner','@conditional.inner','@call.inner'}},
           },
           -- goto_next_end = {
@@ -81,15 +81,15 @@ return {
           --   ["]["] = "@class.outer"
           -- },
           goto_previous_start = {
-            ['[c'] = '@comment.outer',
-            ['[a'] = '@parameter.inner',
+            ["[c"] = "@comment.outer",
+            ["[a"] = "@parameter.inner",
             ["[m"] = "@function.outer",
             ["[f"] = "@call.outer",
             ["[C"] = "@class.outer",
             ["[="] = "@assignment.inner",
             ["[l"] = "@loop.outer",
-            ["[s"] = { query = '@scope', query_group = 'locals', desc = 'Previous scope' },
-            ["[z"] = { query = '@fold', query_group = 'folds', desc = 'Previous fold' },
+            ["[s"] = { query = "@scope", query_group = "locals", desc = "Previous scope" },
+            -- ["[z"] = { query = '@fold', query_group = 'folds', desc = 'Previous fold' },
             -- ["<s-tab>"] = {query={'@variable*','@attribute.inner*','@parameter.inner','@assignment.inner','@conditional.inner','@call.inner'}},
           },
           -- goto_previous_end = {
@@ -104,12 +104,12 @@ return {
         swap = {
           enable = true,
           swap_next = {
-            ['<leader>na'] = '@parameter.inner',
-            ['<leader>nm'] = '@function.outer',
+            ["<leader>na"] = "@parameter.inner",
+            ["<leader>nm"] = "@function.outer",
           },
           swap_previous = {
-            ['<leader>pa'] = '@parameter.inner',
-            ['<leader>pm'] = '@function.outer',
+            ["<leader>pa"] = "@parameter.inner",
+            ["<leader>pm"] = "@function.outer",
           },
         },
       },
@@ -134,7 +134,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       max_lines = 3,
     },
@@ -152,7 +152,7 @@ return {
           --   a = { "@block.outer", "@conditional.outer", "@loop.outer" },
           --   i = { "@block.inner", "@conditional.inner", "@loop.inner" },
           -- }),
-          ['='] = ai.gen_spec.treesitter({ a = "@assignment.outer", i = "@assignment.inner" }),
+          ["="] = ai.gen_spec.treesitter({ a = "@assignment.outer", i = "@assignment.inner" }),
           m = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
           c = ai.gen_spec.treesitter({ a = "@comment.outer", i = "@comment.inner" }),
           C = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
