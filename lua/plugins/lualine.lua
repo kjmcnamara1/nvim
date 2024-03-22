@@ -78,35 +78,39 @@ return {
   },
   config = function(_, opts)
     -- Add 'macro recording' status
-    local noice = require("noice")
-    local noice_status = {
-      noice.api.statusline.mode.get,
-      cond = noice.api.statusline.mode.has,
-      color = { fg = "orange" },
-    }
-    table.insert(opts.sections.lualine_x, 1, noice_status)
+    if package.loaded.noice then
+      local noice = require("noice")
+      local noice_status = {
+        noice.api.statusline.mode.get,
+        cond = noice.api.statusline.mode.has,
+        color = { fg = "orange" },
+      }
+      table.insert(opts.sections.lualine_x, 1, noice_status)
+    end
 
     -- Add clickable python venv selector
-    local active_venv = function()
-      local venv_name = require("venv-selector").get_active_venv()
-      if venv_name ~= nil then
-        return venv_name:gsub(".*/pypoetry/virtualenvs/", "(poetry) "):gsub("-.*-", "-")
-      else
-        return "venv"
+    if package.loaded.venv_selector then
+      local active_venv = function()
+        local venv_name = require("venv-selector").get_active_venv()
+        if venv_name ~= nil then
+          return venv_name:gsub(".*/pypoetry/virtualenvs/", "(poetry) "):gsub("-.*-", "-")
+        else
+          return "venv"
+        end
       end
+      local venv = {
+        function()
+          return "  " .. active_venv()
+        end,
+        cond = function()
+          return vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";") ~= ""
+        end,
+        on_click = function()
+          vim.cmd.VenvSelect()
+        end,
+      }
+      table.insert(opts.sections.lualine_x, 2, venv)
     end
-    local venv = {
-      function()
-        return "  " .. active_venv()
-      end,
-      cond = function()
-        return vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";") ~= ""
-      end,
-      on_click = function()
-        vim.cmd.VenvSelect()
-      end,
-    }
-    table.insert(opts.sections.lualine_x, 2, venv)
 
     -- Setup with custom sections
     require("lualine").setup(opts)
