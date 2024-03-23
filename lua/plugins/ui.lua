@@ -22,6 +22,7 @@ return {
     },
   },
   {
+    -- Distraction free interface
     "folke/zen-mode.nvim",
     dependencies = { "folke/twilight.nvim" },
     keys = {
