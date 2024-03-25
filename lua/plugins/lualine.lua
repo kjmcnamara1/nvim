@@ -32,7 +32,7 @@ return {
           "filename",
           -- path = 4,
           symbols = {
-            modified = " ",
+            modified = " ",
             readonly = " ",
             unnamed = "No Name  ",
             newfile = "New  "
@@ -89,28 +89,28 @@ return {
     end
 
     -- Add clickable python venv selector
-    if package.loaded.venv_selector then
-      local active_venv = function()
-        local venv_name = require("venv-selector").get_active_venv()
-        if venv_name ~= nil then
-          return venv_name:gsub(".*/pypoetry/virtualenvs/", "(poetry) "):gsub("-.*-", "-")
-        else
-          return "venv"
-        end
+    -- if package.loaded.venv_selector then
+    local active_venv = function()
+      local venv_name = require("venv-selector").get_active_venv()
+      if venv_name ~= nil then
+        return venv_name:gsub(".*/pypoetry/virtualenvs/", "(poetry) "):gsub("-.*-", "-")
+      else
+        return "venv"
       end
-      local venv = {
-        function()
-          return "  " .. active_venv()
-        end,
-        cond = function()
-          return vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";") ~= ""
-        end,
-        on_click = function()
-          vim.cmd.VenvSelect()
-        end,
-      }
-      table.insert(opts.sections.lualine_x, 2, venv)
     end
+    local venv = {
+      function()
+        return "  " .. active_venv()
+      end,
+      cond = function()
+        return vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";") ~= "" or vim.bo.filetype == "python"
+      end,
+      on_click = function()
+        vim.cmd.VenvSelect()
+      end,
+    }
+    table.insert(opts.sections.lualine_x, 2, venv)
+    -- end
 
     -- Setup with custom sections
     require("lualine").setup(opts)

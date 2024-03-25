@@ -16,7 +16,7 @@ return {
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "mfussenegger/nvim-dap-python",
-      "theHamsta/nvim-dap-virtual-text",
+      { "theHamsta/nvim-dap-virtual-text", config = true },
       "jay-babu/mason-nvim-dap.nvim",
     },
     cond = not vim.g.vscode,
@@ -39,13 +39,26 @@ return {
       { "<leader>dt", function() require("dap").terminate() end,                                            desc = "Terminate" },
       { "<leader>dw", function() require("dap.ui.widgets").hover() end,                                     desc = "Widgets" },
     },
+    config = function()
+      local icons = {
+        Stopped             = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+        Breakpoint          = " ",
+        BreakpointCondition = " ",
+        BreakpointRejected  = { " ", "DiagnosticError" },
+        LogPoint            = ".>",
+      }
+      vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+      for name, sign in pairs(icons) do
+        sign = type(sign) == "table" and sign or { sign }
+        vim.fn.sign_define("Dap" .. name,
+          { text = sign[1], texhl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] })
+      end
+    end
   },
   {
     "rcarriga/nvim-dap-ui",
     cond = not vim.g.vscode,
-    dependencies = {
-      "nvim-neotest/nvim-nio",
-    },
+    dependencies = { "nvim-neotest/nvim-nio", },
     keys = {
       { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" },
       { "<leader>de", function() require("dapui").eval() end,     desc = "Eval",  mode = { "n", "v" } },
@@ -53,6 +66,9 @@ return {
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")
+
+      dapui.setup()
+
       dap.listeners.before.attach.dapui_config = function()
         dapui.open()
       end
@@ -82,12 +98,13 @@ return {
   {
     "mfussenegger/nvim-dap-python",
     dependencies = {
-      "mfussenegger/nvim-dap",
       "nvim-treesitter/nvim-treesitter",
+      "linux-cultist/venv-selector.nvim",
     },
     config = function()
-      local path = require("mason-registry").get_package("debugpy"):get_install_path()
-      require("dap-python").setup(path .. "/venv/bin/python")
+      -- local path = require("mason-registry").get_package("debugpy"):get_install_path()
+      -- require("dap-python").setup(path .. "/venv/bin/python")
+      require("dap-python").setup(require("venv-selector").get_active_path())
     end
   },
   {
@@ -95,7 +112,6 @@ return {
     dependencies = {
       "neovim/nvim-lspconfig",
       "nvim-telescope/telescope.nvim",
-      "mfussenegger/nvim-dap-python",
     },
     cmd = "VenvSelect",
     keys = {
@@ -104,8 +120,10 @@ return {
     opts = {
       auto_refresh = true,
       dap_enabled = true,
+      notify_user_on_activate = false,
       parents = 1,
-      -- name = { ".venv", },
+      -- enable_debug_output = true,
+      name = { "venv", ".venv", },
       pyenv_path = "/home/kevin/.config/pyenv/versions",
       -- poetry_path = "~/.cache/pypoetry/virtualenvs",
     },
