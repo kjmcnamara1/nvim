@@ -23,46 +23,40 @@ return {
       vim.keymap.set("n", "s", "<nop>")
     end,
   },
-  -- {
-  --   -- Highlight current indent level
-  --   "echasnovski/mini.indentscope",
-  --   cond = not vim.g.vscode,
-  --   event = "VeryLazy",
-  --   opts = {
-  --     symbol = "▏",
-  --     -- symbol = "│",
-  --     draw = {
-  --       animation = function()
-  --         return 0
-  --       end,
-  --     },
-  --     options = {
-  --       try_as_border = true,
-  --     },
-  --   },
-  --   init = function()
-  --     -- Automatically disable mini.indentscope for certain filetypes
-  --     vim.api.nvim_create_autocmd("FileType", {
-  --       pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "trouble", "lazy", "mason", "notify", "toggleterm", "lazyterm" },
-  --       callback = function()
-  --         vim.b.miniindentscope_disable = true
-  --       end,
-  --     })
-  --   end,
-  -- },
+  {
+    -- Highlight current indent level
+    "echasnovski/mini.indentscope",
+    cond = not vim.g.vscode,
+    event = "VeryLazy",
+    opts = {
+      -- symbol = "▏",
+      symbol = "│",
+      draw = {
+        animation = function() return 0 end,
+      },
+      options = {
+        try_as_border = true,
+      },
+    },
+    init = function()
+      -- Automatically disable mini.indentscope for certain filetypes
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "trouble", "lazy", "mason", "notify", "toggleterm", "lazyterm" },
+        callback = function()
+          vim.b.miniindentscope_disable = true
+        end,
+      })
+    end,
+  },
   {
     -- Draw indent characters even on blank lines
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
-    dependencies = "HiPhish/rainbow-delimiters.nvim",
     event = "VeryLazy",
     cond = vim.env.COMPUTERNAME ~= "ANGEL" and not vim.g.vscode,
     opts = {
-      indent = {
-        char = "",
-        -- char = "▏",
-      },
-      scope = { enabled = false, },
+      indent = { char = "" },
+      scope = { enabled = false },
       exclude = {
         filetypes = {
           "help",

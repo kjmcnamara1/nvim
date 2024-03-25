@@ -13,12 +13,8 @@ return {
       ["core.defaults"] = {}, -- Loads default behaviour
       ["core.summary"] = {},
       ["core.ui.calendar"] = {},
-      ["core.concealer"] = { -- Adds pretty icons to your documents
-        config = {
-          icon_preset = "basic",
-        },
-      },
-      ["core.dirman"] = { -- Manages Neorg workspaces
+      ["core.concealer"] = {}, -- Adds pretty icons to your documents
+      ["core.dirman"] = {      -- Manages Neorg workspaces
         config = {
           workspaces = {
             default = vim.fn.getcwd() .. "/notes",
