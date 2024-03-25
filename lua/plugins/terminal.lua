@@ -19,7 +19,7 @@ return {
     opts = {
       shade_terminals = false,
       open_mapping = [[<c-t>]],
-      direction = "float",
+      direction = "horizontal",
       -- winbar = {
       --   enabled = true,
       -- },
