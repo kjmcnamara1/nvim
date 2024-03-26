@@ -32,7 +32,7 @@ local opts = not vim.g.vscode and {
     border = "rounded",
     title = "Lazy Plugin Manager",
   },
-  checker = { enabled = true },
+  checker = { enabled = true, frequency = 86400 },
   change_detection = { notify = false },
 } or {}
 
