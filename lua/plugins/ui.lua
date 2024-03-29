@@ -26,7 +26,7 @@ return {
     "folke/zen-mode.nvim",
     dependencies = { "folke/twilight.nvim" },
     keys = {
-      { "<leader>z", "<cmd>ZenMode<cr>", desc = "Toggle Zen Mode" }
+      { "<leader>z", "<cmd>ZenMode<cr>", desc = "Toggle Zen Mode", mode = { "n", "v" } }
     },
     opts = {
       window = {
