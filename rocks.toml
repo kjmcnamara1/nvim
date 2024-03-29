@@ -1,0 +1,91 @@
+# This is your rocks.nvim plugins declaration file.
+# Here is a small yet pretty detailed example on how to use it:
+#
+# [plugins]
+# nvim-treesitter = "semver_version"  # e.g. "1.0.0"
+
+# List of non-Neovim rocks.
+# This includes things like `toml` or other lua packages.
+[rocks]
+
+# List of Neovim plugins to install alongside their versions.
+# If the plugin name contains a dot then you must add quotes to the key name!
+[plugins]
+"rocks.nvim" = "2.19.0"           # rocks.nvim can also manage itself :D
+"rocks-git.nvim" = "1.3.0"
+"rocks-config.nvim" = "1.2.3"
+"onenord.nvim" = "0.7.0"
+"bufferline.nvim" = "4.5.2"
+"comment.nvim" = "0.8.0"
+"todo-comments.nvim" = "1.2.0"
+"lualine.nvim" = "scm"
+"noice.nvim" = "2.0.1"
+"telescope.nvim" = "scm"
+"indent-blankline.nvim" = "3.5.4"
+neogit = "scm"
+"dressing.nvim" = "2.2.0"
+"inc-rename.nvim" = "scm"
+auto-session = "2.0.1"
+"toggleterm.nvim" = "2.10.0"
+"trouble.nvim" = "2.10.0"
+"zen-mode.nvim" = "1.3.0"
+"twilight.nvim" = "1.0.0"
+"mason.nvim" = "1.10.0"
+nvim-treesitter-context = "scm"
+nvim-ts-autotag = "scm"
+"neodev.nvim" = "2.5.2"
+"mason-lspconfig.nvim" = "1.27.0"
+nvim-lspconfig = "0.1.7"
+nvim-cmp = "0.0.1"
+cmp-nvim-lsp = "scm"
+
+[plugins.'telescope-fzf-native.nvim']
+git = 'nvim-telescope/telescope-fzf-native.nvim'
+
+[plugins.'mini.nvim']
+git = 'echasnovski/mini.nvim'
+rev = '*'
+
+[plugins.nvim-treesitter]
+git = "nvim-treesitter/nvim-treesitter"
+rev = '*'
+
+[plugins.nvim-treesitter-textobjects]
+git = 'nvim-treesitter/nvim-treesitter-textobjects'
+
+[plugins.tree-sitter-nu]
+git = 'nushell/tree-sitter-nu'
+
+[plugins.'nvim-highlight-colors']
+git = 'brenoprata10/nvim-highlight-colors'
+
+[plugins.vim-maximizer]
+git = 'szw/vim-maximizer'
+
+[plugins.vim-signature]
+git = 'kshenoy/vim-signature'
+
+[plugins.vim-tmux-navigator]
+git = 'christoomey/vim-tmux-navigator'
+
+[plugins.'diffview.nvim']
+git = 'sindrets/diffview.nvim'
+
+[plugins.'gitsigns.nvim']
+git = 'lewis6991/gitsigns.nvim'
+rev = '*'
+
+[plugins.'nvim-lsp-file-operations']
+git = 'antosha417/nvim-lsp-file-operations'
+
+[plugins.'none-ls.nvim']
+git = 'nvimtools/none-ls.nvim'
+
+[plugins.'mason-null-ls.nvim']
+git = 'nvimtools/none-ls.nvim'
+
+[plugins.nvim-nu]
+git = 'LhKipp/nvim-nu'
+
+[config]
+auto_setup = true
