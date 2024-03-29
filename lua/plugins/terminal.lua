@@ -1,5 +1,10 @@
 return {
   {
+    "declancm/windex.nvim",
+    cond = not vim.g.vscode,
+    config = true,
+  },
+  {
     "akinsho/toggleterm.nvim",
     cond = not vim.g.vscode,
     cmd = "ToggleTerm",
