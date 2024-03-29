@@ -95,12 +95,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- Configure border for LspInfo ui
 require("lspconfig.ui.windows").default_options.border = "rounded"
 
-map("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover", buffer = 0 })
-map("n", "<c-k>", vim.lsp.buf.signature_help, { desc = "LSP Signature Documentation", buffer = 0, mode = "i" })
-map("n", "gD", vim.lsp.buf.declaration, { desc = "LSP Declaration", buffer = 0 })
-map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action", buffer = 0 })
-map({ "n", "v" }, "<leader>cf", vim.lsp.buf.format, { desc = "LSP Format", buffer = 0 })
-map("n", "<leader>ci", "<cmd>LspInfo<cr>", { desc = "LSP Info", buffer = 0 })
-map("n", "<leader>df", vim.diagnostic.open_float, { desc = "LSP Open Diagnostics", buffer = 0 })
-map("n", "]d", vim.diagnostic.goto_next, { desc = "LSP Next Diagnostic", buffer = 0 })
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "LSP Previous Diagnostic", buffer = 0 })
+-- map("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover", buffer = 0 })
+-- map("n", "<c-k>", vim.lsp.buf.signature_help, { desc = "LSP Signature Documentation", buffer = 0, mode = "i" })
+-- map("n", "gD", vim.lsp.buf.declaration, { desc = "LSP Declaration", buffer = 0 })
+-- map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action", buffer = 0 })
+-- map({ "n", "v" }, "<leader>cf", vim.lsp.buf.format, { desc = "LSP Format", buffer = 0 })
+-- map("n", "<leader>ci", "<cmd>LspInfo<cr>", { desc = "LSP Info", buffer = 0 })
+-- map("n", "<leader>df", vim.diagnostic.open_float, { desc = "LSP Open Diagnostics", buffer = 0 })
+-- map("n", "]d", vim.diagnostic.goto_next, { desc = "LSP Next Diagnostic", buffer = 0 })
+-- map("n", "[d", vim.diagnostic.goto_prev, { desc = "LSP Previous Diagnostic", buffer = 0 })

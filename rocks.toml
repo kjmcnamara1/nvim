@@ -82,7 +82,8 @@ git = 'antosha417/nvim-lsp-file-operations'
 git = 'nvimtools/none-ls.nvim'
 
 [plugins.'mason-null-ls.nvim']
-git = 'nvimtools/none-ls.nvim'
+git = 'jay-babu/mason-null-ls.nvim'
+rev = '*'
 
 [plugins.nvim-nu]
 git = 'LhKipp/nvim-nu'
