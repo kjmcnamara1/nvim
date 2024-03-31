@@ -1,8 +1,21 @@
 return {
   {
     "declancm/windex.nvim",
+    enabled = false,
     cond = not vim.g.vscode,
-    config = true,
+    keys = {
+      { "<F3>",  function() require("windex").toggle_maximize() end,      desc = "Toggle Maximize Current Window" },
+      { "<c-h>", function() require("windex").switch_window("left") end,  desc = "Switch to Left Window" },
+      { "<c-j>", function() require("windex").switch_window("down") end,  desc = "Switch to Lower Window" },
+      { "<c-k>", function() require("windex").switch_window("up") end,    desc = "Switch to Upper Window" },
+      { "<c-l>", function() require("windex").switch_window("right") end, desc = "Switch to Right Window" },
+      { "<c-G>", function() require("windex").previous_window() end,      desc = "Switch to Previous Window" }, -- same as <c-'>
+      { "<c-t>", function() require("windex").toggle_terminal() end,      desc = "Toggle Terminal",               mode = { "n", "t" } },
+      { "<c-n>", [[<c-\><c-n>]],                                          desc = "Normal Mode",                   mode = "t" },
+    },
+    opts = {
+      default_keymaps = false,
+    },
   },
   {
     "akinsho/toggleterm.nvim",
