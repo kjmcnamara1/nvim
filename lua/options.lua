@@ -6,10 +6,6 @@ vim.g.maplocalleader   = "\\"
 
 -- ======================== EDITOR ========================
 
-vim.opt.mouse          = "a"         -- Enable mouse for all available modes
-vim.opt.mousemoveevent = true        -- Enable mouse hover events
-vim.cmd("filetype plugin indent on") -- Enable all filetype plugins
-
 -- Enable relative line numbers with current line as absolute number
 vim.opt.number         = true
 vim.opt.relativenumber = true
@@ -31,25 +27,6 @@ vim.opt.ruler          = false -- Don't show cursor position in command line
 vim.opt.showmode       = false -- Don't show mode in command line
 vim.opt.wrap           = false -- Display long lines as just one line
 
-vim.opt.signcolumn     = "yes" -- Always show signcolumn 2 wide to accomodate gitsigns and lsp diagnostics
-
-vim.opt.list           = true -- Show invisible characters
-vim.opt.listchars      = "tab:> ,trail:∙,extends:󰇘,precedes:󰇘,conceal:,nbsp:␣" -- Invisible characters
-
-vim.opt.fillchars      = {
-  foldopen = "󰅀", --'foldcolumn' char for opened fold
-  foldclose = "󰅂", -- 'foldcolumn' char for closed fold
-  -- fold = "⸱",
-  fold = " ", -- Fill char for 'foldtext'
-  foldsep = " ", -- 'foldcolumn' char for inside opened folds
-  eob = " ", -- Don't show '~' outside of buffer
-}
-
-vim.opt.shortmess:append("WIcC") -- Reduce command line messages
-vim.opt.splitkeep     = "screen" -- Reduce scroll during window split
-vim.opt.termguicolors = true     -- Enable gui colors
-
-if vim.fn.exists("syntax_on") ~= 1 then vim.cmd([[syntax enable]]) end
 
 -- Editing
 vim.opt.ignorecase    = true                        -- Ignore case when searching (use `\C` to force not doing that)
@@ -69,11 +46,11 @@ vim.opt.scrolloff      = 5 -- keep cursor in center of screen == 999
 vim.opt.sidescrolloff  = 5
 
 -- Global statusline for all windows -- Handled by lualine opt
-vim.opt.laststatus = 3
+-- vim.opt.laststatus = 3
 
 -- ======================== SESSION ========================
 
--- vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
+vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 
 vim.opt.clipboard      = "unnamedplus" -- Sync with system clipboard
 vim.opt.autowrite      = true          -- Auto write file when leaving ubffer
