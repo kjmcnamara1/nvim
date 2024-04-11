@@ -26,7 +26,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Lazy options
 local opts = not vim.g.vscode and {
-  --defaults = { lazy = true },
+  defaults = { lazy = true },
   install = { colorscheme = { "onenord" } },
   ui = {
     border = "rounded",
