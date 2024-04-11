@@ -38,3 +38,8 @@ local opts = not vim.g.vscode and {
 
 -- Load Lazy.nvim
 require("lazy").setup("plugins", opts)
+
+-- Load vscode settings
+if vim.g.vscode then
+  require("core.vscode")
+end
