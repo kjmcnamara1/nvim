@@ -26,6 +26,9 @@ return {
     "vscode-neovim/vscode-multi-cursor.nvim",
     cond = not not vim.g.vscode,
     event = "VeryLazy",
-    opts = {},
+    keys = {
+      { "<c-n>", "mciw*<cmd>nohl<cr>", desc = "MultiCursor select and move to next word", remap = true },
+    },
+    opts = { no_selection = true },
   }
 }
