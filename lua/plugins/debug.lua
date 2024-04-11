@@ -103,6 +103,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "linux-cultist/venv-selector.nvim",
     },
+    cond = not vim.g.vscode,
     config = function()
       -- local path = require("mason-registry").get_package("debugpy"):get_install_path()
       -- require("dap-python").setup(path .. "/venv/bin/python")
@@ -115,6 +116,7 @@ return {
       "neovim/nvim-lspconfig",
       "nvim-telescope/telescope.nvim",
     },
+    cond = not vim.g.vscode,
     cmd = "VenvSelect",
     keys = {
       { "<leader>cv", "<cmd>VenvSelect<cr>", desc = "Select VirtualEnv", }
