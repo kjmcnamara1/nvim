@@ -22,7 +22,8 @@ return {
   config = function(_, opts)
     require("ufo").setup(opts)
     -- Folding options for ufo plugin
-    vim.opt.foldcolumn = "auto:9"
+    -- vim.opt.foldcolumn = "auto:9"
+    vim.opt.foldcolumn = "0"
     vim.opt.foldlevel = 99
     -- vim.opt.foldlevelstart = 99
     vim.opt.foldenable = true
