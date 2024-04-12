@@ -34,6 +34,12 @@ return {
           },
           view = "mini",
         },
+        {
+          filter = {
+            find = "line %d+ of %d+"
+          },
+          opts = { skip = true },
+        },
       },
       presets = {
         bottom_search = true,
