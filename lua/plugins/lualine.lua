@@ -110,7 +110,11 @@ return {
       end,
     }
     table.insert(opts.sections.lualine_x, 2, venv)
-    -- end
+
+    local function maximize_status()
+      return vim.t.maximized and "   " or ""
+    end
+    table.insert(opts.sections.lualine_c, maximize_status)
 
     -- Setup with custom sections
     require("lualine").setup(opts)

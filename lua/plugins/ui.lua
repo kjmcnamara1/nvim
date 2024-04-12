@@ -14,12 +14,12 @@ return {
   },
   {
     -- Maximize window and restore
-    "szw/vim-maximizer",
+    "declancm/maximize.nvim",
     cond = not vim.g.vscode,
-    cmd = "MaximizerToggle",
     keys = {
-      { "<F3>", mode = { "i", "n", "v" }, desc = "Toggle maximize window" },
+      { "<F3>", function() require("maximize").toggle() end, mode = { "i", "n", "v", "t" }, desc = "Toggle maximize window" },
     },
+    opts = { default_keymaps = false },
   },
   {
     -- Distraction free interface
