@@ -37,7 +37,7 @@ return {
     opts = {
       shade_terminals = false,
       open_mapping = [[<c-t>]],
-      direction = "horizontal",
+      direction = "tab",
       -- winbar = {
       --   enabled = true,
       -- },
