@@ -9,8 +9,8 @@ end
 map("i", "jk", "<esc>", { desc = "Exit insert mode" })
 
 -- Move to beginning/end of file
-map("n", "gg", "gg0", { desc = "Goto beginning of file", remap = true })
-map("n", "ge", "G$", { desc = "Goto end of file", remap = true })
+map("", "gg", "gg0", { desc = "Goto beginning of file", remap = true })
+map("", "ge", "G$", { desc = "Goto end of file", remap = true })
 
 -- Save file
 map({ "i", "x", "n", "s" }, "<c-s>", "<cmd>w!<cr>", { desc = "Save file" })
