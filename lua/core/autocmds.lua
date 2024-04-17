@@ -121,3 +121,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.cmd.startinsert()
   end
 })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  desc = "Set Terminal Options",
+  group = augroup("terminal"),
+  callback = function()
+    vim.wo.relativenumber = false
+    vim.wo.number = false
+    vim.cmd.startinsert()
+  end
+})
