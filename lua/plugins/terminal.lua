@@ -33,11 +33,22 @@ return {
       { "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>",   desc = "Toggle Vertical Terminal", },
       { "<leader>tt", "<cmd>ToggleTerm direction=tab<cr>",        desc = "Toggle Tab Terminal" },
       { "<c-n>",      [[<c-\><c-n>]],                             desc = "Normal Mode",                mode = "t", buffer = 0 },
+      { "<F5>", function()
+        vim.cmd.write()
+        local cmds = {
+          python = require("venv-selector").get_active_path() or "python",
+        }
+        local prg = cmds[vim.bo.filetype] or ""
+        local cmd = (prg and (prg .. " ") or "") .. vim.api.nvim_buf_get_name(0)
+        require("toggleterm").exec(cmd)
+        -- vim.cmd.startinsert()
+      end },
     },
     opts = {
       shade_terminals = false,
       open_mapping = [[<c-t>]],
-      direction = "tab",
+      direction = "horizontal",
+      persist_size = false,
       -- winbar = {
       --   enabled = true,
       -- },
