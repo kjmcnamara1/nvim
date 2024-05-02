@@ -4,21 +4,50 @@ vim.notify = vscode.notify
 
 vim.opt.scrolloff = 999
 
+-- LSP
 vim.keymap.set({ "n", "x" }, "gs", function() vscode.action("workbench.action.gotoSymbol") end)
 vim.keymap.set({ "n", "x" }, "<leader>o", function() vscode.action("workbench.action.gotoSymbol") end)
 vim.keymap.set({ "n", "x" }, "gS", function() vscode.action("workbench.action.showAllSymbols") end)
 vim.keymap.set({ "n", "x" }, "<leader>O", function() vscode.action("workbench.action.showAllSymbols") end)
 vim.keymap.set({ "n", "x" }, "gr", function() vscode.action("editor.action.referenceSearch.trigger") end)
-vim.keymap.set("n", "]h", function() vscode.action("workbench.action.editor.nextChange") end)
-vim.keymap.set("n", "[h", function() vscode.action("workbench.action.editor.previousChange") end)
+
+-- Git
+vim.keymap.set("n", "]h", function() vscode.action("workbench.action.editor.nextChange") end)         -- next hunk
+vim.keymap.set("n", "[h", function() vscode.action("workbench.action.editor.previousChange") end)     -- prev hunk
+vim.keymap.set("n", "<leader>hp", function() vscode.action("editor.action.dirtydiff.next") end)       -- preview hunk
+
+vim.keymap.set({ "n", "v" }, "<leader>hs", function() vscode.action("git.stageSelectedRanges") end)   -- stage hunk
+vim.keymap.set({ "n", "v" }, "<leader>hu", function() vscode.action("git.unstageSelectedRanges") end) -- unstage hunk
+vim.keymap.set({ "n", "v" }, "<leader>hr", function() vscode.action("git.revertSelectedRanges") end)  -- revert hunk
+
+vim.keymap.set("n", "<leader>gS", function() vscode.action("git.stage") end)                          -- stage buffer
+vim.keymap.set("n", "<leader>gU", function() vscode.action("git.unstage") end)                        -- unstage buffer
+vim.keymap.set("n", "<leader>gR", function() vscode.action("git.clean") end)                          -- revert buffer
+
+vim.keymap.set("n", "<leader>gd", function() vscode.action("git.openChange") end)                     -- diff file
+vim.keymap.set("n", "<leader>gc", function() vscode.action("git.commit") end)                         -- git commit
+
+-- Diagnostics
 vim.keymap.set("n", "]d", function() vscode.action("editor.action.marker.next") end)
 vim.keymap.set("n", "[d", function() vscode.action("editor.action.marker.prev") end)
+vim.keymap.set("n", "<leader>dd", function() vscode.action("workbench.actions.view.problems") end)
+
+-- Inspect
 vim.keymap.set("n", "<leader>ui", function() vscode.action("editor.action.inspectTMScopes") end)
+
+-- Files
 vim.keymap.set("n", "<leader>ff", function() vscode.action("workbench.action.quickOpen") end)
 vim.keymap.set("n", "<leader>fr", function() vscode.action("workbench.action.openRecent") end)
+
 vim.keymap.set("n", "<leader>ks", function() vscode.action("workbench.action.openGlobalKeybindings") end)
+
+-- Zen mode
 vim.keymap.set("n", "<leader>z", function() vscode.action("workbench.action.toggleZenMode") end)
+
+-- Multi Cursor
 vim.keymap.set("n", "<C-n>", "mciw*<Cmd>nohl<CR>", { remap = true })
+
+-- Folds
 vim.keymap.set("n", "]z", function() vscode.action("editor.gotoNextFold") end)
 vim.keymap.set("n", "[z", function() vscode.action("editor.gotoPreviousFold") end)
 vim.keymap.set("x", "zf", function() vscode.action("editor.createFoldingRangeFromSelection") end)
