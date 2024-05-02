@@ -69,6 +69,8 @@ map("n", "<a-o>", "o<esc>", { desc = "Put empty line below" })
 -- Buffers & Tabs
 map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New file" })
 map("n", "<leader>'", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 
 map("n", "<c-c>", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<a-s-h>", "<cmd>tabp<cr>", { desc = "Switch to previous tab" })
