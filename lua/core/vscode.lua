@@ -25,7 +25,10 @@ vim.keymap.set("n", "<leader>gU", function() vscode.action("git.unstage") end)  
 vim.keymap.set("n", "<leader>gR", function() vscode.action("git.clean") end)                          -- revert buffer
 
 vim.keymap.set("n", "<leader>gd", function() vscode.action("git.openChange") end)                     -- diff file
+vim.keymap.set("n", "<leader>gf", function() vscode.action("git.fetch") end)                          -- git fetch
 vim.keymap.set("n", "<leader>gc", function() vscode.action("git.commit") end)                         -- git commit
+vim.keymap.set("n", "<leader>gp", function() vscode.action("git.pull") end)                           -- git pull
+vim.keymap.set("n", "<leader>gP", function() vscode.action("git.push") end)                           -- git push
 
 -- Diagnostics
 vim.keymap.set("n", "]d", function() vscode.action("editor.action.marker.next") end)
