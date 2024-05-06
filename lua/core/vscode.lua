@@ -39,6 +39,7 @@ vim.keymap.set("n", "<leader>dd", function() vscode.action("workbench.actions.vi
 vim.keymap.set("n", "<leader>ui", function() vscode.action("editor.action.inspectTMScopes") end)
 
 -- Files
+vim.keymap.set("n", "-", function() vscode.action("workbench.view.explorer") end)
 vim.keymap.set("n", "<leader>ff", function() vscode.action("workbench.action.quickOpen") end)
 vim.keymap.set("n", "<leader>fr", function() vscode.action("workbench.action.openRecent") end)
 
