@@ -37,6 +37,9 @@ vim.keymap.set("n", "<leader>dd", function() vscode.action("workbench.actions.vi
 
 -- Inspect
 vim.keymap.set("n", "<leader>ui", function() vscode.action("editor.action.inspectTMScopes") end)
+--
+-- Color Themes
+vim.keymap.set("n", "<leader>uC", function() vscode.action("workbench.action.selectTheme") end)
 
 -- Files
 vim.keymap.set("n", "-", function() vscode.action("workbench.view.explorer") end)
@@ -44,6 +47,7 @@ vim.keymap.set("n", "<leader>ff", function() vscode.action("workbench.action.qui
 vim.keymap.set("n", "<leader>fr", function() vscode.action("workbench.action.openRecent") end)
 vim.keymap.set("n", "<leader>fn", function() vscode.action("workbench.action.files.newUntitledFile") end)
 
+-- Keymaps
 vim.keymap.set("n", "<leader>ks", function() vscode.action("workbench.action.openGlobalKeybindings") end)
 
 -- Zen mode
