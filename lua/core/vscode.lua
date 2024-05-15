@@ -24,6 +24,7 @@ vim.keymap.set("n", "<leader>gS", function() vscode.action("git.stage") end)    
 vim.keymap.set("n", "<leader>gU", function() vscode.action("git.unstage") end)                        -- unstage buffer
 vim.keymap.set("n", "<leader>gR", function() vscode.action("git.clean") end)                          -- revert buffer
 
+vim.keymap.set("n", "<leader>gb", function() vscode.action("gitlens.toggleLineBlame") end)            -- line blame
 vim.keymap.set("n", "<leader>gd", function() vscode.action("git.openChange") end)                     -- diff file
 vim.keymap.set("n", "<leader>gf", function() vscode.action("git.fetch") end)                          -- git fetch
 vim.keymap.set("n", "<leader>gc", function() vscode.action("git.commit") end)                         -- git commit
@@ -34,6 +35,10 @@ vim.keymap.set("n", "<leader>gP", function() vscode.action("git.push") end)     
 vim.keymap.set("n", "]d", function() vscode.action("editor.action.marker.next") end)
 vim.keymap.set("n", "[d", function() vscode.action("editor.action.marker.prev") end)
 vim.keymap.set("n", "<leader>dd", function() vscode.action("workbench.actions.view.problems") end)
+
+-- TODO
+vim.keymap.set("n", "]t", function() vscode.action("todo-tree.goToNext") end)
+vim.keymap.set("n", "[t", function() vscode.action("todo-tree.goToPrevious") end)
 
 -- Inspect
 vim.keymap.set("n", "<leader>ui", function() vscode.action("editor.action.inspectTMScopes") end)
