@@ -10,6 +10,7 @@ vim.keymap.set({ "n", "x" }, "<leader>o", function() vscode.action("workbench.ac
 vim.keymap.set({ "n", "x" }, "gS", function() vscode.action("workbench.action.showAllSymbols") end)
 vim.keymap.set({ "n", "x" }, "<leader>O", function() vscode.action("workbench.action.showAllSymbols") end)
 vim.keymap.set({ "n", "x" }, "gr", function() vscode.action("editor.action.referenceSearch.trigger") end)
+vim.keymap.set({ "n", "x" }, "<leader>r", function() vscode.action("editor.action.rename") end)
 
 -- Git
 vim.keymap.set("n", "]h", function() vscode.action("workbench.action.editor.nextChange") end)         -- next hunk
@@ -40,11 +41,12 @@ vim.keymap.set("n", "<leader>dd", function() vscode.action("workbench.actions.vi
 vim.keymap.set("n", "]t", function() vscode.action("todo-tree.goToNext") end)
 vim.keymap.set("n", "[t", function() vscode.action("todo-tree.goToPrevious") end)
 
--- Inspect
+-- User Interface
 vim.keymap.set("n", "<leader>ui", function() vscode.action("editor.action.inspectTMScopes") end)
---
--- Color Themes
 vim.keymap.set("n", "<leader>uC", function() vscode.action("workbench.action.selectTheme") end)
+
+-- File Type / Lanugage Mode
+vim.keymap.set("n", "<leader>ft", function() vscode.action("workbench.action.editor.changeLanguageMode") end)
 
 -- Files
 vim.keymap.set("n", "-", function() vscode.action("workbench.view.explorer") end)
