@@ -3,6 +3,8 @@ local vscode = require("vscode-neovim")
 vim.notify = vscode.notify
 
 vim.opt.scrolloff = 999
+vim.keymap.set({ "n", "x" }, "<c-d>", "15j", { remap = true })
+vim.keymap.set({ "n", "x" }, "<c-u>", "15k", { remap = true })
 
 -- LSP
 vim.keymap.set({ "n", "x" }, "gs", function() vscode.action("workbench.action.gotoSymbol") end)
