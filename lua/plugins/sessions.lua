@@ -21,7 +21,7 @@ return {
         load_on_setup = true,
       },
       pre_save_cmds = {
-        "TroubleClose",
+        -- "TroubleClose",
         -- "Neotree close",
         -- "ScopeSaveState"
       },

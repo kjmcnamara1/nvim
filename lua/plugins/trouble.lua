@@ -1,22 +1,54 @@
+-- FIXME: Need to update for new version
 return {
   "folke/trouble.nvim",
   cond = not vim.g.vscode,
   dependencies = "nvim-tree/nvim-web-devicons",
-  cmd = { "Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh" },
+  cmd = "Trouble",
   keys = {
-    { "<leader>dd", "<cmd>TroubleToggle<cr>",                       desc = "Toggle Trouble" },
-    { "<leader>dw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics" },
-    { "<leader>dD", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics" },
-    { "<leader>dq", "<cmd>TroubleToggle quickfix<cr>",              desc = "QuickFix List" },
-    { "<leader>dl", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List" },
-    { "gd",         "<cmd>TroubleToggle lsp_definitions<cr>",       desc = "LSP Definitions" },
-    { "gr",         "<cmd>TroubleToggle lsp_references<cr>",        desc = "LSP References" },
-    { "gt",         "<cmd>TroubleToggle lsp_type_definitions<cr>",  desc = "LSP Type Definitions" },
+    { "<leader>dd", "<cmd>Trouble diagnostics toggle<cr>",          desc = "Toggle Trouble" },
+    -- { "<leader>dw", "<cmd>Trouble workspace_diagnostics<cr>",         desc = "Workspace Diagnostics" },
+    -- { "<leader>dD", "<cmd>Trouble document_diagnostics<cr>",          desc = "Document Diagnostics" },
+    { "<leader>dq", "<cmd>Trouble quickfix toggle<cr>",             desc = "QuickFix List" },
+    { "<leader>dl", "<cmd>Trouble loclist toggle<cr>",              desc = "Location List" },
+    { "gd",         "<cmd>Trouble lsp_definitions toggle <cr>",     desc = "LSP Definitions" },
+    { "gr",         "<cmd>Trouble float_references toggle<cr>",     desc = "LSP References" },
+    { "gt",         "<cmd>Trouble lsp_type_definitions toggle<cr>", desc = "LSP Type Definitions" },
   },
   opts = {
-    padding = false,
-    multiline = false,
-    win_config = { border = "rounded" },
-    signs = { error = " ", warning = " ", information = " ", hint = "󰠠 ", other = " " }
+    auto_preview = false,
+    auto_jump = true,
+    focus = true,
+    -- padding = false,
+    -- multiline = false,
+    -- win_config = { border = "rounded" },
+    -- signs = { error = " ", warning = " ", information = " ", hint = "󰠠 ", other = " " }
+    modes = {
+      float_references = {
+        mode = "lsp_references",
+        auto_preview = true,
+        indent_guides = false,
+        pinned = true,
+        keys = { ["<esc>"] = "close", ["<cr>"] = "jump_close" },
+        win = {
+          type = "float",
+          relative = "cursor",
+          position = { 2, 10 },
+          size = { height = 10, width = 50 },
+          border = { "╭", "─", "╮", "│", "│", "┄", "│", "│" }, -- ╭╮╰╯─│
+          title = "References",
+          title_pos = "center",
+        },
+        preview = {
+          type = "float",
+          relative = "win",
+          anchor = "NE",
+          position = { 10, 51 },
+          size = { height = 10, width = 50 },
+          border = "rounded",
+          focusable = false,
+          fixed = true,
+        }
+      },
+    },
   },
 }

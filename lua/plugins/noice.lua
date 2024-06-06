@@ -9,6 +9,7 @@ return {
     event = "VeryLazy",
     keys = {
       -- NOTE: Can't close shell with CTRL-D
+      --
       -- { "<c-d>",      "<cmd>NoiceDismiss<cr>", desc = "Dismiss All",        mode = { "i", "c", "t" } },
       { "<leader>ud", "<cmd>NoiceDismiss<cr>", desc = "Dismiss All", },
       { "<leader>ul", "<cmd>NoiceLast<cr>",    desc = "Noice Last Message", },
