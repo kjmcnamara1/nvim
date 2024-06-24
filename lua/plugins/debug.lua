@@ -107,7 +107,7 @@ return {
     config = function()
       -- local path = require("mason-registry").get_package("debugpy"):get_install_path()
       -- require("dap-python").setup(path .. "/venv/bin/python")
-      require("dap-python").setup(require("venv-selector").get_active_path())
+      require("dap-python").setup(require("venv-selector").python())
     end
   },
   {
@@ -117,6 +117,7 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     cond = not vim.g.vscode,
+    branch = "regexp",
     cmd = "VenvSelect",
     keys = {
       { "<leader>cv", "<cmd>VenvSelect<cr>", desc = "Select VirtualEnv", }

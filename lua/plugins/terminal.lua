@@ -36,7 +36,7 @@ return {
       { "<F5>", function()
         vim.cmd.write()
         local cmds = {
-          python = require("venv-selector").get_active_path() or "python",
+          python = require("venv-selector").python() or "python",
         }
         local prg = cmds[vim.bo.filetype] or ""
         local cmd = (prg and (prg .. " ") or "") .. vim.api.nvim_buf_get_name(0)

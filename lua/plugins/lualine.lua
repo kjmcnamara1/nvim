@@ -92,7 +92,7 @@ return {
     -- Add clickable python venv selector
     -- if package.loaded.venv_selector then
     local active_venv = function()
-      local venv_name = require("venv-selector").get_active_venv()
+      local venv_name = require("venv-selector").venv()
       if venv_name ~= nil then
         return venv_name:gsub(".*/pypoetry/virtualenvs/", "(poetry) "):gsub("-.*-", "-")
       else
