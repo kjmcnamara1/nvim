@@ -38,7 +38,7 @@ return {
       { "<leader>ff",      "<cmd>Telescope find_files<cr>",                desc = "Find Files" },
       { "<leader>,",       "<cmd>Telescope buffers<cr>",                   desc = "Buffers" },
       { "<leader>/",       "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search in Buffer" },
-      { "<leader>?",       "<cmd>Telescope live_grep<cr>",                 desc = "Search in CWD" },
+      { "<leader>\\",      "<cmd>Telescope live_grep<cr>",                 desc = "Search in CWD" },
       { "<leader>:",       "<cmd>Telescope command_history<cr>",           desc = "Command History" },
       { "<leader>r",       "<cmd>Telescope oldfiles<cr>",                  desc = "Recent Files" },
       -- { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Git-files" },
