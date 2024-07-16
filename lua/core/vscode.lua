@@ -7,8 +7,8 @@ vim.opt.scrolloff = 999
 -- vim.keymap.set({ "n", "x" }, "<c-u>", "15k", { remap = true })
 vim.keymap.set({ "n", "x" }, "<c-d>", "<c-d>zz", { remap = true })
 vim.keymap.set({ "n", "x" }, "<c-u>", "<c-u>zz", { remap = true })
-vim.keymap.set("n", "j", "gj", { remap = true })
-vim.keymap.set("n", "k", "gk", { remap = true })
+vim.keymap.set("", "j", "gj", { remap = true })
+vim.keymap.set("", "k", "gk", { remap = true })
 
 -- LSP
 vim.keymap.set({ "n", "x" }, "gs", function() vscode.action("workbench.action.gotoSymbol") end)
