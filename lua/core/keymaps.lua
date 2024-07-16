@@ -6,7 +6,11 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Quick exit from Insert mode
-map("i", "jk", "<esc>", { desc = "Exit insert mode" })
+-- map("i", "jk", "<esc>", { desc = "Exit insert mode" })
+
+-- Scrolling
+map("", ")", "<c-d>", { desc = "Scroll down half page", remap = true })
+map("", "(", "<c-u>", { desc = "Scroll up half page", remap = true })
 
 -- Move to beginning/end of file
 map("", "gg", "gg0", { desc = "Goto beginning of file", remap = true })
@@ -28,7 +32,7 @@ map("n", "U", "<c-r>", { desc = "Redo" })
 map("i", "<c-v>", "<c-r>+", { desc = "Paste from system clipboard" })
 
 -- Delete right in insert mode
-map("i", "<c-l>", "<del>", { desc = "Delete right" })
+-- map("i", "<c-l>", "<del>", { desc = "Delete right" })
 
 -- Copy/paste -- solved with clipboard=unnamedplus
 -- use 'p' in visual mode to replace register with selected text
@@ -61,6 +65,8 @@ end, { desc = "Find/Replace word under cursor" })
 -- Move by visible lines.
 map({ "n", "x" }, "k", [[v:count == 0 ? 'gk' : 'k']], { expr = true })
 map({ "n", "x" }, "j", [[v:count == 0 ? 'gj' : 'j']], { expr = true })
+map({ "n", "x" }, "<up>", [[v:count == 0 ? 'gk' : 'k']], { expr = true })
+map({ "n", "x" }, "<down>", [[v:count == 0 ? 'gj' : 'j']], { expr = true })
 
 -- Add empty lines before and after cursor line supporting dot-repeat
 map("n", "<a-O>", "O<esc>", { desc = "Put empty line above" })
@@ -87,25 +93,25 @@ map("", "H", "^", { desc = "Beginning of Line" })
 map("", "L", "$", { desc = "End of Line" })
 
 -- Window navigation
-map({ "n", "t" }, "<c-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
-map({ "n", "t" }, "<c-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
-map({ "n", "t" }, "<c-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
-map({ "n", "t" }, "<c-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
+map({ "n", "t" }, "<c-left>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
+map({ "n", "t" }, "<c-down>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
+map({ "n", "t" }, "<c-up>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
+map({ "n", "t" }, "<c-right>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
 
 -- Window resize (respecting `v:count`)
-map("n", "<c-Left>", '"<Cmd>vertical resize -" . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = "Decrease window width" })
-map("n", "<c-Down>", '"<Cmd>resize -"          . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = "Decrease window height" })
-map("n", "<c-Up>", '"<Cmd>resize +"          . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = "Increase window height" })
-map("n", "<c-Right>", '"<Cmd>vertical resize +" . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = "Increase window width" })
+-- map("n", "<c-Left>", '"<Cmd>vertical resize -" . v:count1 . "<CR>"',
+--   { expr = true, replace_keycodes = false, desc = "Decrease window width" })
+-- map("n", "<c-Down>", '"<Cmd>resize -"          . v:count1 . "<CR>"',
+--   { expr = true, replace_keycodes = false, desc = "Decrease window height" })
+-- map("n", "<c-Up>", '"<Cmd>resize +"          . v:count1 . "<CR>"',
+--   { expr = true, replace_keycodes = false, desc = "Increase window height" })
+-- map("n", "<c-Right>", '"<Cmd>vertical resize +" . v:count1 . "<CR>"',
+--   { expr = true, replace_keycodes = false, desc = "Increase window width" })
 
 -- Window split
-map("n", "<c-w>\\", "<cmd>wincmd v<cr>", { desc = "Split window right" })
+-- map("n", "<c-w>\\", "<cmd>wincmd v<cr>", { desc = "Split window right" })
 -- map("n", "<c-bslash>", "<cmd>wincmd v<cr>", { desc = "Split window right" })
-map("n", "<c-w>-", "<cmd>wincmd s<cr>", { desc = "Split window below" })
+-- map("n", "<c-w>-", "<cmd>wincmd s<cr>", { desc = "Split window below" })
 -- map("n", "<c-m>", "<cmd>wincmd s<cr>", { desc = "Split window below" }) -- same as <c-minus>
 
 -- Move cursor
@@ -123,14 +129,14 @@ map("v", "<a-s-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<a-s-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Keep buffer centered during vertical movements (unnecessary with `scrolloff=999`)
--- map("n", "<c-d>", "<c-d>zz", { remap = true, desc = "Scroll half page down" })
--- map("n", "<c-u>", "<c-u>zz", { remap = true, desc = "Scroll half page up" })
+map("n", "<c-d>", "<c-d>zz", { remap = true, desc = "Scroll half page down" })
+map("n", "<c-u>", "<c-u>zz", { remap = true, desc = "Scroll half page up" })
 -- map("n", "{", "{zz", { remap = true, desc = "Scroll paragraph down" })
 -- map("n", "}", "}zz", { remap = true, desc = "Scroll paragraph up" })
--- map("n", "n", "nzz", { remap = true, desc = "Next search result" })
--- map("n", "N", "Nzz", { remap = true, desc = "Previous search result" })
--- map("n", "<c-o>", "<c-o>zz", { remap = true, desc = "Previous jump" })
--- map("n", "<c-i>", "<c-i>zz", { remap = true, desc = "Next jump" })
+map("n", "n", "nzz", { remap = true, desc = "Next search result" })
+map("n", "N", "Nzz", { remap = true, desc = "Previous search result" })
+map("n", "<c-o>", "<c-o>zz", { remap = true, desc = "Previous jump" })
+map("n", "<c-i>", "<c-i>zz", { remap = true, desc = "Next jump" })
 -- map("n", "*", "*zz", { remap = true, desc = "Next word under cursor" })
 -- map("n", "#", "#zz", { remap = true, desc = "Previous word under cursor" })
 
