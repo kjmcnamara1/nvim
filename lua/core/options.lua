@@ -92,7 +92,7 @@ vim.opt.formatoptions = "qjl1"                      -- Don't autoformat comments
 -- ======================== WINDOW ========================
 
 -- Always keep n lines above/below cursor unless at start/end of file
-vim.opt.scrolloff      = 999 -- keep cursor in center of screen == 999
+vim.opt.scrolloff      = 10 -- keep cursor in center of screen == 999
 vim.opt.sidescrolloff  = 5
 
 -- Minimum window width
