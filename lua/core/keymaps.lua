@@ -93,10 +93,10 @@ map("", "H", "^", { desc = "Beginning of Line" })
 map("", "L", "$", { desc = "End of Line" })
 
 -- Window navigation
-map({ "n", "t" }, "<c-left>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
-map({ "n", "t" }, "<c-down>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
-map({ "n", "t" }, "<c-up>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
-map({ "n", "t" }, "<c-right>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
+-- map({ "n", "t" }, "<c-left>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
+-- map({ "n", "t" }, "<c-down>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
+-- map({ "n", "t" }, "<c-up>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
+-- map({ "n", "t" }, "<c-right>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
 
 -- Window resize (respecting `v:count`)
 -- map("n", "<c-Left>", '"<Cmd>vertical resize -" . v:count1 . "<CR>"',
