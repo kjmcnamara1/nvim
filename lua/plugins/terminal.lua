@@ -81,6 +81,7 @@ return {
   },
   {
     "christoomey/vim-tmux-navigator",
+    enabled = false,
     cmd = {
       "TmuxNavigateLeft",
       "TmuxNavigateDown",
@@ -97,8 +98,27 @@ return {
     },
   },
   {
+    "mrjones2014/smart-splits.nvim",
+    cond = not vim.g.vscode,
+    lazy = false,
+    build = "./kitty/install-kittens.bash",
+    keys = {
+      { "<c-h>",     function() require("smart-splits").move_cursor_left() end },
+      { "<c-j>",     function() require("smart-splits").move_cursor_down() end },
+      { "<c-k>",     function() require("smart-splits").move_cursor_up() end },
+      { "<c-l>",     function() require("smart-splits").move_cursor_right() end },
+      { "<c-/>",     function() require("smart-splits").move_cursor_previous() end },
+      { "<c-left>",  function() require("smart-splits").resize_left() end },
+      { "<c-down>",  function() require("smart-splits").resize_down() end },
+      { "<c-up>",    function() require("smart-splits").resize_up() end },
+      { "<c-right>", function() require("smart-splits").resize_right() end },
+      { "<c-w>R",    function() require("smart-splits").start_resize_mode() end },
+    },
+    opts = { default_amount = 1, at_edge = "stop" },
+  },
+  {
     "MunsMan/kitty-navigator.nvim",
-    -- enabled = false,
+    enabled = false,
     cond = not vim.g.vscode,
     build = {
       "cp navigate_kitty.py ~/.config/kitty",
