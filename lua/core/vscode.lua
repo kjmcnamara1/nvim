@@ -52,7 +52,7 @@ vim.keymap.set("n", "<leader>ui", function() vscode.action("editor.action.inspec
 vim.keymap.set("n", "<leader>uC", function() vscode.action("workbench.action.selectTheme") end)
 
 -- File Type / Lanugage Mode
-vim.keymap.set("n", "<leader>ft", function() vscode.action("workbench.action.editor.changeLanguageMode") end)
+vim.keymap.set("n", "<leader>;", function() vscode.action("workbench.action.editor.changeLanguageMode") end)
 
 -- Files
 vim.keymap.set("n", "-", function() vscode.action("workbench.view.explorer") end)

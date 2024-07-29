@@ -35,7 +35,7 @@ return {
       { "<leader>gC",      "<cmd>Telescope git_commits<cr>",               desc = "Git Commits" },
       { "<leader>gB",      "<cmd>Telescope git_branches<cr>",              desc = "Git Branches" },
       -- search
-      { "<leader>ff",      "<cmd>Telescope find_files<cr>",                desc = "Find Files" },
+      { "<leader>.",       "<cmd>Telescope find_files<cr>",                desc = "Find Files" },
       { "<leader>,",       "<cmd>Telescope buffers<cr>",                   desc = "Buffers" },
       { "<leader>/",       "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search in Buffer" },
       { "<leader>\\",      "<cmd>Telescope live_grep<cr>",                 desc = "Search in CWD" },
@@ -56,7 +56,7 @@ return {
       { "<leader>sm",      "<cmd>Telescope marks<cr>",                     desc = "Jump to Mark" },
       { "<leader>so",      "<cmd>Telescope vim_options<cr>",               desc = "Options" },
       { "<leader>uC",      "<cmd>Telescope colorscheme<cr>",               desc = "Colorscheme with preview" },
-      { "<leader>ft",      "<cmd>Telescope filetypes<cr>",                 desc = "Change FileType" },
+      { "<leader>;",       "<cmd>Telescope filetypes<cr>",                 desc = "Change FileType" },
     },
     opts = {
       defaults = {

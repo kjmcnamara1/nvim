@@ -13,8 +13,8 @@ return {
     keys = {
       { ";", function() return require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_next() end,     mode = { "n", "x", "o" }, desc = "Repeat next move" },
       { ",", function() return require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_previous() end, mode = { "n", "x", "o" }, desc = "Repeat previous move" },
-      -- {'f',function() return require('nvim-treesitter.textobjects.repeatable_move').builtin_f() end, mode={'n','x','o'},desc='Find character forwards'},
-      -- {'F',function() return require('nvim-treesitter.textobjects.repeatable_move').builtin_F() end, mode={'n','x','o'},desc='Find character backwards'},
+      { "f", function() return require("nvim-treesitter.textobjects.repeatable_move").builtin_f() end,                 mode = { "n", "x", "o" }, desc = "Find character forwards" },
+      { "F", function() return require("nvim-treesitter.textobjects.repeatable_move").builtin_F() end,                 mode = { "n", "x", "o" }, desc = "Find character backwards" },
       { "t", function() return require("nvim-treesitter.textobjects.repeatable_move").builtin_t() end,                 mode = { "n", "x", "o" }, desc = "Until character forwards" },
       { "T", function() return require("nvim-treesitter.textobjects.repeatable_move").builtin_T() end,                 mode = { "n", "x", "o" }, desc = "Until character backwards" },
     },
