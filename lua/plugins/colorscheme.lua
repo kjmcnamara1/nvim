@@ -67,5 +67,8 @@ return {
     cond = not vim.g.vscode,
     name = "catppuccin",
     event = "VeryLazy",
+    opts = {
+      flavour = "frappe",
+    }
   },
 }
