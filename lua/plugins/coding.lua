@@ -51,6 +51,7 @@ return {
   {
     -- Draw indent characters even on blank lines
     "lukas-reineke/indent-blankline.nvim",
+    enabled = false,
     main = "ibl",
     event = "VeryLazy",
     cond = vim.env.COMPUTERNAME ~= "ANGEL" and not vim.g.vscode,

@@ -1,5 +1,6 @@
 return {
   "kevinhwang91/nvim-ufo",
+  enabled = false,
   cond = not vim.g.vscode,
   dependencies = { "kevinhwang91/promise-async", "nvim-treesitter/nvim-treesitter" },
   event = "VeryLazy",
