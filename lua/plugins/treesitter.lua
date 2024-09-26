@@ -6,6 +6,7 @@ return {
       "nushell/tree-sitter-nu",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "windwp/nvim-ts-autotag",
+      "meatballs/vim-xonsh",
     },
     build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile", "VeryLazy" },
