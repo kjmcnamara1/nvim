@@ -16,7 +16,7 @@ vim.keymap.set({ "n", "x" }, "<leader>o", function() vscode.action("workbench.ac
 vim.keymap.set({ "n", "x" }, "gS", function() vscode.action("workbench.action.showAllSymbols") end)
 vim.keymap.set({ "n", "x" }, "<leader>O", function() vscode.action("workbench.action.showAllSymbols") end)
 vim.keymap.set({ "n", "x" }, "gr", function() vscode.action("editor.action.referenceSearch.trigger") end)
-vim.keymap.set({ "n", "x" }, "<leader>r", function() vscode.action("editor.action.rename") end)
+vim.keymap.set({ "n", "x" }, "<leader>cr", function() vscode.action("editor.action.rename") end)
 
 -- Git
 vim.keymap.set("n", "]h", function() vscode.action("workbench.action.editor.nextChange") end)         -- next hunk
@@ -56,9 +56,9 @@ vim.keymap.set("n", "<leader>;", function() vscode.action("workbench.action.edit
 
 -- Files
 vim.keymap.set("n", "-", function() vscode.action("workbench.view.explorer") end)
-vim.keymap.set("n", "<leader>ff", function() vscode.action("workbench.action.quickOpen") end)
-vim.keymap.set("n", "<leader>fr", function() vscode.action("workbench.action.openRecent") end)
-vim.keymap.set("n", "<leader>fn", function() vscode.action("workbench.action.files.newUntitledFile") end)
+vim.keymap.set("n", "<leader>.", function() vscode.action("workbench.action.quickOpen") end)
+vim.keymap.set("n", "<leader>r", function() vscode.action("workbench.action.openRecent") end)
+vim.keymap.set("n", "<leader>n", function() vscode.action("workbench.action.files.newUntitledFile") end)
 
 -- Keymaps
 vim.keymap.set("n", "<leader>ks", function() vscode.action("workbench.action.openGlobalKeybindings") end)
