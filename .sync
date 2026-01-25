@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+destDir="$HOME/.config/nvim"
+srcDir=$(dirname "$(readlink -f "$0")")
+
+yay -S neovim-nightly-bin
+
+chezmoi -D "$destDir" -S "$srcDir" -W "$srcDir" apply
