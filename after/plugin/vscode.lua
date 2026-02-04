@@ -2,7 +2,7 @@ if profile() ~= "vscode" then
   return
 end
 
-local vscode = require("vscode-neovim")
+local vscode = require("vscode")
 
 vim.notify = vscode.notify
 
