@@ -1,6 +1,11 @@
 return {
   settings = {
     Lua = {
+      workspace = {
+        library = {
+          vim.env.VIMRUNTIME .. "/lua",
+        },
+      },
       hint = {
         arrayIndex = "Disable",
       },
