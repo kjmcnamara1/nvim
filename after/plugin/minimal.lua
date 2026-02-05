@@ -15,6 +15,5 @@ o.showmode       = false
 o.showcmd        = false
 o.shortmess:append("F")
 
-wk.add({
-  { "<esc>", "ZQ", desc = "Quit" },
-})
+vim.pack.add({ "https://github.com/folke/snacks.nvim" })
+require("snacks").setup({ terminal = {} })

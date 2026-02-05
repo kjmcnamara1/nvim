@@ -124,22 +124,25 @@ wk.add({
     "<esc>",
     function()
       local floating = vim.api.nvim_win_get_config(0).relative ~= ""
-      -- Cursors paused
       if not mc.cursorsEnabled() then
+        -- Cursors paused
         mc.enableCursors()
-        -- Cursors active
       elseif mc.hasCursors() then
+        -- Cursors active
         mc.clearCursors()
+      elseif profile() == "minimal" then
+        -- Single cursor, minimal profile (kitty scrollback, active-window-info, etc.)
+        vim.cmd("qall!")
+      elseif not vim.bo.modifiable then
         -- Single cursor, non-modifiable window
         -- (LspInfo, ConformInfo, help, hover, etc.)
-      elseif not vim.bo.modifiable then
         vim.cmd.close()
-        -- Single cursor, modifiable, fixed window
       elseif not floating then
+        -- Single cursor, modifiable, fixed window
         vim.cmd.fclose()
+      else
         -- Single cursor, modifiable, floating window
         -- (Snacks scratch/zen/zoom, etc.)
-      else
         -- vim.api.nvim_feedkeys(vim.keycode("<esc>"), "n", true)
       end
       vim.cmd.noh()
