@@ -2,7 +2,7 @@ if profile() == "vscode" then
   return
 end
 
-vim.pack.add({
+pack_add({
   "https://github.com/rmehri01/onenord.nvim",
   "https://github.com/brenoprata10/nvim-highlight-colors",
 })

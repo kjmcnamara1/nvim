@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({
+pack_add({
   "https://github.com/rafamadriz/friendly-snippets",
   "https://github.com/L3MON4D3/LuaSnip",
   "https://github.com/danymat/neogen",

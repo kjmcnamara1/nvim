@@ -27,6 +27,10 @@ end
 require("config.options")    -- all
 require("config.autocmds")   -- all
 
+_G.pack_add=function(packs)
+  vim.pack.add(packs,{confirm=false})
+end
+
 require("config.plenary")    -- all
 require("config.which_key")  -- all
 require("config.colors")     -- default
@@ -52,5 +56,6 @@ require("config.completion") -- snippets all | completion/ai default
 require("config.debug")      --  default
 require("config.suda")       -- all? or default
 require("config.chezmoi")    -- default
+require("config.agent")      -- default
 
 -- [ ]: make sure delete, change, and put do not change system register(+)

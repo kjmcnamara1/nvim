@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({ "https://github.com/nvim-mini/mini.icons" })
+pack_add({ "https://github.com/nvim-mini/mini.icons" })
 
 require("mini.icons").setup({
   file = {

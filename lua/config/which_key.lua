@@ -1,4 +1,4 @@
-vim.pack.add({ "https://github.com/folke/which-key.nvim" })
+pack_add({ "https://github.com/folke/which-key.nvim" })
 
 _G.wk = require("which-key")
 

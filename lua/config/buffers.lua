@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({ "https://github.com/akinsho/bufferline.nvim" })
+pack_add({ "https://github.com/akinsho/bufferline.nvim" })
 
 wk.add({
   { "<leader>'", "<c-^>",                        desc = "Buffer: Alternate" },

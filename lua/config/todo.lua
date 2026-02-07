@@ -5,7 +5,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({ "https://github.com/folke/todo-comments.nvim" })
+pack_add({ "https://github.com/folke/todo-comments.nvim" })
 
 require("todo-comments").setup({
   keywords = {

@@ -1,4 +1,4 @@
-vim.pack.add({ "https://github.com/folke/flash.nvim" })
+pack_add({ "https://github.com/folke/flash.nvim" })
 
 require("flash").setup({
   jump = { autojump = true },

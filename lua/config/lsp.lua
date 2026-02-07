@@ -4,7 +4,7 @@ end
 
 -- [ ]: Configure code folding
 
-vim.pack.add({
+pack_add({
   "https://github.com/ThePrimeagen/refactoring.nvim",
   "https://github.com/mason-org/mason.nvim",
   "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",

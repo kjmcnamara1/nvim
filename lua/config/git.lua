@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({
+pack_add({
   "https://github.com/lewis6991/gitsigns.nvim",
   -- "https://github.com/MunifTanjim/nui.nvim",
   -- "https://github.com/clabby/difftastic.nvim",

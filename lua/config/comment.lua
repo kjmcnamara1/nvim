@@ -1,4 +1,4 @@
-vim.pack.add({ "https://github.com/numToStr/Comment.nvim" })
+pack_add({ "https://github.com/numToStr/Comment.nvim" })
 
 require("Comment").setup({
   -- sticky = false,

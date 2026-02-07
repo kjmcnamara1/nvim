@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({ "https://github.com/dstein64/nvim-scrollview" })
+pack_add({ "https://github.com/dstein64/nvim-scrollview" })
 
 require("scrollview").setup({
   current_only = true,

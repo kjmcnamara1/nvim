@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({ "https://github.com/HotThoughts/jjui.nvim" })
+pack_add({ "https://github.com/HotThoughts/jjui.nvim" })
 
 require("jjui").setup({
   floating_window_winblend = 5,

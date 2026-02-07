@@ -1,4 +1,4 @@
-vim.pack.add({
+pack_add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
   "https://github.com/nvim-treesitter/nvim-treesitter-context",

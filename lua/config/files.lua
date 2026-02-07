@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({
+pack_add({
   "https://github.com/nvim-mini/mini.files",
   "https://github.com/mikavilpas/yazi.nvim",
 })

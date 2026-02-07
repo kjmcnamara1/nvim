@@ -1,4 +1,4 @@
-vim.pack.add({ "https://github.com/monaqa/dial.nvim" })
+pack_add({ "https://github.com/monaqa/dial.nvim" })
 
 local aug = require("dial.augend")
 local map = require("dial.map").manipulate

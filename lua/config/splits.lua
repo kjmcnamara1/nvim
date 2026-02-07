@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({ "https://github.com/mrjones2014/smart-splits.nvim" })
+pack_add({ "https://github.com/mrjones2014/smart-splits.nvim" })
 
 local splits = require("smart-splits")
 

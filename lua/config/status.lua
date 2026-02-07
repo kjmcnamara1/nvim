@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({ "https://github.com/nvim-lualine/lualine.nvim" })
+pack_add({ "https://github.com/nvim-lualine/lualine.nvim" })
 
 require("lualine").setup({
   options = {

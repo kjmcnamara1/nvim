@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
-vim.pack.add({ "https://github.com/xvzc/chezmoi.nvim" })
+pack_add({ "https://github.com/xvzc/chezmoi.nvim" })
 
 require("chezmoi").setup({ edit = { watch = true } })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
