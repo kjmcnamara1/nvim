@@ -112,6 +112,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.buflisted = false
     vim.cmd.wincmd("L")
     vim.api.nvim_win_set_width(0, 85)
+    vim.wo.wrap = true
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true, silent = true })
     -- vim.keymap.set("n", "<esc>", "<cmd>close<cr>", { buffer = true, silent = true })
   end,

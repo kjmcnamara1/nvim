@@ -76,6 +76,7 @@ require("snacks").setup({
   },
   styles = {
     notification = { wo = { wrap = true } },
+    notification_history = { wo = { wrap = true } },
     lazygit = {
       width = 0,
       height = 0,
@@ -273,6 +274,7 @@ require("snacks").setup({
       },
 
       -- TODO: add preview to show help page for option (like FzfLua does)
+      -- FIX: breaks as soon as start filtering
       nvim_options = {
         layout = "default",
         finder = function()
@@ -359,7 +361,8 @@ wk.add({
     mode = { "n", "i", "t" }
   },
   -- { "<c-'>",      Snacks.terminal.toggle,              desc = "Terminal: Toggle",          mode = { "n", "i", "t" } },
-  { "<c-s-'>",         Snacks.terminal.open,                                     desc = "Terminal: New",                    mode = { "n", "i", "t" } }, -- BUG: multiple terminals breaks toggling
+  -- BUG: multiple terminals breaks toggling
+  { "<c-s-'>",         Snacks.terminal.open,                                     desc = "Terminal: New",                    mode = { "n", "i", "t" } },
 
   -- Cursor
   { "gd",              Snacks.picker.lsp_definitions,                            desc = "LSP: Goto Definition" },
