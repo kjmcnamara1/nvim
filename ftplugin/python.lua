@@ -12,5 +12,5 @@ wk.add({
   end,
 })
 
-require("venv-selector").setup()
+require("venv-selector").setup({ settings = { options = { notify_user_on_venv_activation = true } } })
 require("dap-python").setup("uv")
