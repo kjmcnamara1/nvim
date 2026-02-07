@@ -44,11 +44,11 @@ vim.diagnostic.config({
 })
 
 -- Use undercurls for diagnostics instead of flat underline
-for _, d in ipairs({ "Error", "Warning", "Information", "Hint" }) do
-  local hl = "LspDiagnosticsUnderline" .. d
-  local sp = vim.api.nvim_get_hl(0, { name = hl }).sp
-  vim.api.nvim_set_hl(0, hl, { undercurl = true, sp = sp })
-end
+-- for _, d in ipairs({ "Error", "Warning", "Information", "Hint" }) do
+--   local hl = "LspDiagnosticsUnderline" .. d
+--   local sp = vim.api.nvim_get_hl(0, { name = hl }).sp
+--   vim.api.nvim_set_hl(0, hl, { undercurl = true, sp = sp })
+-- end
 
 require("tiny-inline-diagnostic").setup({
   options = {
@@ -64,16 +64,17 @@ require("tiny-inline-diagnostic").setup({
 })
 
 require("tiny-code-action").setup({
-  backend = "difftastic",
-  -- picker = "snacks",
-  picker = {
-    "buffer",
-    opts = {
-      hotkeys = true,
-      hotkeys_mode = "text_based",
-      auto_preview = true,
-    }
-  }
+  backend = "delta",
+  picker = "snacks",
+  -- backend = "difftastic",
+  -- picker = {
+  --   "buffer",
+  --   opts = {
+  --     hotkeys = true,
+  --     hotkeys_mode = "text_based",
+  --     auto_preview = true,
+  --   }
+  -- }
 })
 
 require("live-rename").setup({ hl = { current = "IncSearch" } })
