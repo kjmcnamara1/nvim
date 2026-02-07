@@ -28,14 +28,23 @@ require("supermaven-nvim").setup({
 })
 
 require("blink.cmp").setup({
-  keymap = { preset = "super-tab" },
+  keymap = {
+    preset = "super-tab",
+    ["<up>"] = { "fallback" },
+    ["<down>"] = { "fallback" },
+  },
   appearance = { nerd_font_variant = "mono" },
   snippets = { preset = "luasnip" },
   signature = { enabled = true },
+  cmdline = {
+    enabled = true,
+    keymap = { preset = "inherit" },
+    completion = { menu = { auto_show = true } },
+  },
   completion = {
-    ghost_text = { enabled = true },
+    ghost_text = { enabled = false },
     documentation = { auto_show = false, auto_show_delay_ms = 500 },
-    menu = { draw = { treesitter = { "lsp" } } },
+    menu = { draw = { treesitter = { "lsp", "path", "snippets" } } },
   },
   sources = {
     default = { "lsp", "path", "snippets", "buffer" },
@@ -49,6 +58,11 @@ require("blink.cmp").setup({
         -- make lazydev completions top priority
         score_offset = 100,
       },
+      snippets = {
+        opts = {
+          use_label_description = true,
+        }
+      }
     },
   }
 })

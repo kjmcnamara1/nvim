@@ -3,6 +3,19 @@ pack_add({ "https://github.com/folke/flash.nvim" })
 require("flash").setup({
   jump = { autojump = true },
   label = { current = false },
+  search = {
+    exclude = {
+      "notify",
+      "cmp_menu",
+      "blink-cmp-menu",
+      "noice",
+      "flash_prompt",
+      function(win)
+        -- exclude non-focusable windows
+        return not vim.api.nvim_win_get_config(win).focusable
+      end,
+    },
+  },
   modes = {
     search = { enabled = true },
     treesitter = {
