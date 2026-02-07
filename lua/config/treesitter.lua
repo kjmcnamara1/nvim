@@ -2,6 +2,7 @@ pack_add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
   "https://github.com/nvim-treesitter/nvim-treesitter-context",
+  "https://github.com/HiPhish/rainbow-delimiters.nvim",
   -- "https://github.com/aaronik/treewalker.nvim",
 })
 
@@ -82,6 +83,19 @@ require("nvim-treesitter-textobjects").setup({
   move = {
     set_jumps = true,
   },
+})
+
+require("rainbow-delimiters.setup").setup({
+  highlight = {
+    "SnacksIndentScope1",
+    "SnacksIndentScope2",
+    "SnacksIndentScope3",
+    "SnacksIndentScope4",
+    -- "SnacksIndentScope5", -- green easy to confuse with strings
+    "SnacksIndentScope6",
+    "SnacksIndentScope7",
+    "SnacksIndentScope8",
+  }
 })
 
 -- require("treewalker").setup({
