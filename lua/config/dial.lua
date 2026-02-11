@@ -59,7 +59,7 @@ require("dial.config").augends:register_group({
     logical,
     logical_alias,
     months,
-    cases, -- [ ]: need separate keymap
+    cases, -- TODO: need separate keymap
     assignment,
     hexcolor,
     aug.misc.alias.markdown_header,

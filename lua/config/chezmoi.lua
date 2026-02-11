@@ -1,3 +1,15 @@
+-- TODO: chezmoi-treesitter.nvim
+-- vim.filetype.add to detect compound ft from chezmoi target file
+-- (e.g. toml.chezmoitmpl)
+-- create FileType autoccommand:
+-- gotmpl as primary treesitter parser
+-- add treesitter injection for primary lang (e.g. toml) with:
+-- local query = string.format([[
+-- ((text) @injection.content
+-- (#set! injection.language %q)
+-- (#set! injection.combined))
+-- ]], lang)
+-- vim.treesitter.query.set("gotmpl","injections",currt_query .. query)
 if profile() ~= "default" then
   return
 end

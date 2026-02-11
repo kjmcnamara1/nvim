@@ -1,5 +1,8 @@
+-- TODO: make sure delete, change, and put do not change system register(+)
+
 -- Add this if it doesn't exist
 if not table.pack then
+  ---@diagnostic disable-next-line: duplicate-set-field
   table.pack = function(...)
     return { n = select("#", ...), ... }
   end
@@ -24,11 +27,11 @@ _G.profile = function()
   end
 end
 
-require("config.options")    -- all
-require("config.autocmds")   -- all
+require("config.options")  -- all
+require("config.autocmds") -- all
 
-_G.pack_add=function(packs)
-  vim.pack.add(packs,{confirm=false})
+_G.pack_add = function(packs)
+  vim.pack.add(packs, { confirm = false })
 end
 
 require("config.plenary")    -- all
@@ -57,5 +60,3 @@ require("config.debug")      --  default
 require("config.suda")       -- all? or default
 require("config.chezmoi")    -- default
 require("config.agent")      -- default
-
--- [ ]: make sure delete, change, and put do not change system register(+)
