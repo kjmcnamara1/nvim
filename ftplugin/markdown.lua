@@ -1,3 +1,7 @@
+if profile() == "vscode" then
+  return
+end
+
 pack_add({
   "https://github.com/OXY2DEV/markview.nvim",
   "https://github.com/iamcco/markdown-preview.nvim",
