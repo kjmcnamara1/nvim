@@ -2,7 +2,7 @@ if profile() ~= "default" then
   return
 end
 
--- [ ]: Configure code folding
+-- TODO: Configure code folding
 
 pack_add({
   "https://github.com/ThePrimeagen/refactoring.nvim",
@@ -10,6 +10,7 @@ pack_add({
   "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason-lspconfig.nvim",
+  "https://github.com/nvimtools/none-ls.nvim",
   "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
   "https://github.com/rachartier/tiny-code-action.nvim",
   "https://github.com/saecki/live-rename.nvim",
@@ -19,13 +20,15 @@ pack_add({
 
 wk.add({
   mode = { "n", "x" },
-  { "g.",          require("tiny-code-action").code_action, desc = "LSP: Code Action" },
-  { "grn",         require("live-rename").rename,           desc = "LSP: Rename" },
-  { "<leader>k",   vim.lsp.buf.hover,                       desc = "LSP: Hover" },
-  { "<leader>cil", "<cmd>checkhealth vim.lsp<cr>",          desc = "Info: LSP" },
-  { "<leader>cic", "<cmd>ConformInfo<cr>",                  desc = "Info: Conform" },
-  { '<leader>cf',  require('conform').format,               desc = "LSP: Format" },
-  { "<leader>cm",  "<cmd>Mason<cr>",                        desc = "Mason" },
+  { "g.",          require("tiny-code-action").code_action,                  desc = "LSP: Code Action" },
+  { "grn",         require("live-rename").rename,                            desc = "LSP: Rename" },
+  -- { "<leader>k",   vim.lsp.buf.hover,                       desc = "LSP: Hover" },
+  { "<leader>k",   function() vim.lsp.buf.hover({ border = "rounded" }) end, desc = "LSP: Hover" },
+  { "<leader>cil", "<cmd>checkhealth vim.lsp<cr>",                           desc = "Info: LSP" },
+  { "<leader>cic", "<cmd>ConformInfo<cr>",                                   desc = "Info: Conform" },
+  { "<leader>cin", "<cmd>NullLsInfo<cr>",                                    desc = "Info: Null-Ls",   buffer = 0 },
+  { '<leader>cf',  require('conform').format,                                desc = "LSP: Format" },
+  { "<leader>cm",  "<cmd>Mason<cr>",                                         desc = "Mason" },
 })
 
 vim.diagnostic.config({
@@ -105,6 +108,14 @@ require("mason-tool-installer").setup({
   }
 })
 
+local nls = require("null-ls")
+nls.setup({
+  sources = {
+    nls.builtins.hover.printenv,
+    nls.builtins.diagnostics.fish,
+  }
+})
+
 require("conform").setup({
   format_on_save = {
     timeout_ms = 500,
@@ -114,4 +125,19 @@ require("conform").setup({
     lsp_format = "prefer",
     async = true,
   },
+  formatters = {
+    shfmt = {
+      append_args = { "-i", "2", "-bn", "-ci", "-sr", "-kp" },
+    },
+  },
+  formatters_by_ft = {
+    sh = { "shfmt" },
+    zsh = { "shfmt" },
+    json = { "prettierd", "prettier" },
+    jsonc = { "prettierd", "prettier" },
+    nix = { "nixfmt" },
+    xonsh = { "ruff" },
+    fish = { "fish_indent" },
+    markdown = { "prettierd" },
+  }
 })
