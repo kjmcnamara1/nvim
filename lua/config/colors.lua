@@ -90,6 +90,11 @@ require("onenord").setup({
     ["@lsp.mod.declaration"] = { style = "bold" },
     ["@module"] = { fg = colors.dark_yellow },
 
+    SnacksPickerGitStatusModified = { fg = colors.yellow, link = colors.none },
+    SnacksPickerGitStatusStaged = { fg = colors.dark_green, link = colors.none },
+    SnacksPickerGitStatusRenamed = { fg = colors.blue, link = colors.none },
+    SnacksPickerGitStatusUntracked = { fg = colors.light_gray, link = colors.none },
+
     MatchParen = { link = "IncSearch" },
     LspReferenceText = { style = colors.none },
     LspReferenceRead = { bg = colors.highlight, style = colors.none },
