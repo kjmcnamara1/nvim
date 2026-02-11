@@ -165,8 +165,8 @@ require("snacks").setup({
           ["<c-c>"] = { "stopinsert", mode = "i" },
           -- ["<cr>"] = { "stopinsert", mode = "i" }, -- want cr to still 'confirm' when in normal mode
           ["<esc>"] = { "cancel", mode = { "i", "n" } },
-          -- ["<a-s-h>"] = { "toggle_hidden", mode = { "i", "n" } },
-          -- ["<a-h>"] = { "<left>", mode = { "n", "i" } },
+          ["<a-s-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+          ["<a-h>"] = false,
           ["<a-s>"] = { "flash", mode = { "n", "i" } },
           ["s"] = { "flash" },
         },

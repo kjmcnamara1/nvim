@@ -22,10 +22,10 @@ wk.add({
   {
     mode = { "i", "t", "c" },
     -- This forces a redraw of the cursor whereas simple <left> doesn't
-    { "<a-h>", function() vim.api.nvim_feedkeys(vim.keycode("<left>"), "n", true) end,  desc = "Cursor: Left",  remap = true },
-    { "<a-j>", function() vim.api.nvim_feedkeys(vim.keycode("<down>"), "n", true) end,  desc = "Cursor: Down",  remap = true },
-    { "<a-k>", function() vim.api.nvim_feedkeys(vim.keycode("<up>"), "n", true) end,    desc = "Cursor: Up",    remap = true },
-    { "<a-l>", function() vim.api.nvim_feedkeys(vim.keycode("<right>"), "n", true) end, desc = "Cursor: Right", remap = true },
+    { "<a-h>", function() vim.api.nvim_feedkeys(vim.keycode("<left>"), "i", true) end,  desc = "Cursor: Left",  remap = true },
+    { "<a-j>", function() vim.api.nvim_feedkeys(vim.keycode("<down>"), "i", true) end,  desc = "Cursor: Down",  remap = true },
+    { "<a-k>", function() vim.api.nvim_feedkeys(vim.keycode("<up>"), "i", true) end,    desc = "Cursor: Up",    remap = true },
+    { "<a-l>", function() vim.api.nvim_feedkeys(vim.keycode("<right>"), "i", true) end, desc = "Cursor: Right", remap = true },
   },
 
   {
