@@ -1,13 +1,20 @@
-vim.pack.add({ "https://github.com/OXY2DEV/markview.nvim" })
+pack_add({
+  "https://github.com/OXY2DEV/markview.nvim",
+  "https://github.com/iamcco/markdown-preview.nvim",
+})
+
+-- Install/update markdown-preview
+-- vim.fn["mkdp#util#install"]()
 
 wk.add({
   cond = function()
     return vim.bo.filetype == "markdown"
   end,
-  { "<leader>um", "<cmd>Markview toggle<cr>",       desc = "Toggle Render Markdown" },
-  { "<leader>uM", "<cmd>Markview hybridToggle<cr>", desc = "Toggle Markview Hybrid Mode" },
-  { "<c-t>",      "<cmd>Checkbox toggle<cr>",       desc = "Toggle Checkbox" },
-  { "<leader>cb", "<cmd>Checkbox interactive<cr>",  desc = "Interactive Checkbox" },
+  { "<localleader>m", "<cmd>Markview toggle<cr>",       desc = "Toggle Render Markdown" },
+  { "<localleader>M", "<cmd>Markview hybridToggle<cr>", desc = "Toggle Markview Hybrid Mode" },
+  { "<c-t>",          "<cmd>Checkbox toggle<cr>",       desc = "Toggle Checkbox" },
+  { "<leader>cb",     "<cmd>Checkbox interactive<cr>",  desc = "Interactive Checkbox" },
+  { "<leader>cp",     "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview",           ft = "markdown" },
 })
 
 require("markview").setup({
