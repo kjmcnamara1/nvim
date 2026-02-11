@@ -1,6 +1,8 @@
--- [x]: Todo and Symbols to be 'right' layout and start in normal mode?
--- [x]: Diagnostics to be 'bottom' layout and start in normal mode?
--- [ ]: Lsp pickers to be smaller and appear at cursor
+---@diagnostic disable: cast-local-type
+-- DONE: Todo and Symbols to be 'right' layout and start in normal mode?
+-- DONE: Diagnostics to be 'bottom' layout and start in normal mode?
+-- TODO: Lsp pickers to be smaller and appear at cursor
+-- TODO: Format todo picker to immediately display todo content before file
 
 if profile() ~= "default" then
   return
@@ -223,11 +225,16 @@ require("snacks").setup({
 
       -- Custom Sources
       filetypes = {
-        finder = function(_opts, _ctx)
+        ---@type snacks.picker.finder
+        ---@return snacks.picker.finder.Item[]
+        finder = function(opts, ctx)
           return vim.iter(vim.fn.getcompletion("", "filetype")):map(function(ft)
             return { text = ft }
           end):totable()
         end,
+        ---@type snacks.picker.format
+        ---@param item snacks.picker.Item
+        ---@return snacks.picker.Text[]
         format = function(item)
           local icon, icon_hl = Snacks.util.icon(item.text, "filetype")
           return {
@@ -236,6 +243,7 @@ require("snacks").setup({
             { item.text,  "SnacksPickerLabel" },
           }
         end,
+        ---@type snacks.picker.Action.spec
         confirm = function(picker, item)
           picker:close()
           vim.bo.filetype = item.text
@@ -259,6 +267,7 @@ require("snacks").setup({
 
       chezmoi_files = {
         layout = "left",
+        ---@type snacks.picker.finder
         finder = function(_opts, _ctx)
           local czc = require('chezmoi.commands')
           local targets = czc.list({ args = { "--include=files", "--path-style=absolute" } })
@@ -266,6 +275,7 @@ require("snacks").setup({
             return { text = absolute, file = absolute }
           end):totable()
         end,
+        ---@type snacks.picker.Action.spec
         confirm = function(picker, item)
           picker:close()
           local czc = require('chezmoi.commands')
@@ -274,35 +284,89 @@ require("snacks").setup({
       },
 
       -- TODO: add preview to show help page for option (like FzfLua does)
-      -- FIX: breaks as soon as start filtering
+      -- BUG: breaks as soon as start filtering
       nvim_options = {
         layout = "default",
-        finder = function()
-          local options = {}
+        preview = "preview",
+        ---@type snacks.picker.finder
+        ---@param opts vim.api.keyset.option Options for nvim_get_option_value
+        ---@param ctx snacks.picker.finder.ctx
+        ---@return snacks.picker.finder.Item[]
+        finder = function(opts, ctx)
+          local item
+          local items = {}
           for name, info in pairs(vim.api.nvim_get_all_options_info()) do
             local ok, value = pcall(vim.api.nvim_get_option_value, name, {})
             if ok then
-              info["type"] = info.type:gsub("^%l", string.upper)
-              info["value"] = value
-              table.insert(options, info)
+              item = {
+                name = name,
+                value = value,
+                type = (info.type or ""):gsub("^%l", string.upper),
+                info = info,
+              }
+              item.text = Snacks.picker.util.text(item, { "name", "value", "type" })
+              -- item.file=
+              item.preview = {
+                ft = "lua",
+                text = vim.iter(item.info):map(function(k, v)
+                  v = type(v) == "string" and string.format("%q", v) or tostring(v)
+                  return string.format("%s = %s", k, v)
+                end):fold("", function(acc, v)
+                  return acc .. v .. "\n"
+                end)
+              }
+              items[#items + 1] = item
             end
           end
-          return options
+          -- table.sort(items, function(a, b) return a.name < b.name end)
+          return ctx.filter:filter(items)
         end,
+        ---@type snacks.picker.format
         format = function(item, picker)
-          -- local icon, icon_hl = Snacks.util.icon(item.type, "kind")
-          -- local icons = {}
-          -- for k, v in pairs(picker.opts.icons.kinds) do
-          --   icons[k:lower()] = v
-          -- end
-          -- dd(item)
+          local shortname = item.info.shortname == "" and "" or "(" .. item.info.shortname .. ")"
           return {
             { picker.opts.icons.kinds[item.type] or "", "SnacksPickerIcon" .. item.type },
             { " ", "" },
-            { ("%-30s"):format(item.name), "SnacksPickerLabel" },
+            { ("%-20s"):format(item.name), "SnacksPickerLabel" },
+            { ("%10s"):format(shortname), "SnacksPickerComment" },
             { "│ ", "SnacksPickerCol" },
-            { tostring(item.value), item.value == item.default and "SnacksPickerUnselected" or "SnacksPickerSelected" },
+            { tostring(item.value), item.value == item.info.default and "SnacksPickerUnselected" or "SnacksPickerSelected" },
           }
+        end,
+        -- When the user confirms an entry: prompt for new value.
+        ---@type snacks.picker.Action.spec
+        confirm = function(picker, item)
+          picker:close()
+
+          -- Prompt for a new value. Try to evaluate Lua literal input first.
+          local prompt = "New value for " .. item.name .. ": "
+          local default = vim.inspect(item.value)
+          vim.ui.input({ prompt = prompt, default = default, completion = "lua" }, function(input)
+            vim.cmd("stopinsert")
+            if input == nil or input == "" then return end
+
+            local parsed = input
+            local ok, val = pcall(loadstring("return " .. input))
+            if ok then parsed = val end
+
+            if (item.type or ""):lower():match("number") then
+              parsed = tonumber(input) or parsed
+            elseif (item.type or ""):lower():match("boolean") then
+              local lower = input:lower()
+              if lower == "true" or lower == "1" then
+                parsed = true
+              elseif lower == "false" or lower == "0" then
+                parsed = false
+              end
+            end
+
+            local ok_set, err = pcall(vim.api.nvim_set_option_value, item.name, parsed, {})
+            if not ok_set then
+              vim.notify("Failed to set option " .. item.name .. ": " .. tostring(err), vim.log.levels.ERROR)
+            else
+              vim.notify("Set " .. item.name .. " = " .. vim.inspect(parsed), vim.log.levels.INFO)
+            end
+          end)
         end,
       },
     }
@@ -340,17 +404,18 @@ wk.add({
   {
     "<c-'>",
     function()
+      local term
       local function term_is_visible()
         return #Snacks.terminal.list() > 0 and Snacks.terminal.get():valid()
       end
 
       if not term_is_visible() then
         local view = vim.fn.winsaveview()
-        local term = Snacks.terminal.toggle()
+        term = Snacks.terminal.toggle()
         term._previous_win_state = view
         return term
       end
-      local term = Snacks.terminal.toggle()
+      term = Snacks.terminal.toggle()
       if term._previous_win_state then
         vim.fn.winrestview(term._previous_win_state)
         term._previous_win_state = nil
@@ -362,73 +427,74 @@ wk.add({
   },
   -- { "<c-'>",      Snacks.terminal.toggle,              desc = "Terminal: Toggle",          mode = { "n", "i", "t" } },
   -- BUG: multiple terminals breaks toggling
-  { "<c-s-'>",         Snacks.terminal.open,                                     desc = "Terminal: New",                    mode = { "n", "i", "t" } },
+  { "<c-s-'>",         Snacks.terminal.open,                                                                desc = "Terminal: New",                    mode = { "n", "i", "t" } },
 
   -- Cursor
-  { "gd",              Snacks.picker.lsp_definitions,                            desc = "LSP: Goto Definition" },
-  { "grd",             Snacks.picker.lsp_declarations,                           desc = "LSP: Goto Declaration" },
-  { "grr",             Snacks.picker.lsp_references,                             desc = "LSP: References",                  nowait = true },
-  { "gri",             Snacks.picker.lsp_implementations,                        desc = "LSP: Goto Implementation" },
-  { "grt",             Snacks.picker.lsp_type_definitions,                       desc = "LSP: Goto Type Definition" },
-  { "gai",             Snacks.picker.lsp_incoming_calls,                         desc = "LSP: C[a]lls Incoming" },
-  { "gao",             Snacks.picker.lsp_outgoing_calls,                         desc = "LSP: C[a]lls Outgoing" },
+  { "gd",              Snacks.picker.lsp_definitions,                                                       desc = "LSP: Goto Definition" },
+  { "grd",             Snacks.picker.lsp_declarations,                                                      desc = "LSP: Goto Declaration" },
+  { "grr",             Snacks.picker.lsp_references,                                                        desc = "LSP: References",                  nowait = true },
+  { "gri",             Snacks.picker.lsp_implementations,                                                   desc = "LSP: Goto Implementation" },
+  { "grt",             Snacks.picker.lsp_type_definitions,                                                  desc = "LSP: Goto Type Definition" },
+  { "gai",             Snacks.picker.lsp_incoming_calls,                                                    desc = "LSP: C[a]lls Incoming" },
+  { "gao",             Snacks.picker.lsp_outgoing_calls,                                                    desc = "LSP: C[a]lls Outgoing" },
 
   -- Right
-  { "go",              Snacks.picker.lsp_symbols,                                desc = "LSP: Symbols" },
-  { "gO",              Snacks.picker.lsp_workspace_symbols,                      desc = "LSP: Workspace Symbols" },
-  { "<leader>st",      Snacks.picker.todo_comments,                              desc = "Pick: Todo" },
+  { "go",              Snacks.picker.lsp_symbols,                                                           desc = "LSP: Symbols" },
+  { "gO",              Snacks.picker.lsp_workspace_symbols,                                                 desc = "LSP: Workspace Symbols" },
+  { "<leader>st",      function() Snacks.picker.todo_comments({ keywords = { 'TODO', 'BUG', 'FIX' } }) end, desc = "Pick: Todo/Fix/Fixme" },
+  { "<leader>sT",      Snacks.picker.todo_comments,                                                         desc = "Pick: Todo" },
 
   -- Vscode
-  { "<leader>,",       Snacks.picker.buffers,                                    desc = "Pick: Buffers" },
-  { "<leader>:",       Snacks.picker.command_history,                            desc = "Pick: Command History" },
-  { "<leader>si",      Snacks.picker.icons,                                      desc = "Pick: Icons" },
+  { "<leader>,",       Snacks.picker.buffers,                                                               desc = "Pick: Buffers" },
+  { "<leader>:",       Snacks.picker.command_history,                                                       desc = "Pick: Command History" },
+  { "<leader>si",      Snacks.picker.icons,                                                                 desc = "Pick: Icons" },
 
   -- Left
-  { "<leader>e",       Snacks.explorer.open,                                     desc = "Pick: File Explorer" },
-  { "<leader>f",       Snacks.picker.files,                                      desc = "Pick: Files" },
-  { "<leader>r",       Snacks.picker.recent,                                     desc = "Pick: Recent" },
-  { "<leader>sp",      Snacks.picker.projects,                                   desc = "Pick: Projects" },
-  { "<leader>z",       Snacks.picker.chezmoi_files,                              desc = "Pick: Chezmoi Files" },
-  { "<leader>/",       Snacks.picker.grep,                                       desc = "Pick: Grep" },
-  { "<leader>sm",      Snacks.picker.marks,                                      desc = "Pick: Marks" },
-  { "<leader>sj",      Snacks.picker.jumps,                                      desc = "Pick: Jumps" },
+  { "<leader>e",       Snacks.explorer.open,                                                                desc = "Pick: File Explorer" },
+  { "<leader>f",       Snacks.picker.files,                                                                 desc = "Pick: Files" },
+  { "<leader>r",       Snacks.picker.recent,                                                                desc = "Pick: Recent" },
+  { "<leader>sp",      Snacks.picker.projects,                                                              desc = "Pick: Projects" },
+  { "<leader>z",       Snacks.picker.chezmoi_files,                                                         desc = "Pick: Chezmoi Files" },
+  { "<leader>/",       Snacks.picker.grep,                                                                  desc = "Pick: Grep" },
+  { "<leader>sm",      Snacks.picker.marks,                                                                 desc = "Pick: Marks" },
+  { "<leader>sj",      Snacks.picker.jumps,                                                                 desc = "Pick: Jumps" },
 
   -- Bottom
-  { "<leader>sd",      Snacks.picker.diagnostics,                                desc = "Pick: Diagnostics" },
-  { "<leader>sD",      Snacks.picker.diagnostics_buffer,                         desc = "Pick: Buffer Diagnostics" },
+  { "<leader>sd",      Snacks.picker.diagnostics,                                                           desc = "Pick: Diagnostics" },
+  { "<leader>sD",      Snacks.picker.diagnostics_buffer,                                                    desc = "Pick: Buffer Diagnostics" },
 
   -- Default
-  { "<leader>sP",      Snacks.picker.pickers,                                    desc = "Pick: Pickers" },
-  { "<leader>sh",      Snacks.picker.help,                                       desc = "Pick: Help Pages" },
-  { "<leader>sH",      Snacks.picker.highlights,                                 desc = "Pick: Highlights" },
-  { "<leader>sM",      Snacks.picker.man,                                        desc = "Pick: Man Pages" },
-  { "<leader>sa",      Snacks.picker.autocmds,                                   desc = "Pick: Autocmds" },
-  { "<leader>so",      Snacks.picker.nvim_options,                               desc = "Pick: Neovim Options" },
-  { "<leader>sk",      Snacks.picker.keymaps,                                    desc = "Pick: Keymaps" },
-  { "<leader>sn",      Snacks.picker.notifications,                              desc = "Pick: Search Notifications" },
-  { "<leader>n",       Snacks.notifier.hide,                                     desc = "Notifications: Dismiss All" },
-  { "<leader>N",       Snacks.notifier.show_history,                             desc = "Notifications: History" },
+  { "<leader>sP",      Snacks.picker.pickers,                                                               desc = "Pick: Pickers" },
+  { "<leader>sh",      Snacks.picker.help,                                                                  desc = "Pick: Help Pages" },
+  { "<leader>sH",      Snacks.picker.highlights,                                                            desc = "Pick: Highlights" },
+  { "<leader>sM",      Snacks.picker.man,                                                                   desc = "Pick: Man Pages" },
+  { "<leader>sa",      Snacks.picker.autocmds,                                                              desc = "Pick: Autocmds" },
+  { "<leader>so",      Snacks.picker.nvim_options,                                                          desc = "Pick: Neovim Options" },
+  { "<leader>sk",      Snacks.picker.keymaps,                                                               desc = "Pick: Keymaps" },
+  { "<leader>sn",      Snacks.picker.notifications,                                                         desc = "Pick: Search Notifications" },
+  { "<leader>n",       Snacks.notifier.hide,                                                                desc = "Notifications: Dismiss All" },
+  { "<leader>N",       Snacks.notifier.show_history,                                                        desc = "Notifications: History" },
 
   -- Not sure yet...
-  { "<leader>su",      Snacks.picker.undo,                                       desc = "Pick: Undo History" },
+  { "<leader>su",      Snacks.picker.undo,                                                                  desc = "Pick: Undo History" },
 
   -- SE Corner
-  { "<leader>t",       Snacks.picker.filetypes,                                  desc = "Pick: Filetypes" },
-  { "<leader>uC",      Snacks.picker.colorschemes,                               desc = "Pick: Colorschemes" },
+  { "<leader>t",       Snacks.picker.filetypes,                                                             desc = "Pick: Filetypes" },
+  { "<leader>uC",      Snacks.picker.colorschemes,                                                          desc = "Pick: Colorschemes" },
 
   -- Other
-  { "<leader><space>", Snacks.picker.resume,                                     desc = "Pick: Resume" },
-  { "<leader>.",       Snacks.scratch.open,                                      desc = "Scratch: Buffer" },
-  { "<leader>S",       Snacks.scratch.select,                                    desc = "Scratch: Select" },
-  { "<leader>gg",      Snacks.lazygit.open,                                      desc = "Lazygit" },
-  { "<leader>gf",      Snacks.lazygit.log_file,                                  desc = "Lazygit Current File History" },
-  { "<leader>ghi",     Snacks.picker.gh_issue,                                   desc = "Pick: GitHub Issues (open)" },
-  { "<leader>ghI",     function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "Pick: GitHub Issues (all)" },
-  { "<leader>ghp",     Snacks.picker.gh_pr,                                      desc = "Pick: GitHub Pull Requests (open)" },
-  { "<leader>ghP",     function() Snacks.picker.gh_pr({ state = "all" }) end,    desc = "Pick: GitHub Pull Requests (all)" },
-  { "<a-c>",           Snacks.bufdelete.delete,                                  desc = "Buffer: Delete" },
-  { "grf",             Snacks.rename.rename_file,                                desc = "LSP: Rename File" },
-  { "]]",              function() Snacks.words.jump(vim.v.count1) end,           desc = "Next Reference" },
-  { "[[",              function() Snacks.words.jump(-vim.v.count1) end,          desc = "Prev Reference" },
+  { "<leader><space>", Snacks.picker.resume,                                                                desc = "Pick: Resume" },
+  { "<leader>.",       Snacks.scratch.open,                                                                 desc = "Scratch: Buffer" },
+  { "<leader>S",       Snacks.scratch.select,                                                               desc = "Scratch: Select" },
+  { "<leader>gg",      Snacks.lazygit.open,                                                                 desc = "Lazygit" },
+  { "<leader>gf",      Snacks.lazygit.log_file,                                                             desc = "Lazygit Current File History" },
+  { "<leader>ghi",     Snacks.picker.gh_issue,                                                              desc = "Pick: GitHub Issues (open)" },
+  { "<leader>ghI",     function() Snacks.picker.gh_issue({ state = "all" }) end,                            desc = "Pick: GitHub Issues (all)" },
+  { "<leader>ghp",     Snacks.picker.gh_pr,                                                                 desc = "Pick: GitHub Pull Requests (open)" },
+  { "<leader>ghP",     function() Snacks.picker.gh_pr({ state = "all" }) end,                               desc = "Pick: GitHub Pull Requests (all)" },
+  { "<a-c>",           Snacks.bufdelete.delete,                                                             desc = "Buffer: Delete" },
+  { "grf",             Snacks.rename.rename_file,                                                           desc = "LSP: Rename File" },
+  { "]]",              function() Snacks.words.jump(vim.v.count1) end,                                      desc = "Next Reference" },
+  { "[[",              function() Snacks.words.jump(-vim.v.count1) end,                                     desc = "Prev Reference" },
 
 })
