@@ -1,5 +1,6 @@
-vim.o.tabstop = 4
-vim.o.softtabstop = 4
+vim.bo.tabstop = 4
+vim.bo.softtabstop = 4
+vim.bo.commentstring = "# %s"
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "TSUpdate",

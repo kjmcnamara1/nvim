@@ -1,0 +1,6 @@
+; extends
+
+[
+  (true)
+  (false)
+] @boolean
