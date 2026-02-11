@@ -1,3 +1,5 @@
+-- TODO: treesitter injections for chezmoitmpl
+
 pack_add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
@@ -19,18 +21,18 @@ vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("AutoTreesitter", { clear = true }),
   callback = function(ev)
     local bufnr = ev.buf
-    local ft = ev.match
+    local lang = vim.treesitter.language.get_lang(ev.match) or ev.match
     local ts = require("nvim-treesitter")
 
-    if not vim.list_contains(ts.get_available(), ft) then
+    if not vim.list_contains(ts.get_available(), lang) then
       return
     end
 
-    ts.install(ft):await(function()
+    ts.install(lang):await(function()
       if not vim.api.nvim_buf_is_loaded(bufnr) then
         return
       end
-      if vim.list_contains(ts.get_installed(), ft) then
+      if vim.list_contains(ts.get_installed(), lang) then
         -- if `highlight`
         vim.treesitter.start(bufnr)
         -- if `fold`
