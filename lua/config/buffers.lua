@@ -40,7 +40,7 @@ require("bufferline").setup({
         },
         {
           name = "Tests",
-          highlight = { undercurl = true, sp = vim.api.nvim_get_hl(0, { name = "Error" }).fg },
+          highlight = { sp = vim.api.nvim_get_hl(0, { name = "Error" }).fg },
           auto_close = true,
           priority = 3,
           icon = " ",
