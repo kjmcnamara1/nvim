@@ -428,6 +428,20 @@ wk.add({
   -- { "<c-'>",      Snacks.terminal.toggle,              desc = "Terminal: Toggle",          mode = { "n", "i", "t" } },
   -- BUG: multiple terminals breaks toggling
   { "<c-s-'>",         Snacks.terminal.open,                                                                desc = "Terminal: New",                    mode = { "n", "i", "t" } },
+  {
+    "<c-a-n>",
+    function()
+      vim.cmd("silent! write")
+      local file = vim.fn.expand("%:p")
+      Snacks.terminal.open("uv run " .. file, {
+        auto_close = false,
+        win = {
+          position = "bottom",
+        },
+      })
+    end,
+    desc = "Terminal: Run Current Python File with uv"
+  },
 
   -- Cursor
   { "gd",              Snacks.picker.lsp_definitions,                                                       desc = "LSP: Goto Definition" },
