@@ -201,7 +201,7 @@ require("snacks").setup({
       end,
     },
     sources = {
-      explorer = { hidden = true, exclude = { ".jj" }, layout = { preview = "main" } },
+      explorer = { hidden = true, exclude = { ".jj", ".pytest_cache", ".ruff_cache" }, layout = { preview = "main" } },
       files = { hidden = true, layout = "left" },
       recent = { hidden = true, layout = "left" },
       grep = { hidden = true, layout = "left" },
@@ -396,7 +396,7 @@ Snacks.toggle.diagnostics():map("<localleader>d")
 Snacks.toggle.inlay_hints():map("<localleader>h")
 Snacks.toggle.indent():map("<localleader>I")
 Snacks.toggle.treesitter():map("<localleader>t")
-Snacks.toggle.zoom():map("<a-m>")
+Snacks.toggle.zoom():map("<a-m>", { mode = { "n", "x", "i", "t" } })
 Snacks.toggle.zen():map("<a-z>")
 
 wk.add({
