@@ -105,6 +105,8 @@ require("mason-tool-installer").setup({
     "debugpy",
     "shfmt",
     "taplo",
+    "codelldb",
+    "rust_analyzer",
   }
 })
 
@@ -139,5 +141,6 @@ require("conform").setup({
     xonsh = { "ruff" },
     fish = { "fish_indent" },
     markdown = { "prettierd" },
+    rust = { "rustfmt" },
   }
 })
