@@ -8,8 +8,8 @@ pack_add({
 })
 
 wk.add({
-  { "<leader>m", "<cmd>lua MiniFiles.open()<cr>",                             desc = "Files: Mini" },
-  { "<leader>M", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", desc = "Files: Mini (current)" },
+  { "<leader>M", "<cmd>lua MiniFiles.open()<cr>",                             desc = "Files: Mini" },
+  { "<leader>m", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", desc = "Files: Mini (current)" },
   { "<leader>y", "<cmd>Yazi toggle<cr>",                                      desc = "Files: Yazi" },
 })
 
