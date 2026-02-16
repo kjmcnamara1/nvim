@@ -45,41 +45,41 @@ vim.api.nvim_create_autocmd("FileType", {
   end
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  desc     = "Add @comment.deprecated to all TS highlights",
-  group    = vim.api.nvim_create_augroup("GlobalTSQueries", { clear = true }),
-  callback = function(ev)
-    local lang = vim.treesitter.language.get_lang(ev.match) or ev.match
-    if vim.list_contains({ "markdown", "markdown_inline", "html" }, lang) then return end
-    local has_parser = vim.treesitter.language.add(lang)
-    if not has_parser then return end
+-- vim.api.nvim_create_autocmd("FileType", {
+--   desc     = "Add @comment.deprecated to all TS highlights",
+--   group    = vim.api.nvim_create_augroup("GlobalTSQueries", { clear = true }),
+--   callback = function(ev)
+--     local lang = vim.treesitter.language.get_lang(ev.match) or ev.match
+--     if vim.list_contains({ "markdown", "markdown_inline", "html" }, lang) then return end
+--     local has_parser = vim.treesitter.language.add(lang)
+--     if not has_parser then return end
 
-    local cs = vim.bo.commentstring:match([[^(%S+)%s*%%s]])
-    if not cs then return end
-    local query_match = "^" .. string.rep(cs, 2)
+--     local cs = vim.bo.commentstring:match([[^(%S+)%s*%%s]])
+--     if not cs then return end
+--     local query_match = "^" .. string.rep(cs, 2)
 
-    local all_lines = {}
-    local paths = vim.treesitter.query.get_files(lang, "highlights")
-    for _, path in ipairs(paths) do
-      local ok, lines = pcall(vim.fn.readfile, path)
-      if not ok then return end
-      vim.list_extend(all_lines, lines)
-      -- Add an empty string to act as a newline between files
-      table.insert(all_lines, "")
-    end
+--     local all_lines = {}
+--     local paths = vim.treesitter.query.get_files(lang, "highlights")
+--     for _, path in ipairs(paths) do
+--       local ok, lines = pcall(vim.fn.readfile, path)
+--       if not ok then return end
+--       vim.list_extend(all_lines, lines)
+--       -- Add an empty string to act as a newline between files
+--       table.insert(all_lines, "")
+--     end
 
-    local current_query = table.concat(all_lines, "\n")
+--     local current_query = table.concat(all_lines, "\n")
 
-    local custom_query = string.format([[
-      ((comment) @comment.deprecated
-      (#match? @comment.deprecated %q)
-      (#set! priority 150))
-      ]], query_match)
+--     local custom_query = string.format([[
+--       ((comment) @comment.deprecated
+--       (#match? @comment.deprecated %q)
+--       (#set! priority 150))
+--       ]], query_match)
 
-    local new_query = current_query .. custom_query
-    vim.treesitter.query.set(lang, "highlights", new_query)
-  end
-})
+--     local new_query = current_query .. custom_query
+--     vim.treesitter.query.set(lang, "highlights", new_query)
+--   end
+-- })
 
 require("nvim-treesitter-textobjects").setup({
   move = {
