@@ -15,5 +15,5 @@ o.showmode       = false
 o.showcmd        = false
 o.shortmess:append("F")
 
-vim.pack.add({ "https://github.com/folke/snacks.nvim" })
+pack_add({ "https://github.com/folke/snacks.nvim" })
 require("snacks").setup({ terminal = {} })

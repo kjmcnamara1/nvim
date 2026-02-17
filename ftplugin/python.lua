@@ -1,4 +1,4 @@
-vim.pack.add({
+pack_add({
   "https://github.com/linux-cultist/venv-selector.nvim",
   "https://codeberg.org/mfussenegger/nvim-dap-python",
 })
