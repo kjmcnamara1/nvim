@@ -8,6 +8,7 @@ pack_add({
 })
 
 require("spider").setup({ consistentOperatorPending = true })
+
 local mc = require("multicursor-nvim")
 mc.setup()
 vim.api.nvim_set_hl(0, "MultiCursorCursor", { fg = "#7b8290", reverse = true })
@@ -138,7 +139,7 @@ wk.add({
         -- Single cursor, non-modifiable window
         -- (LspInfo, ConformInfo, help, hover, etc.)
         vim.cmd.close()
-      elseif not floating then
+      elseif not floating and profile() ~= "vscode" then
         -- Single cursor, modifiable, fixed window
         vim.cmd.fclose()
       else

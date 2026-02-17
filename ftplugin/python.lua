@@ -1,3 +1,7 @@
+if profile() ~= "default" then
+  return
+end
+
 pack_add({
   "https://github.com/linux-cultist/venv-selector.nvim",
   "https://codeberg.org/mfussenegger/nvim-dap-python",

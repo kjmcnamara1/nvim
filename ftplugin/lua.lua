@@ -1,3 +1,7 @@
+if profile() ~= "default" then
+  return
+end
+
 pack_add({
   "https://github.com/folke/lazydev.nvim",
   "https://github.com/jbyuki/one-small-step-for-vimkind",

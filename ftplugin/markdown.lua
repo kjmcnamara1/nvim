@@ -1,4 +1,4 @@
-if profile() == "vscode" then
+if profile() ~= "default" then
   return
 end
 
