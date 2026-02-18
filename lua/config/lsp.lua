@@ -31,6 +31,31 @@ wk.add({
   { "<leader>cm",  "<cmd>Mason<cr>",                                         desc = "Mason" },
 })
 
+-- Turn off inlay hints in insert mode
+local hint_group = vim.api.nvim_create_augroup("InlayHintsSmartToggle", { clear = true })
+local hints_were_enabled = false
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+  group = hint_group,
+  callback = function()
+    hints_were_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+    -- dd(hints_were_enabled)
+    if hints_were_enabled then
+      vim.lsp.inlay_hint.enable(false, { bufnr = 0 })
+    end
+  end
+})
+vim.api.nvim_create_autocmd("InsertLeave", {
+  group = hint_group,
+  callback = function()
+    -- dd(hints_were_enabled)
+    if hints_were_enabled then
+      vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
+    end
+  end
+})
+
+
 vim.diagnostic.config({
   severity_sort = true,
   float = { border = 'rounded', source = 'if_many' },
