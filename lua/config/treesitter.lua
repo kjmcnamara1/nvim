@@ -16,6 +16,8 @@ wk.add({
 
 require("nvim-treesitter").install({ "regex" })
 
+vim.treesitter.language.register("bash", "PKGBUILD")
+
 vim.api.nvim_create_autocmd("FileType", {
   desc = "Auto configure treesitter for each filetype",
   group = vim.api.nvim_create_augroup("AutoTreesitter", { clear = true }),
