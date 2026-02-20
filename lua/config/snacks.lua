@@ -193,6 +193,28 @@ require("snacks").setup({
         })
       end,
     },
+    layouts = {
+      ---@type snacks.picker.layout.Config
+      code_action = {
+        auto_hide = { "input" },
+        ---@type snacks.layout.Box
+        layout = {
+          box = "vertical",
+          width = 0.5,
+          min_width = 80,
+          max_width = 100,
+          -- height = 0.4,
+          min_height = 2,
+          max_height = 20,
+          border = true,
+          title = "{title}",
+          title_pos = "center",
+          { win = "input",   border = "bottom", height = 1, },
+          { win = "list",    border = "none", },
+          { win = "preview", border = "top",    title = "{preview}", height = 10, },
+        }
+      },
+    },
     sources = {
       explorer = { hidden = true, exclude = { ".jj", ".pytest_cache", ".ruff_cache" }, layout = { preview = "main" } },
       files = { hidden = true, layout = "left" },

@@ -93,7 +93,13 @@ require("tiny-inline-diagnostic").setup({
 
 require("tiny-code-action").setup({
   backend = "delta",
-  picker = "snacks",
+  picker = {
+    "snacks",
+    opts = {
+      layout = "code_action",
+      focus = "list",
+    },
+  },
   -- backend = "difftastic",
   -- picker = {
   --   "buffer",
