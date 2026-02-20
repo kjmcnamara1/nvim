@@ -1,7 +1,7 @@
 pack_add({ "https://github.com/folke/flash.nvim" })
 
 require("flash").setup({
-  jump = { autojump = true },
+  jump = { autojump = false },
   label = { current = false },
   search = {
     exclude = {
