@@ -1,3 +1,4 @@
+vim.b.snacks_indent = false
 if profile() ~= "default" then
   return
 end

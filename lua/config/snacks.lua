@@ -132,13 +132,6 @@ require("snacks").setup({
         "SnacksIndentScope8",
       },
     },
-    filter = function(buf, win)
-      local exclude_ft = { "text" }
-      return vim.g.snacks_indent ~= false
-          and vim.b[buf].snacks_indent ~= false
-          and vim.bo[buf].buftype == ""
-          and not vim.tbl_contains(exclude_ft, vim.bo[buf].filetype)
-    end
   },
   zen = {
     win = {
