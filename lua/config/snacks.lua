@@ -222,8 +222,8 @@ require("snacks").setup({
       grep = { hidden = true, layout = "left" },
       marks = { layout = "left" },
       jumps = { layout = "left" },
-      lsp_symbols = { focus = "list", auto_close = false, layout = "right" },
-      lsp_workspace_symbols = { focus = "list", auto_close = false, layout = "right" },
+      lsp_symbols = { --[[ focus = "list", ]] auto_close = false, layout = "right" },
+      lsp_workspace_symbols = { --[[ focus = "list", ]] auto_close = false, layout = "right" },
       todo_comments = { focus = "list", auto_close = false, layout = "right" },
       diagnostics = { focus = "list", auto_close = false, layout = { preset = "bottom", preview = "main" } },
       diagnostics_buffer = { focus = "list", auto_close = false, layout = { preset = "bottom", preview = "main" } },
@@ -234,7 +234,7 @@ require("snacks").setup({
         layout = {
           preset = "vscode",
           preview = "main",
-          hidden = false,
+          hidden = {},
         }
       },
 
