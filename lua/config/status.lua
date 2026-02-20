@@ -41,5 +41,9 @@ require("lualine").setup({
         }
       }
     },
+    lualine_y = {
+      "venv-selector",
+      "progress",
+    },
   }
 })
