@@ -121,23 +121,40 @@ require("mason-tool-installer").setup({
   auto_update = true,
   run_on_start = true,
   ensure_installed = {
-    "bashls",
-    "cssls",
-    "fish_lsp",
-    "hyprls",
-    "jinja_lsp",
-    "jsonls",
-    "lua_ls",
-    "marksman",
-    "nixfmt",
+    -- Common / Web
     "prettierd",
+    "cssls",
+    "jsonls",
+    "taplo",
+    "marksman",
+    "yamlls",
+    "gh_actions_ls",
+
+    -- Uncommon
+    "hyprls",
+
+    -- Neovim
+    "lua_ls",
+    "ts_query_ls",
+
+    -- Shell
+    "bashls",
+    "shfmt",
+    "fish_lsp",
+
+    -- Python
     "basedpyright",
     "ruff",
     "debugpy",
-    "shfmt",
-    "taplo",
-    "codelldb",
+    "jinja_lsp",
+
+    -- Nix
+    "nil_ls",
+    "nixfmt",
+
+    -- Rust
     "rust_analyzer",
+    "codelldb",
   }
 })
 
