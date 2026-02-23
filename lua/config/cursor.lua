@@ -117,7 +117,7 @@ wk.add({
   { "<c-leftmouse>",   mc.handleMouse,                    desc = 'MultiCursor: Add/remove cursor' },
   { "<c-leftdrag>",    mc.handleMouseDrag,                desc = 'MultiCursor: Add/remove cursor' },
   { "<c-leftrelease>", mc.handleMouseRelease,             desc = 'MultiCursor: Add/remove cursor' },
-  { "gv",              mc.restoreCursors,                 desc = "MultiCursor: Restore cursors" },
+  { "gV",              mc.restoreCursors,                 desc = "MultiCursor: Restore cursors" },
   { "mm",              "<Plug>(MatchitNormalForward)",    desc = "Match Pair",                    mode = { "n" } },
   { "mm",              "<Plug>(MatchitVisualForward)",    desc = "Match Pair",                    mode = { "x" } },
   { "mm",              "<Plug>(MatchitOperationForward)", desc = "Match Pair",                    mode = { "o" } },
