@@ -32,7 +32,10 @@ require("bufferline").setup({
           auto_close = true,
           priority = 2,
           matcher = function(buf)
-            return buf.name:match('%.md') or buf.name:match('%.txt') or buf.name == "LICENSE"
+            return buf.name:match('%.md')
+                or buf.name:match('%.txt')
+                or buf.name == "LICENSE"
+                or buf.name == "mkdocs.yml"
           end,
           separator = {
             style = require('bufferline.groups').separator.pill
