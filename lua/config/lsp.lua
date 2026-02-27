@@ -200,12 +200,28 @@ require("conform").setup({
   formatters_by_ft = {
     sh = { "shfmt" },
     zsh = { "shfmt" },
-    json = { "prettierd", "prettier" },
-    jsonc = { "prettierd", "prettier" },
+    json = { "prettierd" },
+    jsonc = { "prettierd" },
+    yaml = { "prettierd" },
     nix = { "nixfmt" },
     xonsh = { "ruff" },
     fish = { "fish_indent" },
     markdown = { "prettierd" },
     rust = { "rustfmt" },
   }
+})
+
+vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+-- Automatically clear the conform log on startup
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = vim.api.nvim_create_augroup("ConformLogCleanup", { clear = true }),
+  callback = function()
+    local log_path = vim.fn.stdpath("state") .. "/conform.log"
+    local f = io.open(log_path, "w")
+    if f then
+      f:write("")
+      f:close()
+    end
+  end,
 })
