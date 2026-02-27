@@ -70,6 +70,7 @@ o.foldtext       = "";
 
 o.foldenable     = true
 o.foldlevelstart = 99
+o.foldmethod     = "indent";
 -- o.foldmethod     = "expr";
 -- o.foldexpr       = "v:lua.vim.treesitter.foldexpr()";
 -- o.foldexpr       = "v:lua.vim.lsp.foldexpr()";

@@ -10,6 +10,7 @@ pack_add({
   "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason-lspconfig.nvim",
+  "https://github.com/chrisgrieser/nvim-origami",
   "https://github.com/nvimtools/none-ls.nvim",
   "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
   "https://github.com/rachartier/tiny-code-action.nvim",
@@ -165,6 +166,22 @@ nls.setup({
     nls.builtins.diagnostics.fish,
   }
 })
+
+require("origami").setup({
+  foldKeymaps = {
+    scrollLeftOnCaret = true,
+  }
+})
+
+-- vim.lsp.config('*', {
+--   on_attach = function(client, bufnr)
+--     if client and client:supports_method("textDocument/foldingRange") then
+--       vim.wo.foldmethod = "expr"
+--       vim.wo.foldexpr = "v:lua.vim.lsp.foldexpr()"
+--       -- vim.wo.foldtext = "v:lua.vim.lsp.foldtext()"
+--     end
+--   end
+-- })
 
 require("conform").setup({
   format_on_save = {
