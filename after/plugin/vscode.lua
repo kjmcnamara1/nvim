@@ -2,6 +2,8 @@ if profile() ~= "vscode" then
   return
 end
 
+pack_add({ "https://github.com/xiyaowong/fast-cursor-move.nvim" })
+
 local vscode = require("vscode")
 
 vim.notify = vscode.notify

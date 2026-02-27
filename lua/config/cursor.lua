@@ -1,5 +1,4 @@
 pack_add({
-  "https://github.com/xiyaowong/fast-cursor-move.nvim",
   "https://github.com/chrisgrieser/nvim-spider",
   "https://github.com/jake-stewart/multicursor.nvim",
   "https://github.com/nvim-mini/mini.extra",
