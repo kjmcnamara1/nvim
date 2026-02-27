@@ -1,12 +1,12 @@
 pack_add({
-  "https://github.com/chrisgrieser/nvim-spider",
+  ---- "https://github.com/chrisgrieser/nvim-spider",
   "https://github.com/jake-stewart/multicursor.nvim",
   "https://github.com/nvim-mini/mini.extra",
   "https://github.com/nvim-mini/mini.ai",
   "https://github.com/nvim-mini/mini.surround",
 })
 
-require("spider").setup({ consistentOperatorPending = true })
+---- require("spider").setup({ consistentOperatorPending = true })
 
 local mc = require("multicursor-nvim")
 mc.setup()
@@ -28,12 +28,12 @@ wk.add({
     { "<a-l>", function() vim.api.nvim_feedkeys(vim.keycode("<right>"), "i", true) end, desc = "Cursor: Right", remap = true },
   },
 
-  {
-    mode = { "n", "o", "x" },
-    { "w", "<cmd>lua require('spider').motion('w')<cr>", desc = "Spider: w" },
-    { "e", "<cmd>lua require('spider').motion('e')<cr>", desc = "Spider: e" },
-    { "b", "<cmd>lua require('spider').motion('b')<cr>", desc = "Spider: b" },
-  },
+  ---- {
+  ----   mode = { "n", "o", "x" },
+  ----   { "w", "<cmd>lua require('spider').motion('w')<cr>", desc = "Spider: w" },
+  ----   { "e", "<cmd>lua require('spider').motion('e')<cr>", desc = "Spider: e" },
+  ----   { "b", "<cmd>lua require('spider').motion('b')<cr>", desc = "Spider: b" },
+  ---- },
 
   {
     mode = { "n", "x" },
