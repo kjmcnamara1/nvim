@@ -38,7 +38,7 @@ end
 require("config.plenary") -- all
 -- require("config.which_key")  -- all
 -- require("config.colors")     -- default
-require("config.snacks")     -- default?
+-- require("config.snacks")     -- default?
 require("config.session")    -- default
 require("config.flash")      -- all
 require("config.todo")       -- default

@@ -299,7 +299,6 @@ require("snacks").setup({
       },
 
       -- TODO: add preview to show help page for option (like FzfLua does)
-      -- BUG: breaks as soon as start filtering
       nvim_options = {
         layout = "default",
         preview = "preview",
