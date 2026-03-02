@@ -33,7 +33,7 @@ require("bufferline").setup({
           priority = 2,
           matcher = function(buf)
             return buf.name:match('%.md')
-                or buf.name:match('%.txt')
+                -- or buf.name:match('%.txt')
                 or buf.name == "LICENSE"
                 or buf.name == "mkdocs.yml"
           end,
