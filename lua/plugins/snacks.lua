@@ -148,7 +148,7 @@ return {
     { "<leader>e",       function() Snacks.explorer.open() end,                                               desc = "Pick: File Explorer" },
     { "<leader>f",       function() Snacks.picker.files() end,                                                desc = "Pick: Files" },
     { "<leader>r",       function() Snacks.picker.recent() end,                                               desc = "Pick: Recent" },
-    { "<leader>sp",      function() Snacks.picker.projects() end,                                             desc = "Pick: Projects" },
+    { "<leader>p",       function() Snacks.picker.projects() end,                                             desc = "Pick: Projects" },
     { "<leader>z",       function() Snacks.picker.chezmoi_files() end,                                        desc = "Pick: Chezmoi Files" },
     { "<leader>/",       function() Snacks.picker.grep() end,                                                 desc = "Pick: Grep" },
     { "<leader>sm",      function() Snacks.picker.marks() end,                                                desc = "Pick: Marks" },
@@ -159,6 +159,7 @@ return {
     { "<leader>sD",      function() Snacks.picker.diagnostics_buffer() end,                                   desc = "Pick: Buffer Diagnostics" },
 
     -- Default
+    { "<leader>sp",      function() Snacks.picker.lazy() end,                                                 desc = "Pick: Plugin Specs" },
     { "<leader>sP",      function() Snacks.picker.pickers() end,                                              desc = "Pick: Pickers" },
     { "<leader>sh",      function() Snacks.picker.help() end,                                                 desc = "Pick: Help Pages" },
     { "<leader>sH",      function() Snacks.picker.highlights() end,                                           desc = "Pick: Highlights" },
