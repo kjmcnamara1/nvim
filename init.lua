@@ -36,7 +36,7 @@ _G.pack_add = function(packs)
 end
 
 require("config.plenary")    -- all
-require("config.which_key")  -- all
+-- require("config.which_key")  -- all
 require("config.colors")     -- default
 require("config.snacks")     -- default?
 require("config.session")    -- default
