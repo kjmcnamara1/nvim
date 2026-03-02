@@ -29,6 +29,7 @@ end
 
 require("config.options")  -- all
 require("config.autocmds") -- all
+require("config.lazy")
 
 _G.pack_add = function(packs)
   vim.pack.add(packs, { confirm = false })

@@ -58,14 +58,6 @@ o.fillchars      = {
   eob = " ", -- Don't show '~' outside of buffer
 }
 
-function _G.CustomFoldText()
-  local line = vim.fn.getline(vim.v.foldstart)
-  local fold_size = vim.v.foldend - vim.v.foldstart + 1
-  local percentage = math.floor((fold_size / vim.fn.line('$')) * 100)
-  return line .. " ... (" .. fold_size .. " lines: " .. percentage .. "%)"
-end
-
--- o.foldtext       = "v:lua.CustomFoldText()"
 o.foldtext       = "";
 
 o.foldenable     = true
