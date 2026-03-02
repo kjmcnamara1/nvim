@@ -41,7 +41,7 @@ require("config.plenary") -- all
 -- require("config.snacks")     -- default?
 -- require("config.session")    -- default
 -- require("config.flash")      -- all
-require("config.todo")       -- default
+-- require("config.todo")       -- default
 require("config.treesitter") -- all
 require("config.icons")      -- default? or all
 require("config.files")      -- default
