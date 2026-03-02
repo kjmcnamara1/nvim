@@ -42,7 +42,7 @@ require("config.plenary") -- all
 -- require("config.flash")      -- all
 -- require("config.todo")       -- default
 -- require("config.treesitter") -- all
-require("config.icons")      -- default? or all
+-- require("config.icons")      -- default? or all
 require("config.files")      -- default
 require("config.cursor")     -- all
 -- require("config.comment")    -- all
