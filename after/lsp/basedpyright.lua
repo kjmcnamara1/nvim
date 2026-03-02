@@ -1,12 +1,8 @@
 return {
   settings = {
     basedpyright = {
-      analysis = {
-        typeCheckingMode = "standard",
-        diagnosticSeverityOverrides = {
-          reportExplicitAny = "none"
-        }
-      }
+      disableLanguageServices = true, -- provided by ty
+      disableOrganieImports = true,   -- provided by ruff
     }
   }
 }

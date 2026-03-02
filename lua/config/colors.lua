@@ -71,6 +71,7 @@ require("onenord").setup({
     ["@punctuation.quote"] = { fg = colors.dark_green },
     ["@string.prefix"] = { link = "@keyword" },
     ["@string.documentation"] = { fg = colors.gray },
+    ["@lsp.mod.documentation"] = { link = "@string.documentation" },
     ["@function.macro"] = { fg = colors.cyan, style = "bold" },
     ["@constant.builtin"] = { style = "bold" },
     ["@variable.parameter"] = { fg = colors.dark_red, style = "italic" },
@@ -88,6 +89,7 @@ require("onenord").setup({
     ["@lsp.typemod.class.builtin"] = { fg = colors.light_cyan },
     ["@lsp.typemod.variable.readonly"] = { fg = colors.light_orange },
     ["@lsp.mod.declaration"] = { style = "bold" },
+    ["@lsp.mod.definition"] = { link = "@lsp.mod.declaration" },
     ["@module"] = { fg = colors.dark_yellow },
 
     SnacksPickerGitStatusModified = { fg = colors.yellow, link = colors.none },

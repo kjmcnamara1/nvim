@@ -11,6 +11,7 @@ pack_add({
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason-lspconfig.nvim",
   "https://github.com/chrisgrieser/nvim-origami",
+  -- "https://github.com/mrcjkb/rustaceanvim",
   "https://github.com/nvimtools/none-ls.nvim",
   "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
   "https://github.com/rachartier/tiny-code-action.nvim",
@@ -117,7 +118,15 @@ require("live-rename").setup({ hl = { current = "IncSearch" } })
 require('refactoring').setup()
 require("fidget").setup()
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+  automatic_enable = {
+    exclude = {
+      -- "rust_analyzer", -- Conflicts with rustaceanvim
+      -- "basedpyright", -- still useful for highlighting
+      -- "ty",
+    },
+  },
+})
 require("mason-tool-installer").setup({
   auto_update = true,
   run_on_start = true,
@@ -145,6 +154,7 @@ require("mason-tool-installer").setup({
 
     -- Python
     "basedpyright",
+    "ty",
     "ruff",
     "debugpy",
     "jinja_lsp",

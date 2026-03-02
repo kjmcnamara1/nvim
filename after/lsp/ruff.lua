@@ -3,7 +3,7 @@ return {
     settings = {
       lint = {
         select = { "E", "F", "B", "ISC", "SIM", "TC", "PD" },
-        ignore = { "F401", "PD901", "F841" },
+        -- ignore = { "F401", "PD901", "F841" },
       }
     },
   },
