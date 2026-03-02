@@ -35,9 +35,9 @@ _G.pack_add = function(packs)
   vim.pack.add(packs, { confirm = false })
 end
 
-require("config.plenary")    -- all
+require("config.plenary") -- all
 -- require("config.which_key")  -- all
-require("config.colors")     -- default
+-- require("config.colors")     -- default
 require("config.snacks")     -- default?
 require("config.session")    -- default
 require("config.flash")      -- all
