@@ -15,7 +15,6 @@ end
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "_"
-vim.g.no_plugin_maps = true
 
 _G.profile = function()
   if vim.g.minimal then
@@ -42,7 +41,7 @@ require("config.plenary") -- all
 -- require("config.session")    -- default
 -- require("config.flash")      -- all
 -- require("config.todo")       -- default
-require("config.treesitter") -- all
+-- require("config.treesitter") -- all
 require("config.icons")      -- default? or all
 require("config.files")      -- default
 require("config.cursor")     -- all
