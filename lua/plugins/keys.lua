@@ -89,6 +89,14 @@ return {
           require("which-key.extras").expand.win()
         end
       },
+      { "<leader>u", group = "UI" },
+      { "<leader>g", group = "Git" },
+      { "<leader>gh", group = "GitHub" },
+      { "<leader>d", group = "Debug" },
+      { "<leader>a", group = "AI Agent",         mode = { "n", "x" } },
+      { "<leader>c", group = "Code",           mode = { "n", "x" } },
+      { "<leader>h", group = "Hunks (Git)",      mode = { "n", "x" } },
+      { "<leader>s", group = "Pick/Select",    mode = { "n", "x" } },
       { "<leader>L", "<cmd>Lazy<cr>",          desc = "Lazy Plugin Manager" },
       { "<c-c>",     "<c-w>q",                 desc = "Window: Close" },
       { "u",         "u",                      desc = "Undo" },
