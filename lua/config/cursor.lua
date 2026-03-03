@@ -109,7 +109,7 @@ wk.add({
           end)
         end)
       end,
-      desc = "Multijcursor: Evaluate visual selection(s)",
+      desc = "MultiCursor: Evaluate visual selection(s)",
     },
 
   },

@@ -80,26 +80,35 @@ return {
   opts = {
     preset = "helix",
     spec = {
-      -- Lazy
-      { "<leader>L", "<cmd>Lazy<cr>",     desc = "Lazy Plugin Manager" },
-
-      -- Undo
-      { "u",         "u",                 desc = "Undo",                          mode = { "n" } },
-      { "U",         "<c-r>",             desc = "Redo",                          mode = { "n" } },
+      {
+        "<leader>w",
+        proxy = "<c-w>",
+        group = "Windows",
+        mode = { "n", "x" },
+        expand = function()
+          require("which-key.extras").expand.win()
+        end
+      },
+      { "<leader>L", "<cmd>Lazy<cr>",          desc = "Lazy Plugin Manager" },
+      { "<c-c>",     "<c-w>q",                 desc = "Window: Close" },
+      { "u",         "u",                      desc = "Undo" },
+      { "U",         "<c-r>",                  desc = "Redo" },
+      { "gx",        ":sil !open <cWORD><cr>", desc = "Open link under cursor" },
+      { "%",         ":normal! ggVG<cr>",      desc = "Select Entire Buffer",          mode = { "n", "x", "o" } },
 
       -- Marks
-      { "M",         "m",                 desc = "Mark: Set",                     mode = { "n" } },
-      { "m",         "<nop>",             desc = "Remove default `mark` mapping", mode = { "n", "x" }, hidden = true },
-      { "<a-s-m>",   remove_mark,         desc = "Mark: Remove",                  mode = { "n", "x" } },
-      { "'",         "`",                 desc = "Mark: Jump to line",            mode = { "n", "x" } },
-      { "`",         "'",                 desc = "Mark: Jump to position",        mode = { "n", "x" } },
-      { "<a-s-j>",   "J",                 desc = "Join Lines",                    mode = { 'n', 'x' } },
+      { "M",         "m",                      desc = "Mark: Set",                     mode = { "n" } },
+      { "m",         "<nop>",                  desc = "Remove default `mark` mapping", mode = { "n", "x" },     hidden = true },
+      { "<a-s-m>",   remove_mark,              desc = "Mark: Remove",                  mode = { "n", "x" } },
+      { "'",         "`",                      desc = "Mark: Jump to line",            mode = { "n", "x" } },
+      { "`",         "'",                      desc = "Mark: Jump to position",        mode = { "n", "x" } },
+      { "<a-s-j>",   "J",                      desc = "Join Lines",                    mode = { 'n', 'x' } },
 
       -- Insert line
-      { "<a-o>",     n_insert_line_below, desc = "Insert line below",             mode = { "n" },      expr = true },
-      { "<a-O>",     n_insert_line_above, desc = "Insert line above",             mode = { "n" },      expr = true },
-      { "<a-o>",     v_insert_line_below, desc = "Insert line below",             mode = { "x" },      expr = true },
-      { "<a-O>",     v_insert_line_above, desc = "Insert line above",             mode = { "x" },      expr = true },
+      { "<a-o>",     n_insert_line_below,      desc = "Insert line below",             mode = { "n" },          expr = true },
+      { "<a-O>",     n_insert_line_above,      desc = "Insert line above",             mode = { "n" },          expr = true },
+      { "<a-o>",     v_insert_line_below,      desc = "Insert line below",             mode = { "x" },          expr = true },
+      { "<a-O>",     v_insert_line_above,      desc = "Insert line above",             mode = { "x" },          expr = true },
 
       -- Keymap Help
       {
@@ -123,6 +132,26 @@ return {
         { "=", "=gv", desc = "Indent: Auto" },
       },
 
+      {
+        mode = { "i", "t", "c" },
+        -- This forces a redraw of the cursor whereas simple <left> doesn't
+        { "<a-h>", function() vim.api.nvim_feedkeys(vim.keycode("<left>"), "i", true) end,  desc = "Cursor: Left",  remap = true },
+        { "<a-j>", function() vim.api.nvim_feedkeys(vim.keycode("<down>"), "i", true) end,  desc = "Cursor: Down",  remap = true },
+        { "<a-k>", function() vim.api.nvim_feedkeys(vim.keycode("<up>"), "i", true) end,    desc = "Cursor: Up",    remap = true },
+        { "<a-l>", function() vim.api.nvim_feedkeys(vim.keycode("<right>"), "i", true) end, desc = "Cursor: Right", remap = true },
+      },
+      { "j",     [[v:count == 0 ? 'gj' : 'j']],     desc = "Cursor: Down by visible line", expr = true,   mode = { "n", "x" } },
+      { "k",     [[v:count == 0 ? 'gk' : 'k']],     desc = "Cursor: Up by visible line",   expr = true,   mode = { "n", "x" } },
+      { "<a-j>", "<cmd>m .+1<cr>==",                desc = "Line: Move down",              mode = { "n" } },
+      { "<a-k>", "<cmd>m .-2<cr>==",                desc = "Line: Move up",                mode = { "n" } },
+      { "<a-j>", ":m '>+1<cr>gv=gv",                desc = "Line: Move down",              mode = { "x" } },
+      { "<a-k>", ":m '<-2<cr>gv=gv",                desc = "Line: Move up",                mode = { "x" } },
+
+      { "m",     group = "match",                   mode = { "n", "x" } },
+      { "mm",    "<Plug>(MatchitNormalForward)",    desc = "Match Pair",                   mode = { "n" } },
+      { "mm",    "<Plug>(MatchitVisualForward)",    desc = "Match Pair",                   mode = { "x" } },
+      { "mm",    "<Plug>(MatchitOperationForward)", desc = "Match Pair",                   mode = { "o" } },
+      { "<esc>", "<cmd>noh<cr><esc>",               desc = "Clear hlsearch",               mode = { "i" } },
     }
   }
 

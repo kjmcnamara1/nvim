@@ -44,7 +44,7 @@ require("config.plenary") -- all
 -- require("config.treesitter") -- all
 -- require("config.icons")      -- default? or all
 -- require("config.files")      -- default
-require("config.cursor")     -- all
+-- require("config.cursor")     -- all
 -- require("config.comment")    -- all
 require("config.dial")       -- all
 require("config.pairs")      -- all
