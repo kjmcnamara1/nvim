@@ -58,5 +58,5 @@ end
 -- require("config.completion") -- snippets all | completion/ai default
 -- require("config.debug")      --  default
 -- require("config.suda")       -- all
-require("config.chezmoi") -- default
-require("config.agent")   -- default
+-- require("config.chezmoi") -- default
+require("config.agent") -- default
