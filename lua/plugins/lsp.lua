@@ -56,6 +56,7 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     dependencies = "mason-org/mason.nvim",
     cond = profile() == "default",
+    lazy = false,
     cmd = { "MasonToolsInstall", "MasonToolsInstallSync", "MasonToolsUpdate", "MasonToolsUpdateSync", "MasonToolsClean" },
     opts_extend = { "ensure_installed" },
     opts = {
@@ -120,7 +121,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "mason-org/mason.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
       "mason-org/mason-lspconfig.nvim",
     },
     cond = profile() == "default",
