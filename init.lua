@@ -34,7 +34,7 @@ _G.pack_add = function(packs)
   vim.pack.add(packs, { confirm = false })
 end
 
-require("config.plenary") -- all
+-- require("config.plenary") -- all
 -- require("config.which_key")  -- all
 -- require("config.colors")     -- default
 -- require("config.snacks")     -- default?
@@ -54,7 +54,7 @@ require("config.plenary") -- all
 -- require("config.splits")     -- default
 -- require("config.git")        -- default
 -- require("config.jjui")       -- default
-require("config.lsp")        -- default
+-- require("config.lsp")        -- default
 require("config.completion") -- snippets all | completion/ai default
 require("config.debug")      --  default
 require("config.suda")       -- all? or default
