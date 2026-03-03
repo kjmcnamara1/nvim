@@ -56,7 +56,6 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     dependencies = "mason-org/mason.nvim",
     cond = profile() == "default",
-    lazy = false,
     cmd = { "MasonToolsInstall", "MasonToolsInstallSync", "MasonToolsUpdate", "MasonToolsUpdateSync", "MasonToolsClean" },
     opts_extend = { "ensure_installed" },
     opts = {
@@ -125,6 +124,7 @@ return {
       "mason-org/mason-lspconfig.nvim",
     },
     cond = profile() == "default",
+    lazy = false,
     event = { "BufReadPre", "BufNewFile" },
     keys = {
       { "<leader>k",   function() vim.lsp.buf.hover({ border = "rounded" }) end, desc = "LSP: Hover", mode = { "n", "x" }, },
