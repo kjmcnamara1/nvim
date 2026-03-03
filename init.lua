@@ -50,7 +50,7 @@ require("config.plenary") -- all
 -- require("config.pairs")      -- all
 -- require("config.status")     -- default
 -- require("config.buffers")    -- default
-require("config.scrollbar")  -- default
+-- require("config.scrollbar")  -- default
 -- require("config.splits")     -- default
 require("config.git")        -- default
 -- require("config.jjui")       -- default
