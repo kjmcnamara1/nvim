@@ -80,43 +80,35 @@ return {
   opts = {
     preset = "helix",
     spec = {
-      {
-        "<leader>w",
-        proxy = "<c-w>",
-        group = "Windows",
-        mode = { "n", "x" },
-        expand = function()
-          require("which-key.extras").expand.win()
-        end
-      },
-      { "<leader>u", group = "UI" },
-      { "<leader>g", group = "Git" },
+      { "<leader>w",  proxy = "<c-w>",          group = "Windows",                      mode = { "n", "x" }, },
+      { "<leader>u",  group = "UI" },
+      { "<leader>g",  group = "Git" },
       { "<leader>gh", group = "GitHub" },
-      { "<leader>d", group = "Debug" },
-      { "<leader>a", group = "AI Agent",         mode = { "n", "x" } },
-      { "<leader>c", group = "Code",           mode = { "n", "x" } },
-      { "<leader>h", group = "Hunks (Git)",      mode = { "n", "x" } },
-      { "<leader>s", group = "Pick/Select",    mode = { "n", "x" } },
-      { "<leader>L", "<cmd>Lazy<cr>",          desc = "Lazy Plugin Manager" },
-      { "<c-c>",     "<c-w>q",                 desc = "Window: Close" },
-      { "u",         "u",                      desc = "Undo" },
-      { "U",         "<c-r>",                  desc = "Redo" },
-      { "gx",        ":sil !open <cWORD><cr>", desc = "Open link under cursor" },
-      { "%",         ":normal! ggVG<cr>",      desc = "Select Entire Buffer",          mode = { "n", "x", "o" } },
+      { "<leader>d",  group = "Debug" },
+      { "<leader>a",  group = "AI Agent",       mode = { "n", "x" } },
+      { "<leader>c",  group = "Code",           mode = { "n", "x" } },
+      { "<leader>h",  group = "Hunks (Git)",    mode = { "n", "x" } },
+      { "<leader>s",  group = "Pick/Select",    mode = { "n", "x" } },
+      { "<leader>L",  "<cmd>Lazy<cr>",          desc = "Lazy Plugin Manager" },
+      { "<c-c>",      "<c-w>q",                 desc = "Window: Close" },
+      { "u",          "u",                      desc = "Undo" },
+      { "U",          "<c-r>",                  desc = "Redo" },
+      { "gx",         ":sil !open <cWORD><cr>", desc = "Open link under cursor" },
+      { "%",          ":normal! ggVG<cr>",      desc = "Select Entire Buffer",          mode = { "n", "x", "o" } },
 
       -- Marks
-      { "M",         "m",                      desc = "Mark: Set",                     mode = { "n" } },
-      { "m",         "<nop>",                  desc = "Remove default `mark` mapping", mode = { "n", "x" },     hidden = true },
-      { "<a-s-m>",   remove_mark,              desc = "Mark: Remove",                  mode = { "n", "x" } },
-      { "'",         "`",                      desc = "Mark: Jump to line",            mode = { "n", "x" } },
-      { "`",         "'",                      desc = "Mark: Jump to position",        mode = { "n", "x" } },
-      { "<a-s-j>",   "J",                      desc = "Join Lines",                    mode = { 'n', 'x' } },
+      { "M",          "m",                      desc = "Mark: Set",                     mode = { "n" } },
+      { "m",          "<nop>",                  desc = "Remove default `mark` mapping", mode = { "n", "x" },     hidden = true },
+      { "<a-s-m>",    remove_mark,              desc = "Mark: Remove",                  mode = { "n", "x" } },
+      { "'",          "`",                      desc = "Mark: Jump to line",            mode = { "n", "x" } },
+      { "`",          "'",                      desc = "Mark: Jump to position",        mode = { "n", "x" } },
+      { "<a-s-j>",    "J",                      desc = "Join Lines",                    mode = { 'n', 'x' } },
 
       -- Insert line
-      { "<a-o>",     n_insert_line_below,      desc = "Insert line below",             mode = { "n" },          expr = true },
-      { "<a-O>",     n_insert_line_above,      desc = "Insert line above",             mode = { "n" },          expr = true },
-      { "<a-o>",     v_insert_line_below,      desc = "Insert line below",             mode = { "x" },          expr = true },
-      { "<a-O>",     v_insert_line_above,      desc = "Insert line above",             mode = { "x" },          expr = true },
+      { "<a-o>",      n_insert_line_below,      desc = "Insert line below",             mode = { "n" },          expr = true },
+      { "<a-O>",      n_insert_line_above,      desc = "Insert line above",             mode = { "n" },          expr = true },
+      { "<a-o>",      v_insert_line_below,      desc = "Insert line below",             mode = { "x" },          expr = true },
+      { "<a-O>",      v_insert_line_above,      desc = "Insert line above",             mode = { "x" },          expr = true },
 
       -- Keymap Help
       {
