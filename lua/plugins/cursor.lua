@@ -1,5 +1,7 @@
 return {
 
+  { "xiyaowong/fast-cursor-move.nvim", cond = profile() == "vscode", lazy = false, },
+
   {
     "jake-stewart/multicursor.nvim",
     branch = "1.0",
