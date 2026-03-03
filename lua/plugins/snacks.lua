@@ -46,9 +46,9 @@ return {
   dependencies = {
     "echasnovski/mini.icons",
   },
+  cond = profile() == "default",
   priority = 1000,
   lazy = false,
-  cond = profile() == "default",
   init = function()
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
