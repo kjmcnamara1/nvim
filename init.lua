@@ -59,4 +59,4 @@ end
 -- require("config.debug")      --  default
 -- require("config.suda")       -- all
 -- require("config.chezmoi") -- default
-require("config.agent") -- default
+-- require("config.agent") -- default
