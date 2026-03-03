@@ -56,7 +56,7 @@ end
 -- require("config.jjui")       -- default
 -- require("config.lsp")        -- default
 -- require("config.completion") -- snippets all | completion/ai default
-require("config.debug")      --  default
-require("config.suda")       -- all? or default
-require("config.chezmoi")    -- default
-require("config.agent")      -- default
+-- require("config.debug")      --  default
+require("config.suda")    -- all? or default
+require("config.chezmoi") -- default
+require("config.agent")   -- default

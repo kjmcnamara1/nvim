@@ -276,4 +276,14 @@ return {
     end
   },
 
+  {
+    "linux-cultist/venv-selector.nvim",
+    cond = profile() == "default",
+    ft = "python",
+    keys = {
+      { "<leader>cv", "<cmd>VenvSelect<cr>", desc = "Select VirtualEnv", },
+    },
+    opts = { settings = { options = { notify_user_on_venv_activation = true } } },
+  },
+
 }
