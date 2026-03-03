@@ -52,7 +52,7 @@ require("config.plenary") -- all
 -- require("config.buffers")    -- default
 -- require("config.scrollbar")  -- default
 -- require("config.splits")     -- default
-require("config.git")        -- default
+-- require("config.git")        -- default
 -- require("config.jjui")       -- default
 require("config.lsp")        -- default
 require("config.completion") -- snippets all | completion/ai default
