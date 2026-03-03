@@ -4,6 +4,7 @@ return {
   {
     "dstein64/nvim-scrollview",
     cond = profile() == "default",
+    event = "BufEnter",
     opts = {
       current_only = true,
       signs_scrollbar_overlap = "over",

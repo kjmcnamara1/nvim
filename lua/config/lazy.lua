@@ -19,6 +19,7 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
+  defaults = { lazy = true },
   install = { colorscheme = { "onenord" } },
   checker = { enabled = true, notify = false },
   performance = {
