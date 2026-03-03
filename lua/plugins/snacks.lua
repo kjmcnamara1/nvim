@@ -44,7 +44,7 @@ end
 return {
   "folke/snacks.nvim",
   dependencies = {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
   },
   cond = profile() == "default",
   priority = 1000,

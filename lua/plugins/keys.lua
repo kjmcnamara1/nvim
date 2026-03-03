@@ -59,7 +59,7 @@ end
 return {
   "folke/which-key.nvim",
   dependencies = {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
   },
   init = function()
     _G.wk = require("which-key")

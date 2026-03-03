@@ -1,7 +1,7 @@
 return {
 
   {
-    "echasnovski/mini.files",
+    "nvim-mini/mini.files",
     cond = profile() == "default",
     keys = {
       { "<leader>m", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", desc = "Files: Mini (current)" },

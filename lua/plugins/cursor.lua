@@ -123,8 +123,8 @@ return {
   },
 
   {
-    "echasnovski/mini.ai",
-    dependencies = 'echasnovski/mini.extra',
+    "nvim-mini/mini.ai",
+    dependencies = 'nvim-mini/mini.extra',
     event = "VeryLazy",
     opts = function()
       local ai = require("mini.ai")
@@ -163,7 +163,7 @@ return {
   },
 
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     keys = {
       { "ms", desc = "Add surrounding",                     mode = { "n", "v" } },
       { "md", desc = "Delete surrounding" },

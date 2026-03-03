@@ -1,7 +1,7 @@
 return {
   "akinsho/bufferline.nvim",
   dependencies = {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     "folke/snacks.nvim",
     -- { "backdround/tabscope.nvim", config = true },
   },
