@@ -293,4 +293,20 @@ return {
     opts = { settings = { options = { notify_user_on_venv_activation = true } } },
   },
 
+  {
+    "folke/lazydev.nvim",
+    cond = profile() == "default",
+    ft = "lua",
+    cmd = "LazyDev",
+    keys = {
+      { "<leader>cis", "<cmd>LazyDev lsp<cr>", desc = "Info: Attached LSP Config", mode = { "n", "x" } },
+    },
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        { path = "snacks.nvim",        words = { "Snacks" } },
+      }
+    },
+  },
+
 }

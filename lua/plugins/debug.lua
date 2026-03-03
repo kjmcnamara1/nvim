@@ -101,6 +101,11 @@ return {
     config = function()
       require("dap-python").setup("uv")
     end,
-  }
+  },
+
+  {
+    "jbyuki/one-small-step-for-vimkind",
+    ft = "lua",
+  },
 
 }
