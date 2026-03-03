@@ -49,7 +49,7 @@ require("config.plenary") -- all
 -- require("config.dial")       -- all
 -- require("config.pairs")      -- all
 -- require("config.status")     -- default
-require("config.buffers")    -- default
+-- require("config.buffers")    -- default
 require("config.scrollbar")  -- default
 -- require("config.splits")     -- default
 require("config.git")        -- default
