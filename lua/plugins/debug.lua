@@ -20,7 +20,8 @@ return {
         desc = "Debug: Set Logpoint"
       },
       { "<F5>",  "<cmd>DapContinue<cr>",         desc = "Debug: Continue" },
-      { "<F6>",  "<cmd>DapStepOver<cr>",         desc = "Debug: Step Next" },
+      { "<F6>",  "<cmd>DapTerminate<cr>",        desc = "Debug: Terminate" },
+      { "<F7>",  "<cmd>DapStepOver<cr>",         desc = "Debug: Step Next" },
       { "<F8>",  "<cmd>DapStepInto<cr>",         desc = "Debug: Step Into" },
       { "<F9>",  "<cmd>DapStepOut<cr>",          desc = "Debug: Step Out" },
     },
