@@ -175,7 +175,7 @@ return {
     { "<leader>su",      function() Snacks.picker.undo() end,                                                 desc = "Pick: Undo History" },
 
     -- SE Corner
-    { "<leader>t",       function() Snacks.picker.filetypes() end,                                            desc = "Pick: Filetypes" },
+    { "<leader>T",       function() Snacks.picker.filetypes() end,                                            desc = "Pick: Filetypes" },
     { "<leader>uC",      function() Snacks.picker.colorschemes() end,                                         desc = "Pick: Colorschemes" },
 
     -- Other
