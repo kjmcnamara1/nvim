@@ -23,10 +23,10 @@ require("lazy").setup({
   defaults = { lazy = true },
   install = { colorscheme = { "onenord" } },
   checker = { enabled = true, notify = false },
-  performance = {
-    reset_packpath = false,
-    rtp = {
-      reset = false,
-    },
-  },
+  -- performance = {
+  --   reset_packpath = false,
+  --   rtp = {
+  --     reset = false,
+  --   },
+  -- },
 })
