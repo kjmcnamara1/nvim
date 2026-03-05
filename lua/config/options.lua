@@ -5,6 +5,7 @@ local o = vim.opt
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 vim.schedule(function() vim.o.clipboard = 'unnamedplus' end) -- Sync clipboard between OS and Neovim.
 o.autowrite      = true                                      -- Auto write file when leaving buffer
+o.updatetime     = 250                                       -- Decrease update time / CursorHold
 -- o.timeoutlen     = 300                                       -- Decrease mapped sequence wait time
 
 o.undofile       = true  -- Enable persistent undo (see also `:h undodir`)

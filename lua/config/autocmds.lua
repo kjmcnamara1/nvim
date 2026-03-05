@@ -129,4 +129,27 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-return {}
+-- vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+--   desc = "Check for changed files",
+--   group = CustomGroup,
+--   callback = function()
+--     if vim.fn.getcmdwintype() == "" then
+--       vim.cmd("checktime")
+--     end
+--   end
+-- })
+
+--- Check for changed files every `updatetime` milliseconds
+local function start_live_reload()
+  local timer = vim.uv.new_timer()
+  if not timer then return end
+
+  -- Only check if we aren't in the middle of typing a command
+  timer:start(0, vim.o.updatetime, vim.schedule_wrap(function()
+    if vim.fn.getcmdwintype() == "" then
+      vim.cmd("checktime")
+    end
+  end))
+end
+
+start_live_reload()
