@@ -250,6 +250,11 @@ return {
         shfmt = {
           append_args = { "-i", "2", "-bn", "-ci", "-sr", "-kp" },
         },
+        mojo = {
+          command = "mojo",
+          args = { "format", "-" },
+          stdin = true,
+        },
       },
       formatters_by_ft = {
         sh = { "shfmt" },
@@ -262,6 +267,7 @@ return {
         fish = { "fish_indent" },
         markdown = { "prettierd" },
         rust = { "rustfmt" },
+        mojo = { "mojo" },
       }
     },
     config = function(_, opts)
