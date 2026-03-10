@@ -122,7 +122,7 @@ return {
     -- { "<c-'>",      Snacks.terminal.toggle,              desc = "Terminal: Toggle",          mode = { "n", "i", "t" } },
     -- BUG: multiple terminals breaks toggling
     { "<c-s-'>",         function() Snacks.terminal.open() end,                                               desc = "Terminal: New",                            mode = { "n", "i", "t" } },
-    { "<c-a-n>",         uv_run_py_file,                                                                      desc = "Terminal: Run Current Python File with uv" },
+    { "<c-F5>",          uv_run_py_file,                                                                      desc = "Terminal: Run Current Python File with uv" },
 
     -- Cursor
     { "gd",              function() Snacks.picker.lsp_definitions() end,                                      desc = "LSP: Goto Definition" },
