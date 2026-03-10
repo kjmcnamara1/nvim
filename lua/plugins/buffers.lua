@@ -9,6 +9,7 @@ return {
   event = "VeryLazy",
   keys = {
     { "<leader>'", "<c-^>",                        desc = "Buffer: Alternate" },
+    { "<c-n>",     "<cmd>enew<cr>",                desc = "Buffer: New" },
     { "<a-p>",     "<cmd>BufferLineTogglePin<cr>", desc = "Buffer: Pin" },
     { "<a-s-l>",   "<cmd>BufferLineMoveNext<cr>",  desc = "Buffer: Move Right" },
     { "<a-s-h>",   "<cmd>BufferLineMovePrev<cr>",  desc = "Buffer: Move Left" },
