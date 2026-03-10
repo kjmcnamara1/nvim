@@ -64,6 +64,7 @@ return {
         ["@punctuation.quote"] = { fg = colors.dark_green },
         ["@string.prefix"] = { link = "@keyword" },
         ["@string.documentation"] = { fg = colors.gray },
+        ["@comment.documentation"] = { link = "@string.documentation" },
         ["@lsp.mod.documentation"] = { link = "@string.documentation" },
         ["@function.macro"] = { fg = colors.cyan, style = "bold" },
         ["@constant.builtin"] = { style = "bold" },
