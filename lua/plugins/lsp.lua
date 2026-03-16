@@ -90,6 +90,11 @@ return {
         "debugpy",
         "jinja_lsp",
 
+        -- Ruby
+        "ruby_lsp",
+        "rubocop",
+        "rdbg",
+
         -- Nix
         "nil_ls",
         "nixfmt",

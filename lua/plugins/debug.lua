@@ -105,6 +105,18 @@ return {
   },
 
   {
+    "suketa/nvim-dap-ruby",
+    cond = profile() == "default",
+    ft = "ruby",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    config = function()
+      require("dap-ruby").setup()
+    end,
+  },
+
+  {
     "jbyuki/one-small-step-for-vimkind",
     ft = "lua",
   },
