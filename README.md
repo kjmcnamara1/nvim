@@ -1,5 +1,9 @@
 # NEOVIM
 
+```sh
+git clone https://github.com/kjmcnamara1/nvim ~/.config/nvim
+```
+
 ## Plugins
 
 <!-- for _,p in ipairs(vim.pack.get(nil,{info=false})) do -->
