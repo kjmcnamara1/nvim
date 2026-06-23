@@ -18,11 +18,11 @@ local function toggle_terminal_preserving_state()
 
   if not term_is_visible() then
     local view = vim.fn.winsaveview()
-    term = Snacks.terminal.toggle()
+    term = Snacks.terminal.toggle(nil, { cwd = vim.uv.cwd() })
     term._previous_win_state = view
     return term
   end
-  term = Snacks.terminal.toggle()
+  term = Snacks.terminal.toggle(nil, { cwd = vim.uv.cwd() })
   if term._previous_win_state then
     vim.fn.winrestview(term._previous_win_state)
     term._previous_win_state = nil
@@ -121,7 +121,7 @@ return {
     { "<c-'>",           toggle_terminal_preserving_state,                                                    desc = "Terminal: Toggle",                         mode = { "n", "i", "t" } },
     -- { "<c-'>",      Snacks.terminal.toggle,              desc = "Terminal: Toggle",          mode = { "n", "i", "t" } },
     -- BUG: multiple terminals breaks toggling
-    { "<c-s-'>",         function() Snacks.terminal.open() end,                                               desc = "Terminal: New",                            mode = { "n", "i", "t" } },
+    { "<c-s-'>",         function() Snacks.terminal.open(nil, { cwd = vim.uv.cwd() }) end,                    desc = "Terminal: New",                            mode = { "n", "i", "t" } },
     { "<c-F5>",          uv_run_py_file,                                                                      desc = "Terminal: Run Current Python File with uv" },
 
     -- Cursor
