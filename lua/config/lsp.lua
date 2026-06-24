@@ -5,7 +5,7 @@ end
 -- TODO: Configure code folding
 
 pack_add({
-  "https://github.com/ThePrimeagen/refactoring.nvim",
+  -- "https://github.com/ThePrimeagen/refactoring.nvim",
   "https://github.com/mason-org/mason.nvim",
   "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
   "https://github.com/neovim/nvim-lspconfig",
@@ -115,7 +115,7 @@ require("tiny-code-action").setup({
 
 require("live-rename").setup({ hl = { current = "IncSearch" } })
 
-require('refactoring').setup()
+-- require('refactoring').setup()
 require("fidget").setup()
 require("mason").setup()
 require("mason-lspconfig").setup({
