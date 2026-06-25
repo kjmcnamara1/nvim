@@ -1,3 +1,16 @@
+local function wordcount()
+  local mode = vim.api.nvim_get_mode().mode
+
+  if mode == 'v' or mode == 'V' or mode == '\22' then
+    local wc = vim.fn.wordcount()
+    if wc.visual_words then
+      return tostring(wc.visual_words)
+    end
+  end
+
+  return tostring(vim.fn.wordcount().words)
+end
+
 return {
 
   {
@@ -45,6 +58,10 @@ return {
         lualine_y = {
           "venv-selector",
           "progress",
+        },
+        lualine_z = {
+          { wordcount },
+          "location",
         },
       }
     },
