@@ -3,8 +3,24 @@ local o = vim.opt
 -- ======================== SESSION ========================
 
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
-vim.schedule(function() vim.o.clipboard = 'unnamedplus' end) -- Sync clipboard between OS and Neovim.
-o.autowrite      = true                                      -- Auto write file when leaving buffer
+vim.schedule(function()
+  -- Sync clipboard between OS and Neovim.
+  vim.o.clipboard = 'unnamedplus'
+
+  -- Configure Neovim to use OSC 52 for yanking
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+    },
+  }
+end)
+o.autowrite      = true -- Auto write file when leaving buffer
 -- o.timeoutlen     = 300                                       -- Decrease mapped sequence wait time
 
 o.undofile       = true  -- Enable persistent undo (see also `:h undodir`)
