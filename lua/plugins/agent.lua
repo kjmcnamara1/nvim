@@ -12,9 +12,14 @@ return {
     event = "VeryLazy",
     version = false,
     opts = {
-      provider = "gemini",
+      provider = "claude",
       input = { provider = "snacks", },
       providers = {
+        claude = {
+          endpoint = "https://claude.ai/v1/complete",
+          timeout = 30000,
+          auth_type = "max",
+        },
         gemini = {
           -- list models with:
           -- curl -s "https://generativelanguage.googleapis.com/v1beta/models?key=$GEMINI_API_KEY" | jq .models[].name
@@ -44,6 +49,7 @@ return {
 
   {
     "folke/sidekick.nvim",
+    -- enabled = false,
     cond = profile() == "default",
     opts = {
       -- add any options here
