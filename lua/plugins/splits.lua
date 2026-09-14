@@ -1,7 +1,11 @@
 return {
-  "mrjones2014/smart-splits.nvim",
+  "smart-splits-nvim/smart-splits.nvim",
   lazy = false,
   cond = profile() == "default",
+  build = function(plugin)
+    if vim.fn.executable("herdr") == 0 then return end
+    vim.cmd("!herdr plugin link " .. plugin.dir .. " && herdr server reload-config")
+  end,
   keys = function()
     local splits = require("smart-splits")
     return {
