@@ -59,15 +59,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- vim.api.nvim_create_autocmd("VimResized", {
---   desc = "Resize splits if window got resized",
---   group = CustomGroup,
---   callback = function()
---     local current_tab = vim.fn.tabpagenr()
---     vim.cmd("tabdo wincmd =")
---     vim.cmd("tabnext " .. current_tab)
---   end,
--- })
+vim.api.nvim_create_autocmd("VimResized", {
+  desc = "Resize splits if window got resized",
+  group = CustomGroup,
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end,
+})
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
   desc = "Show cursor line when entering window",
