@@ -52,7 +52,7 @@ o.listchars      = { tab = " ", trail = "∙", extends = "󰇘", precedes = "
 
 o.fillchars      = {
   foldopen = "󰅀", --'foldcolumn' char for opened fold
-  foldclose = "󰅂", -- 'foldcolumn' char for closed fold
+  foldclose = "", -- 'foldcolumn' char for closed fold
   -- fold = "⸱",
   fold = " ", -- Fill char for 'foldtext'
   foldsep = " ", -- 'foldcolumn' char for inside opened folds
