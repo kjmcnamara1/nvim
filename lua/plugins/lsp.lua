@@ -38,6 +38,70 @@ vim.diagnostic.config({
   },
 })
 
+-- Mason tools, grouped by the filetype that needs them. This is the single
+-- source of truth: mason-tool-installer's `ensure_installed` is derived from
+-- this table (for manual bulk install/update/clean), and the FileType
+-- autocmd below installs only the tools for a given filetype the first time
+-- it's opened.
+local ft_tools = {
+  json = { "jsonls", "prettierd" },
+  jsonc = { "jsonls", "prettierd" },
+  yaml = { "yamlls", "gh_actions_ls", "prettierd" },
+  toml = { "taplo" },
+  markdown = { "marksman", "prettierd" },
+  css = { "cssls" },
+  scss = { "cssls" },
+  less = { "cssls" },
+  hypr = { "hyprls" },
+  lua = { "lua_ls" },
+  query = { "ts_query_ls" },
+  sh = { "bashls", "shfmt" },
+  bash = { "bashls", "shfmt" },
+  zsh = { "shfmt" },
+  fish = { "fish_lsp" },
+  python = { "basedpyright", "ty", "ruff", "debugpy", "jinja_lsp" },
+  ruby = { "ruby_lsp", "rubocop", "rdbg" },
+  nix = { "nil_ls", "nixfmt" },
+  rust = { "rust_analyzer", "codelldb" },
+}
+
+-- Some names in ft_tools are lspconfig server names (e.g. "ruby_lsp",
+-- "lua_ls") that differ from their actual Mason registry package name (e.g.
+-- "ruby-lsp", "lua-language-server"). Resolve through mason-lspconfig's
+-- mapping table, falling back to the raw name for tools that aren't LSP
+-- servers (formatters, DAP adapters) where the two already match.
+local function resolve_package_name(name)
+  local ok_mlsp, mappings = pcall(require, "mason-lspconfig.mappings")
+  if ok_mlsp then
+    local ok_map, mason_map = pcall(mappings.get_mason_map)
+    if ok_map and mason_map.lspconfig_to_package[name] then
+      return mason_map.lspconfig_to_package[name]
+    end
+  end
+  return name
+end
+
+local function mason_ensure_installed(names)
+  local ok, registry = pcall(require, "mason-registry")
+  if not ok then return end
+  registry.refresh(function()
+    for _, name in ipairs(names) do
+      local ok_pkg, pkg = pcall(registry.get_package, resolve_package_name(name))
+      if ok_pkg and not pkg:is_installed() then
+        pkg:install()
+      end
+    end
+  end)
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("LazyMasonToolInstall", { clear = true }),
+  pattern = vim.tbl_keys(ft_tools),
+  callback = function(args)
+    mason_ensure_installed(ft_tools[args.match])
+  end,
+})
+
 
 return {
 
@@ -60,49 +124,23 @@ return {
     opts_extend = { "ensure_installed" },
     opts = {
       auto_update = true,
-      run_on_start = true,
-      ensure_installed = {
-        -- Common / Web
-        "prettierd",
-        "cssls",
-        "jsonls",
-        "taplo",
-        "marksman",
-        "yamlls",
-        "gh_actions_ls",
-
-        -- Uncommon
-        "hyprls",
-
-        -- Neovim
-        "lua_ls",
-        "ts_query_ls",
-
-        -- Shell
-        "bashls",
-        "shfmt",
-        "fish_lsp",
-
-        -- Python
-        "basedpyright",
-        "ty",
-        "ruff",
-        "debugpy",
-        "jinja_lsp",
-
-        -- Ruby
-        "ruby_lsp",
-        "rubocop",
-        "rdbg",
-
-        -- Nix
-        "nil_ls",
-        "nixfmt",
-
-        -- Rust
-        "rust_analyzer",
-        "codelldb",
-      }
+      -- Tools are installed lazily per-filetype (see the FileType autocmd
+      -- above), not all at once on startup. This list is kept only so
+      -- :MasonToolsInstall / :MasonToolsUpdate / :MasonToolsClean have a full
+      -- set to work with when run manually.
+      run_on_start = false,
+      ensure_installed = (function()
+        local seen, list = {}, {}
+        for _, tools in pairs(ft_tools) do
+          for _, name in ipairs(tools) do
+            if not seen[name] then
+              seen[name] = true
+              table.insert(list, name)
+            end
+          end
+        end
+        return list
+      end)(),
     },
   },
 
@@ -125,7 +163,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
       "mason-org/mason-lspconfig.nvim",
     },
     cond = profile() == "default",
