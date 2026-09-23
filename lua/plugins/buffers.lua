@@ -1,3 +1,20 @@
+-- Like BufferLineCycleNext/Prev, but also steps into collapsed groups
+-- (toggle_hidden_on_enter then expands them)
+local function cycle(direction)
+  local list = vim.tbl_filter(function(item)
+    return item.focusable ~= false
+  end, require("bufferline.state").__components)
+  if #list == 0 then return end
+  local current = vim.api.nvim_get_current_buf()
+  for i, item in ipairs(list) do
+    if item.id == current then
+      local next_item = list[(i - 1 + direction) % #list + 1]
+      vim.api.nvim_set_current_buf(next_item.id)
+      return
+    end
+  end
+end
+
 return {
   "akinsho/bufferline.nvim",
   dependencies = {
@@ -13,8 +30,8 @@ return {
     { "<a-p>",     "<cmd>BufferLineTogglePin<cr>", desc = "Buffer: Pin" },
     { "<a-s-l>",   "<cmd>BufferLineMoveNext<cr>",  desc = "Buffer: Move Right" },
     { "<a-s-h>",   "<cmd>BufferLineMovePrev<cr>",  desc = "Buffer: Move Left" },
-    { "<a-l>",     "<cmd>BufferLineCycleNext<cr>", desc = "Buffer: Next" },
-    { "<a-h>",     "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer: Prev" },
+    { "<a-l>",     function() cycle(1) end,        desc = "Buffer: Next" },
+    { "<a-h>",     function() cycle(-1) end,       desc = "Buffer: Prev" },
   },
   opts = function()
     return {
