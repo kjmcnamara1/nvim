@@ -69,6 +69,7 @@ return {
 
   {
     "Bekaboo/dropbar.nvim",
+    cond = profile() == "default",
     event = "VeryLazy",
     keys = {
       { "<leader>;", function() require("dropbar.api").pick() end, desc = "Dropbar: Pick" },
