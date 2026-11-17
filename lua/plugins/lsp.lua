@@ -296,6 +296,11 @@ return {
           args = { "format", "-" },
           stdin = true,
         },
+        injected = {
+          options = {
+            ignore_errors = true,
+          },
+        },
       },
       formatters_by_ft = {
         sh = { "shfmt" },
@@ -310,6 +315,7 @@ return {
         markdown = { "prettierd" },
         rust = { "rustfmt" },
         mojo = { "mojo" },
+        toml = { "taplo", "injected" },
       }
     },
     config = function(_, opts)
