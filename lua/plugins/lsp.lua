@@ -282,15 +282,14 @@ return {
     opts = {
       format_on_save = {
         timeout_ms = 500,
-        lsp_format = "fallback",
       },
       default_format_opts = {
-        lsp_format = "prefer",
+        lsp_format = "fallback",
         async = true,
       },
       formatters = {
         shfmt = {
-          append_args = { "-i", "2", "-bn", "-ci", "-sr", "-kp" },
+          append_args = { "-i", "2", "-bn", "-ci", "-sr" },
         },
         mojo = {
           command = "mojo",
@@ -300,6 +299,7 @@ return {
       },
       formatters_by_ft = {
         sh = { "shfmt" },
+        bash = { "shfmt" },
         zsh = { "shfmt" },
         json = { "prettierd" },
         jsonc = { "prettierd" },
