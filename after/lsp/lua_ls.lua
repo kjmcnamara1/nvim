@@ -1,11 +1,12 @@
 return {
   settings = {
     Lua = {
-      workspace = {
-        library = {
-          vim.env.VIMRUNTIME .. "/lua",
-        },
-      },
+      -- Added to repo root .luarc.json instead
+      -- workspace = {
+      --   library = {
+      --     vim.env.VIMRUNTIME .. "/lua",
+      --   },
+      -- },
       hint = {
         arrayIndex = "Disable",
       },
@@ -14,7 +15,7 @@ return {
           quote_style = "double",
           indent_style = "space",
           indent_size = 2,
-          max_lin_length = 120,
+          max_line_length = 120,
           trailing_table_separator = "smart",
         }
       }
