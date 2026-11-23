@@ -72,6 +72,45 @@ return {
         return string.match(filename, ".*mise.*%.toml$") ~= nil
       end, { force = true, all = false })
 
+      -- Tera templates: inject the templated language into the raw text.
+      -- `foo.ext.tera` -> detect from `foo.ext` (+ shebang); override with
+      -- `:let b:tera_lang = "bash" | e`
+      require("vim.treesitter.query").add_directive("set-tera-host-lang!", function(_, _, source, _, metadata)
+        if type(source) == "number" then
+          metadata["injection.language"] = vim.b[source].tera_lang
+        end
+      end, { force = true, all = true })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        desc = "Detect host language of tera templates",
+        group = vim.api.nvim_create_augroup("TeraHostLang", { clear = true }),
+        pattern = "tera",
+        callback = function(ev)
+          -- scheduled: filetype detection is skipped while did_filetype() is set
+          vim.schedule(function()
+            local buf = ev.buf
+            if not vim.api.nvim_buf_is_valid(buf) then return end
+            if not vim.b[buf].tera_lang then
+              local name = vim.api.nvim_buf_get_name(buf):gsub("%.tera$", "")
+              local ft = vim.filetype.match({ filename = name, contents = vim.api.nvim_buf_get_lines(buf, 0, 1, false) })
+              vim.b[buf].tera_lang = ft and vim.treesitter.language.get_lang(ft) or nil
+            end
+            local lang = vim.b[buf].tera_lang
+            if not lang then return end
+            local ts = require("nvim-treesitter")
+            if not vim.list_contains(ts.get_available(), lang) then return end
+            ts.install(lang):await(function()
+              local hl = vim.treesitter.highlighter.active[buf]
+              if hl then
+                hl.tree:invalidate(true)
+                hl.tree:parse(true)
+                vim.cmd.redraw({ bang = true })
+              end
+            end)
+          end)
+        end,
+      })
+
       vim.api.nvim_create_autocmd("FileType", {
         desc = "Auto configure treesitter for each filetype",
         group = vim.api.nvim_create_augroup("AutoTreesitter", { clear = true }),
