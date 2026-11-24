@@ -53,7 +53,7 @@ return {
               auto_close = true,
               priority = 2,
               matcher = function(buf)
-                return buf.name:match('%.md')
+                return buf.name:match('%.md$')
                     -- or buf.name:match('%.txt')
                     or buf.name == "LICENSE"
                     or buf.name == "mkdocs.yml"
@@ -69,7 +69,7 @@ return {
               priority = 3,
               icon = " ",
               matcher = function(buf)
-                return buf.name:match('test_')
+                return buf.name:match('^test_')
               end,
             },
           }
